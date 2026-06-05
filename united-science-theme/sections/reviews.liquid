@@ -1,0 +1,120 @@
+{%- comment -%}
+  Reviews / Testimonials Section — Each review is a block
+{%- endcomment -%}
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="reviews-grid">
+        {%- for block in section.blocks -%}
+          <div class="review-card{% if block.settings.is_featured %} featured{% endif %} reveal-up" {{ block.shopify_attributes }}>
+            {% render 'star-rating', rating: block.settings.rating %}
+            <p class="review-text">"{{ block.settings.review_text }}"</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background: linear-gradient(135deg, {{ block.settings.avatar_color_1 }}, {{ block.settings.avatar_color_2 }});">
+                {{ block.settings.reviewer_name | slice: 0 }}
+              </div>
+              <div>
+                <h4>{{ block.settings.reviewer_name }}</h4>
+                <span>{{ block.settings.reviewer_role }}</span>
+              </div>
+            </div>
+            <span class="review-badge"><i class="fa-solid fa-circle-check"></i> Verified Purchase</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews / Testimonials",
+  "class": "reviews-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Section Tag",
+      "default": "Trusted by Athletes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Community Says"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Real reviews from real athletes who chose science over shortcuts."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Wildfire is the cleanest pre-workout I've ever used."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Rahul Sharma"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_role",
+          "label": "Title / Location",
+          "default": "Competitive Powerlifter · Hyderabad"
+        },
+        {
+          "type": "color",
+          "id": "avatar_color_1",
+          "label": "Avatar Gradient Start",
+          "default": "#c8860a"
+        },
+        {
+          "type": "color",
+          "id": "avatar_color_2",
+          "label": "Avatar Gradient End",
+          "default": "#e0a832"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_featured",
+          "label": "Featured Review (larger card)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews / Testimonials",
+      "blocks": [
+        { "type": "review", "settings": { "reviewer_name": "Rahul Sharma", "reviewer_role": "Competitive Powerlifter · Hyderabad" } },
+        { "type": "review", "settings": { "reviewer_name": "Priya Nair", "reviewer_role": "National Level Swimmer · Chennai", "is_featured": true, "avatar_color_1": "#6366f1", "avatar_color_2": "#8b5cf6" } },
+        { "type": "review", "settings": { "reviewer_name": "Vikram Patel", "reviewer_role": "Certified Personal Trainer · Mumbai", "avatar_color_1": "#22c55e", "avatar_color_2": "#16a34a" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

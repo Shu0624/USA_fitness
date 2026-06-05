@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ request.locale.direction | default: 'ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="{{ settings.color_bg_cream }}">
+
+  <title>
+    {%- if page_title -%}{{ page_title }} — {{ shop.name }}{%- else -%}{{ shop.name }}{%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- Font Preloading -->
+  <style>
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+  </style>
+
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="{{ 'usa-base.css' | asset_url }}" as="style">
+
+  <!-- Icons — deferred loading for performance -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
+  <!-- Theme Stylesheet -->
+  {{ 'usa-base.css' | asset_url | stylesheet_tag }}
+
+  <!-- Dynamic CSS Variables from Theme Settings -->
+  <style>
+    :root {
+      --usa-bg-dark: {{ settings.color_bg_dark }};
+      --usa-bg-cream: {{ settings.color_bg_cream }};
+      --usa-bg-cream-alt: {{ settings.color_bg_cream_alt }};
+      --usa-accent: {{ settings.color_accent }};
+      --usa-accent-hover: {{ settings.color_accent_hover }};
+      --usa-accent-glow: {{ settings.color_accent | color_modify: 'alpha', 0.3 }};
+      --usa-accent-soft: {{ settings.color_accent | color_modify: 'alpha', 0.1 }};
+      --usa-text-dark: {{ settings.color_text_dark }};
+      --usa-text-light: {{ settings.color_text_light }};
+      --usa-text-muted-dark: {{ settings.color_text_muted }};
+      --usa-text-muted-light: #aaaaaa;
+      --usa-border-dark: rgba(0, 0, 0, 0.08);
+      --usa-border-light: rgba(255, 255, 255, 0.1);
+      --usa-card-white: #ffffff;
+      --usa-card-dark: {{ settings.color_card_dark }};
+      --usa-green: {{ settings.color_green }};
+      --usa-red: #f5222d;
+      --usa-font-display: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+      --usa-font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+      --usa-shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+      --usa-shadow-hover: 0 15px 50px rgba(255, 60, 0, 0.15);
+      --usa-section-spacing: {{ settings.section_spacing }}px;
+      --usa-border-radius: {{ settings.border_radius }}px;
+    }
+  </style>
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "description": {{ shop.description | json }}
+    }
+  </script>
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+
+  <a class="skip-to-content" href="#MainContent">Skip to content</a>
+
+  {%- sections 'header-group' -%}
+
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- sections 'footer-group' -%}
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis Smooth Scroll -->
+  {%- if settings.enable_smooth_scroll -%}
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
+  {%- endif -%}
+
+  <!-- Theme JS -->
+  <script src="{{ 'usa-app.js' | asset_url }}" defer></script>
+</body>
+</html>

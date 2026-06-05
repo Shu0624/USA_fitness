@@ -1,0 +1,137 @@
+{%- comment -%}
+  Product FAQ Section — Product-specific FAQs
+  Can also pull from product metafield: product.metafields.custom.faq_json
+{%- endcomment -%}
+
+<section class="pd-faq-section" id="product-faq">
+  <div class="container">
+    {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+
+    <div class="faq-list">
+      {%- comment -%} Try product metafield first {%- endcomment -%}
+      {%- if product.metafields.custom.faq_json != blank -%}
+        {%- assign faqs = product.metafields.custom.faq_json.value -%}
+        {%- for faq in faqs -%}
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>{{ faq.question }}</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>{{ faq.answer }}</p></div>
+          </div>
+        {%- endfor -%}
+
+      {%- elsif section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="faq-item" {{ block.shopify_attributes }}>
+            <button class="faq-q">
+              <span>{{ block.settings.question }}</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a">{{ block.settings.answer }}</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- if product.handle contains 'wildfire' -%}
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>How should I consume Wildfire Pre-Workout?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>Mix 1 scoop with 250-300ml of cold water and consume 15-30 minutes before your workout. Start with a half scoop to assess tolerance.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>What causes the tingling sensation?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>The tingling is caused by Beta-Alanine, which buffers lactic acid in muscles. It is completely harmless and temporary.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Is Wildfire safe for drug-tested competitive athletes?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>Yes, Wildfire is 100% banned-substance free and certified by Informed Choice. Every batch is rigorously tested.</p></div>
+          </div>
+        {%- elsif product.handle contains 'plant' -%}
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>How should I consume USA Plant Protein?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>Mix 1 scoop with 300-350ml of water, plant milk, or your favorite beverage and shake well. Consume post-workout or anytime you need a protein boost.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Does it contain soy or gluten?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>No, USA Plant Protein is 100% soy-free, gluten-free, dairy-free, and non-GMO.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>What is the digestive enzyme blend?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>Our blend includes natural plant-derived enzymes to help break down pea and rice proteins rapidly, ensuring maximum absorption and zero bloating.</p></div>
+          </div>
+        {%- elsif product.handle contains 'fermented' -%}
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>What is Fermented Yeast Protein?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>It is a next-generation protein source made via eco-friendly fermentation. It matches or exceeds whey protein in digestion speed and muscle synthesis power while being allergen-free.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>How does it taste compared to other proteins?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>It has an incredibly clean, smooth taste and neutral flavor profile with no earthy aftertaste common in plant proteins.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span>Who is this product for?</span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="faq-a"><p>It is ideal for anyone seeking an ultra-premium, stomach-friendly alternative to whey and plant protein, especially those with food sensitivities.</p></div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "class": "product-faq-wrapper",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "Questions?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "subheading", "label": "Subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How should I take this product?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Mix one scoop with 300ml of cold water and consume 20-30 minutes before your workout.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "How should I take this product?" } },
+        { "type": "faq_item", "settings": { "question": "Is it safe for drug-tested athletes?" } },
+        { "type": "faq_item", "settings": { "question": "Can I stack this with other supplements?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

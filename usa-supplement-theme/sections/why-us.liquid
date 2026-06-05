@@ -1,0 +1,91 @@
+<!-- sections/why-us.liquid -->
+<section class="why-section" id="why-usa">
+  <div class="container">
+    <div class="section-head reveal-up">
+      {%- if section.settings.tag != blank -%}
+        <div class="section-tag">{{ section.settings.tag }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="why-grid">
+        {%- for block in section.blocks -%}
+          <div class="why-card reveal-up" {{ block.shopify_attributes }}>
+            <div class="why-card-icon"><i class="fa-solid {{ block.settings.icon_class | default: 'fa-check' }}"></i></div>
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Choose USA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Section Tag",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Why USA Supplement"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Section Subtitle",
+      "default": "India's most certified pre-workout. Every claim backed by third-party testing."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "why_card",
+      "name": "Why Card Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "FontAwesome Icon Class",
+          "default": "fa-check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Banned-Substance Free"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Informed Choice certified"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose USA",
+      "blocks": [
+        { "type": "why_card", "settings": { "icon_class": "fa-check", "title": "Banned-Substance Free", "description": "Informed Choice certified" } },
+        { "type": "why_card", "settings": { "icon_class": "fa-flask-vial", "title": "Clinically Dosed", "description": "5g Beta-Alanine · 2.5g Citrulline" } },
+        { "type": "why_card", "settings": { "icon_class": "fa-building-columns", "title": "FDA-Registered Facility", "description": "Reg. No. 16133920022" } },
+        { "type": "why_card", "settings": { "icon_class": "fa-list-check", "title": "No Proprietary Blends", "description": "Every mg disclosed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

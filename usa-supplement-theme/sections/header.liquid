@@ -1,0 +1,95 @@
+<!-- sections/header.liquid -->
+<nav class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="{{ routes.root_url }}" class="nav-logo">
+      {%- if section.settings.logo_img != blank -%}
+        <img src="{{ section.settings.logo_img | image_url: width: 150 }}" alt="{{ shop.name }}" style="max-height: 48px; object-fit: contain;">
+      {%- else -%}
+        <span class="nav-logo-icon">{{ section.settings.logo_letter | default: 'U' }}</span>
+        <div class="nav-logo-text">
+          <span>{{ section.settings.logo_line_1 | default: 'UNITED' }}</span>
+          <span>{{ section.settings.logo_line_2 | default: 'SCIENCE' }}</span>
+          <span>{{ section.settings.logo_line_3 | default: 'ALLIANCE' }}</span>
+        </div>
+      {%- endif -%}
+    </a>
+    
+    <ul class="nav-links">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li><a href="{{ link.url }}">{{ link.title | upcase }}</a></li>
+        {%- endfor -%}
+      {%- else -%}
+        <li><a href="#products">PRODUCTS</a></li>
+        <li><a href="#ingredients">SCIENCE</a></li>
+        <li><a href="#vision">EDUCATION</a></li>
+        <li><a href="#community">ABOUT</a></li>
+        <li><a href="#reviews">ATHLETES</a></li>
+        <li><a href="#faq">UPCOMING PRODUCTS</a></li>
+      {%- endif -%}
+    </ul>
+    
+    <div class="nav-icons">
+      <a href="{{ routes.search_url }}" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" aria-label="Cart" style="position: relative;">
+        <i class="fa-solid fa-bag-shopping"></i>
+        {%- if cart.item_count > 0 -%}
+          <span style="position: absolute; top: -6px; right: -8px; background: var(--usa-accent); color: #fff; font-size: 0.7rem; font-weight: 800; border-radius: 50%; padding: 2px 6px; line-height: 1;">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header Navigation",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Branding & Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_img",
+      "label": "Custom Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_letter",
+      "label": "Fallback Logo Letter",
+      "default": "U"
+    },
+    {
+      "type": "text",
+      "id": "logo_line_1",
+      "label": "Logo Title Line 1",
+      "default": "UNITED"
+    },
+    {
+      "type": "text",
+      "id": "logo_line_2",
+      "label": "Logo Title Line 2",
+      "default": "SCIENCE"
+    },
+    {
+      "type": "text",
+      "id": "logo_line_3",
+      "label": "Logo Title Line 3",
+      "default": "ALLIANCE"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select Main Menu"
+    }
+  ]
+}
+{% endschema %}

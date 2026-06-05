@@ -1,0 +1,74 @@
+{%- comment -%}
+  Certifications Section — Each certification is a block
+{%- endcomment -%}
+
+<section class="cert-section" id="certifications">
+  <div class="container">
+    {%- if section.settings.headline != blank -%}
+      <p class="cert-headline reveal-up"><em>{{ section.settings.headline }}</em></p>
+    {%- endif -%}
+
+    {%- assign cert_blocks = section.blocks | where: "type", "cert" -%}
+    {%- if cert_blocks.size > 0 -%}
+      <div class="cert-logos-marquee reveal-up">
+        <div class="cert-logos-track">
+          {%- for pass in (1..2) -%}
+            {%- for block in cert_blocks -%}
+              <div class="cert-logo-item" {{ block.shopify_attributes }}>
+                <span class="cert-logo-icon">
+                  {%- if block.settings.logo_image != blank -%}
+                    <img src="{{ block.settings.logo_image | image_url: width: 60 }}" alt="{{ block.settings.title }}" width="60" height="60" loading="lazy">
+                  {%- else -%}
+                    <i class="fa-solid {{ block.settings.icon_class }}"></i>
+                  {%- endif -%}
+                </span>
+                <span>{{ block.settings.title }}</span>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.verified_text != blank -%}
+      <div class="cert-verified reveal-up">{{ section.settings.verified_text }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "class": "cert-wrapper",
+  "settings": [
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "The only Indian pre-workout certified to global athlete safety standards." },
+    { "type": "text", "id": "verified_text", "label": "Verified Banner", "default": "ALL 8 CERTIFICATIONS INDEPENDENTLY VERIFIED" }
+  ],
+  "blocks": [
+    {
+      "type": "cert",
+      "name": "Certification",
+      "settings": [
+        { "type": "text", "id": "icon_class", "label": "Icon Class", "default": "fa-certificate", "info": "e.g. fa-certificate, fa-file-shield, fa-award" },
+        { "type": "image_picker", "id": "logo_image", "label": "Logo Image (overrides icon)" },
+        { "type": "text", "id": "title", "label": "Certification Name", "default": "GMP" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "blocks": [
+        { "type": "cert", "settings": { "icon_class": "fa-shield-halved", "title": "FSSAI" } },
+        { "type": "cert", "settings": { "icon_class": "fa-building-columns", "title": "FDA" } },
+        { "type": "cert", "settings": { "icon_class": "fa-circle-check", "title": "Informed Choice" } },
+        { "type": "cert", "settings": { "icon_class": "fa-flask-vial", "title": "Labdoor" } },
+        { "type": "cert", "settings": { "icon_class": "fa-certificate", "title": "GMP" } },
+        { "type": "cert", "settings": { "icon_class": "fa-clipboard-check", "title": "HACCP" } },
+        { "type": "cert", "settings": { "icon_class": "fa-award", "title": "ISO" } },
+        { "type": "cert", "settings": { "icon_class": "fa-vials", "title": "Tested" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

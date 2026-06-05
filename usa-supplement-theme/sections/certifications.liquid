@@ -1,0 +1,93 @@
+<!-- sections/certifications.liquid -->
+<section class="cert-section" id="certifications">
+  <div class="container">
+    {%- if section.settings.headline != blank -%}
+      <p class="cert-headline reveal-up"><em>{{ section.settings.headline }}</em></p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="cert-logos-row reveal-up">
+        {%- for block in section.blocks -%}
+          <div class="cert-logo-item" {{ block.shopify_attributes }}>
+            <span class="cert-logo-icon">
+              {%- if block.settings.logo_img != blank -%}
+                <img src="{{ block.settings.logo_img | image_url: width: 80 }}" alt="{{ block.settings.label }}" style="height: 32px; object-fit: contain; margin: 0 auto 12px;">
+              {%- elsif block.settings.custom_text != blank -%}
+                <em style="font-family: var(--usa-font-display); font-size: 1.2rem; font-weight: 800; font-style: italic; color: var(--usa-text-dark);">{{ block.settings.custom_text }}</em>
+              {%- else -%}
+                <i class="fa-solid {{ block.settings.icon_class | default: 'fa-certificate' }}"></i>
+              {%- endif -%}
+            </span>
+            <span>{{ block.settings.label }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.verified_text != blank -%}
+      <div class="cert-verified reveal-up">{{ section.settings.verified_text | upcase }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Certifications Row",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Certifications Headline",
+      "default": "The only Indian pre-workout certified to global athlete safety standards."
+    },
+    {
+      "type": "text",
+      "id": "verified_text",
+      "label": "Verified Footer Text",
+      "default": "ALL 8 CERTIFICATIONS INDEPENDENTLY VERIFIED"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification Badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "Custom Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "custom_text",
+          "label": "Text Override (e.g. fssai)"
+        },
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "FontAwesome Icon Class (Fallback)",
+          "default": "fa-certificate"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Certification Name",
+          "default": "GMP"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications Row",
+      "blocks": [
+        { "type": "certification", "settings": { "custom_text": "fssai", "label": "FSSAI" } },
+        { "type": "certification", "settings": { "icon_class": "fa-file-shield", "label": "FDA" } },
+        { "type": "certification", "settings": { "icon_class": "fa-certificate", "label": "GMP" } },
+        { "type": "certification", "settings": { "icon_class": "fa-clipboard-check", "label": "HACCP" } },
+        { "type": "certification", "settings": { "icon_class": "fa-award", "label": "ISO" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

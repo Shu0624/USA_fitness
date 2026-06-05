@@ -1,0 +1,50 @@
+{%- comment -%}
+  Collection Page — Grid of products from a collection
+  Uses the product-card snippet for consistency
+{%- endcomment -%}
+
+<section class="collection-section">
+  <div class="container">
+    {% render 'section-header', tag: collection.title, heading: section.settings.heading, subheading: collection.description %}
+
+    {%- if collection.products.size > 0 -%}
+      <div class="products-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, badge_text: product.metafields.custom.badge %}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="collection-pagination">
+          {{ paginate | default_pagination: next: '→', previous: '←' }}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="collection-empty">No products found in this collection.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "class": "collection-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Override Heading",
+      "info": "Leave blank to use the collection title"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

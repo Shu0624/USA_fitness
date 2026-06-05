@@ -1,0 +1,30 @@
+{%- comment -%}
+  Product Card Snippet
+  Usage: {% render 'product-card', product: product, badge_text: 'BESTSELLER' %}
+{%- endcomment -%}
+
+<div class="product-card reveal-up">
+  <a href="{{ product.url }}" class="product-card-img" style="display: block; text-decoration: none;">
+    {%- if badge_text != blank -%}
+      <span class="product-card-badge">{{ badge_text }}</span>
+    {%- endif -%}
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+  </a>
+  <div class="product-card-body">
+    <h3><a href="{{ product.url }}" style="color: inherit; text-decoration: none;">{{ product.title }}</a></h3>
+    {%- if product.metafields.custom.tagline != blank -%}
+      <p class="product-tagline">{{ product.metafields.custom.tagline }}</p>
+    {%- endif -%}
+    <div class="product-card-price">{{ product.price | money }}</div>
+    <p class="product-card-meta">{{ product.metafields.custom.servings | default: '' }}</p>
+    <a href="{{ product.url }}" class="btn btn-primary" style="display:inline-block; text-decoration:none;">View Product →</a>
+  </div>
+</div>

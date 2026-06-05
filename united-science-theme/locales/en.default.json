@@ -1,0 +1,17 @@
+{
+  "general": {
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "subscribe": "Subscribe",
+    "verified_purchase": "Verified Purchase"
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "sold_out": "Sold Out",
+    "quantity": "Quantity",
+    "one_time": "One-time",
+    "subscribe_save": "Subscribe & Save"
+  }
+}

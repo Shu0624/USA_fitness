@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USA Fermented Yeast Protein — United Science Alliance</title>
+  <meta name="description" content="USA Fermented Yeast Protein by United Science Alliance. Next-gen fermented protein.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .promo-gallery-section {
+      padding: 0 0 120px;
+      background: var(--usa-bg-cream);
+    }
+    .promo-image-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .promo-image-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .promo-image-grid img:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(240, 158, 67, 0.15);
+    }
+    @media (max-width: 992px) {
+      .promo-image-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* New Layout Styles */
+    .pd-grid { gap: 40px; }
+    .pd-main-image { width: 100%; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 16px; transition: opacity 0.3s ease, transform 0.3s ease; }
+    .pd-thumbnails { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+    .pd-thumbnails::-webkit-scrollbar { height: 4px; }
+    .pd-thumbnails::-webkit-scrollbar-track { background: transparent; }
+    .pd-thumbnails::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+    .pd-thumb { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; flex-shrink: 0; opacity: 0.7; transition: all 0.3s; }
+    .pd-thumb.active { border-color: var(--usa-accent); opacity: 1; }
+    .pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .pd-info-header { margin-bottom: 24px; }
+    .pd-subtitle { font-size: 0.8rem; font-weight: 700; color: var(--usa-text-muted-dark); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .pd-rating-stars { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #f5a623; margin-top: 12px; }
+    .pd-rating-text { color: var(--usa-text-muted-dark); font-size: 0.9rem; font-family: var(--usa-font-body); }
+    
+    .pd-flavor-text { font-size: 0.95rem; font-weight: 700; color: var(--usa-text-dark); margin-bottom: 12px; }
+    .pd-flavor-text span { color: var(--usa-accent); font-weight: 800; }
+    .pd-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .pd-chip { padding: 10px 16px; border: 1px solid var(--usa-border-dark); border-radius: 8px; background: transparent; color: var(--usa-text-dark); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .pd-chip:hover { border-color: rgba(0,0,0,0.2); }
+    .pd-chip.active { background: rgba(240, 158, 67, 0.1); border-color: var(--usa-accent); color: var(--usa-accent); }
+    
+    .pd-purchase-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .pd-card-opt { border: 1px solid var(--usa-border-dark); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s; background: transparent; }
+    .pd-card-opt.active { background: rgba(240, 158, 67, 0.1); border-color: var(--usa-accent); }
+    .pd-card-opt h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 4px; color: var(--usa-text-dark); }
+    .pd-card-opt p { font-size: 0.9rem; font-weight: 700; color: var(--usa-text-dark); margin: 0; }
+    .pd-save-badge { background: rgba(82, 196, 26, 0.15); color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-top: 4px; }
+    
+    .pd-price-display { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+    .pd-price-main { font-family: var(--usa-font-display); font-size: 2.8rem; font-weight: 800; color: var(--usa-text-dark); }
+    .pd-price-sub { color: var(--usa-text-muted-dark); font-size: 0.9rem; font-weight: 500; }
+    
+    .pd-action-row { display: flex; gap: 12px; margin-bottom: 12px; }
+    .pd-qty-box { display: flex; align-items: center; border: 1px solid var(--usa-border-dark); border-radius: 8px; padding: 4px 8px; background: transparent; }
+    .pd-qty-box button { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; width: 32px; height: 32px; color: var(--usa-text-dark); }
+    .pd-qty-box input { width: 32px; text-align: center; border: none; font-weight: 700; background: transparent; color: var(--usa-text-dark); }
+    .pd-btn-black { flex: 1; background: #111; color: #fff; border: none; border-radius: 8px; font-family: var(--usa-font-display); font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+    .pd-btn-black:hover { background: #000; }
+    .pd-btn-yellow { width: 100%; background: #E0A92C; color: #111; border: none; border-radius: 8px; font-family: var(--usa-font-display); font-weight: 800; font-size: 1.1rem; padding: 18px; cursor: pointer; margin-bottom: 24px; transition: background 0.2s; }
+    .pd-btn-yellow:hover { background: #d09a25; }
+    
+    .pd-trust-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem; color: var(--usa-text-muted-dark); }
+    .pd-trust-list i { color: #E0A92C; margin-right: 8px; }
+    
+    @media (max-width: 600px) {
+      .pd-purchase-cards { grid-template-columns: 1fr; gap: 12px; }
+      .pd-trust-list { grid-template-columns: 1fr; gap: 8px; }
+      .pd-price-main { font-size: 2.2rem; }
+      .pd-action-row { flex-direction: column; }
+      .pd-btn-black { padding: 16px; }
+      .pd-qty-box { justify-content: space-between; padding: 8px 16px; }
+      .pd-info { padding: 0 16px; }
+      .pd-gallery-col { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="site-nav scrolled" id="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-icon">U</span>
+        <div class="nav-logo-text">
+          <span>UNITED</span>
+          <span>SCIENCE</span>
+          <span>ALLIANCE</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#products">PRODUCTS</a></li>
+        <li><a href="index.html#ingredients">SCIENCE</a></li>
+        <li><a href="index.html#vision">EDUCATION</a></li>
+        <li><a href="index.html#community">ABOUT</a></li>
+        <li><a href="index.html#reviews">ATHLETES</a></li>
+        <li><a href="index.html#faq">UPCOMING PRODUCTS</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button aria-label="Account"><i class="fa-regular fa-user"></i></button>
+        <button aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ MARQUEE BAR ═══ -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>FREE SHIPPING ABOVE ₹999</span><span class="marquee-dot"></span>
+      <span>INFORMED CHOICE CERTIFIED</span><span class="marquee-dot"></span>
+      <span>BANNED-SUBSTANCE FREE</span><span class="marquee-dot"></span>
+      <span>LAB-TESTED & VERIFIED</span><span class="marquee-dot"></span>
+      <span>SCIENCE-BACKED SOLUTIONS</span><span class="marquee-dot"></span>
+      <span>FREE SHIPPING ABOVE ₹999</span><span class="marquee-dot"></span>
+      <span>INFORMED CHOICE CERTIFIED</span><span class="marquee-dot"></span>
+      <span>BANNED-SUBSTANCE FREE</span><span class="marquee-dot"></span>
+      <span>LAB-TESTED & VERIFIED</span><span class="marquee-dot"></span>
+      <span>SCIENCE-BACKED SOLUTIONS</span><span class="marquee-dot"></span>
+    </div>
+  </div>
+
+  <!-- ═══ PRODUCT DETAIL ═══ -->
+  <section class="product-detail-section">
+    <div class="container">
+      <div class="pd-grid">
+        
+        <!-- Left: Image Gallery -->
+        <div class="pd-gallery-col reveal-up">
+          <img src="assets/fermented%20yeast%20protien.jpeg" alt="USA Fermented Yeast Protein" class="pd-main-image" id="pd-main-img">
+          <div class="pd-thumbnails">
+            <div class="pd-thumb active" onclick="changeMainImage('assets/fermented%20yeast%20protien.jpeg', this)"><img src="assets/fermented%20yeast%20protien.jpeg" alt="Product Shot"></div>
+            <div class="pd-thumb" onclick="changeMainImage('assets/fermented%20yeast%20protien-1.jpeg', this)"><img src="assets/fermented%20yeast%20protien-1.jpeg" alt="Benefits"></div>
+            <div class="pd-thumb" onclick="changeMainImage('assets/fermented%20yeast%20protien-2.jpeg', this)"><img src="assets/fermented%20yeast%20protien-2.jpeg" alt="Features"></div>
+          </div>
+          
+          <script>
+            function changeMainImage(src, thumbElement) {
+              const mainImg = document.getElementById('pd-main-img');
+              
+              // Update thumbnails
+              document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+              if(thumbElement) thumbElement.classList.add('active');
+              
+              // Slide and fade out
+              mainImg.style.opacity = '0';
+              mainImg.style.transform = 'translateX(-10px)';
+              
+              setTimeout(() => {
+                mainImg.src = src;
+                // Slide and fade in
+                mainImg.style.transform = 'translateX(10px)';
+                
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    mainImg.style.opacity = '1';
+                    mainImg.style.transform = 'translateX(0)';
+                  });
+                });
+              }, 300);
+            }
+          </script>
+        </div>
+
+        <!-- Right: Info -->
+        <div class="pd-info reveal-up">
+          <div class="pd-info-header">
+            <div class="pd-subtitle">USA SUPPLEMENT</div>
+            <h1 class="pd-title" style="margin-bottom:8px;">Fermented Yeast Protein</h1>
+            <p class="pd-tagline" style="color:var(--usa-text-muted-dark); font-style:normal; font-size:1rem; margin-bottom:0;">Next-gen fermented protein.</p>
+            <div class="pd-rating-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <span class="pd-rating-text">5 (847) · 1,200+ athletes trust this</span>
+            </div>
+          </div>
+          
+          <div class="pd-flavor-text">Flavor: <span>Double Chocolate</span></div>
+          <div class="pd-chips">
+            <button class="pd-chip active">Double Chocolate</button>
+            <button class="pd-chip">Vanilla Bean</button>
+            <button class="pd-chip">Mocha Blend</button>
+            <button class="pd-chip">Berry Blast</button>
+          </div>
+
+          <div class="pd-purchase-cards">
+            <div class="pd-card-opt active">
+              <h4>One-time</h4>
+              <p>Rs. 2,299.00</p>
+            </div>
+            <div class="pd-card-opt">
+              <h4>Subscribe & Save</h4>
+              <div class="pd-save-badge">-15%</div>
+            </div>
+          </div>
+
+          <div class="pd-price-display">
+            <span class="pd-price-main">Rs. 2,299.00</span>
+            <span class="pd-price-sub">30 servings</span>
+          </div>
+
+          <div class="pd-action-row">
+            <div class="pd-qty-box">
+              <button>-</button>
+              <input type="text" value="1" readonly>
+              <button>+</button>
+            </div>
+            <button class="pd-btn-black">Add to Cart</button>
+          </div>
+          <button class="pd-btn-yellow">Buy Now</button>
+
+          <div class="pd-trust-list">
+            <div><i class="fa-solid fa-circle-check"></i> Free shipping ₹999+</div>
+            <div><i class="fa-solid fa-circle-check"></i> COD available</div>
+            <div><i class="fa-solid fa-circle-check"></i> 100% authentic</div>
+            <div><i class="fa-solid fa-circle-check"></i> Easy returns</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROMO GALLERY ═══ -->
+  <section class="promo-gallery-section">
+    <div class="container">
+      <div class="promo-image-grid reveal-up">
+        <img src="assets/fermented%20yeast%20protien.jpeg" alt="USA Fermented Yeast Protein">
+        <img src="assets/fermented%20yeast%20protien-1.jpeg" alt="USA Fermented Yeast Protein">
+        <img src="assets/fermented%20yeast%20protien-2.jpeg" alt="USA Fermented Yeast Protein">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCIENCE & INGREDIENTS ═══ -->
+  <section class="pd-details-section">
+    <div class="container">
+      <div class="pd-details-grid reveal-up">
+        <div class="pd-detail-card">
+          <h3>The Plant-Powered Matrix</h3>
+          <div class="pd-ingredient-list">
+            <div class="pd-ingredient">
+              <h4>Pea Protein Isolate <span>12g</span></h4>
+              <p>Highly bioavailable and rich in BCAAs, providing the core structural blocks for muscle repair and growth.</p>
+            </div>
+            <div class="pd-ingredient">
+              <h4>Brown Rice Protein <span>8g</span></h4>
+              <p>Complements pea protein perfectly to ensure a complete amino acid profile, essential for athletic recovery.</p>
+            </div>
+            <div class="pd-ingredient">
+              <h4>Pumpkin Seed Protein <span>4g</span></h4>
+              <p>Packed with micronutrients, healthy fats, and antioxidants, adding a smooth texture and nutritional depth.</p>
+            </div>
+            <div class="pd-ingredient">
+              <h4>Digestive Enzymes <span>50mg</span></h4>
+              <p>A specialized blend designed to break down plant proteins efficiently, ensuring zero bloating and maximum absorption.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="#" class="nav-logo" style="margin-bottom:20px;">
+            <span class="nav-logo-icon" style="width:50px;height:50px;font-size:1.5rem;">U</span>
+            <div class="nav-logo-text">
+              <span style="font-size:0.8rem;">UNITED</span>
+              <span style="font-size:0.8rem;">SCIENCE</span>
+              <span style="font-size:0.8rem;">ALLIANCE</span>
+            </div>
+          </a>
+          <p style="color:var(--usa-text-muted-dark);line-height:1.6;font-size:0.9rem;">Building the world's most trusted health ecosystem. Science-backed nutrition for elite performance.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="index.html#products">All Products</a></li>
+            <li><a href="#">Pre-Workouts</a></li>
+            <li><a href="#">Proteins</a></li>
+            <li><a href="#">Wellness</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ingredients">The Science</a></li>
+            <li><a href="index.html#reviews">Athletes</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Quality Assurance</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-compliance">
+        <span>FSSAI Lic: 12345678901234</span>
+        <span>FDA Facility Registered</span>
+        <span>ISO 22000 Certified</span>
+        <span>GMP Compliant</span>
+        <span>HACCP Certified</span>
+      </div>
+      <div class="footer-bar">
+        <p>© 2026 United Science Alliance · Telangana, India · All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>

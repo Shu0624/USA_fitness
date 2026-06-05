@@ -1,0 +1,87 @@
+{%- comment -%}
+  Community & Brand Story — Text + Stats Grid
+{%- endcomment -%}
+
+<section class="community-section" id="community">
+  <div class="container">
+    <div class="community-grid">
+      <div class="community-text reveal-up">
+        {%- if section.settings.tag != blank -%}
+          <div class="section-tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.paragraph_1 != blank -%}
+          <p>{{ section.settings.paragraph_1 }}</p>
+        {%- endif -%}
+        {%- if section.settings.paragraph_2 != blank -%}
+          <p>{{ section.settings.paragraph_2 }}</p>
+        {%- endif -%}
+        {%- if section.settings.quote != blank -%}
+          <div class="community-quote">
+            <i class="fa-solid fa-quote-left"></i>
+            <blockquote>{{ section.settings.quote }}</blockquote>
+            {%- if section.settings.quote_author != blank -%}
+              <cite>{{ section.settings.quote_author }}</cite>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="stats-grid reveal-up">
+          {%- for block in section.blocks -%}
+            <div class="stat-card" {{ block.shopify_attributes }}>
+              <div class="stat-number"
+                {%- if block.settings.target != blank %} data-target="{{ block.settings.target }}"{% endif -%}
+                {%- if block.settings.suffix != blank %} data-suffix="{{ block.settings.suffix }}"{% endif -%}
+              >{{ block.settings.display | default: '0' }}</div>
+              <div class="stat-label">{{ block.settings.label }}</div>
+              <div class="stat-sub">{{ block.settings.sublabel }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Community & Story",
+  "class": "community-wrapper",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "Our Story" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Building The World's Most Trusted <em>Health Ecosystem</em></p>" },
+    { "type": "textarea", "id": "paragraph_1", "label": "Paragraph 1", "default": "We believe every individual deserves access to science-backed health solutions. USA Supplement isn't just a brand — it's a 12-phase roadmap to transform how the world approaches nutrition, wellness, and preventive health." },
+    { "type": "textarea", "id": "paragraph_2", "label": "Paragraph 2", "default": "From our flagship Wildfire Pre-Workout to a complete ecosystem spanning smart tech, education, and longevity science — we're building something that lasts." },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "\"The first victory is not raising investment. The first victory is creating customers who buy again without being asked.\"" },
+    { "type": "text", "id": "quote_author", "label": "Quote Attribution", "default": "— Founding Principle, USA Supplement" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Card",
+      "settings": [
+        { "type": "text", "id": "target", "label": "Counter Target" },
+        { "type": "text", "id": "suffix", "label": "Suffix", "info": "e.g. +, %, K" },
+        { "type": "text", "id": "display", "label": "Display Value", "default": "0", "info": "Use for non-numeric values like ∞" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Phases" },
+        { "type": "text", "id": "sublabel", "label": "Sub-label", "default": "5-Year Roadmap" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community & Story",
+      "blocks": [
+        { "type": "stat", "settings": { "target": "12", "label": "Phases", "sublabel": "5-Year Roadmap" } },
+        { "type": "stat", "settings": { "target": "50", "suffix": "+", "label": "Products", "sublabel": "Across Categories" } },
+        { "type": "stat", "settings": { "target": "100", "suffix": "%", "label": "Transparent", "sublabel": "No Hidden Formulas" } },
+        { "type": "stat", "settings": { "display": "∞", "label": "Commitment", "sublabel": "To Your Health" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

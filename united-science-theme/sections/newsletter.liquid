@@ -1,0 +1,75 @@
+{%- comment -%}
+  Newsletter Signup Section
+{%- endcomment -%}
+
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner reveal-up">
+      <div class="newsletter-text">
+        {%- if section.settings.tag != blank -%}
+          <div class="section-tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+      <form method="post" action="/contact#newsletter" class="newsletter-form" id="newsletter-form">
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="input-group">
+          <input type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}" required autocomplete="email">
+          <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <p class="form-note"><i class="fa-solid fa-lock"></i> {{ section.settings.privacy_note | default: 'No spam. Unsubscribe anytime. We respect your privacy.' }}</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "class": "newsletter-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Section Tag",
+      "default": "Join The Community"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Be Part of the <em>Health Revolution</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Get exclusive early access to new launches, athlete tips, and members-only discounts. Join 5,000+ athletes in the USA community."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy Note",
+      "default": "No spam. Unsubscribe anytime. We respect your privacy."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup"
+    }
+  ]
+}
+{% endschema %}

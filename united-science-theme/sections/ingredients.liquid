@@ -1,0 +1,89 @@
+{%- comment -%}
+  Ingredient Transparency Section — Image + dosage list as blocks
+{%- endcomment -%}
+
+<section class="ingredient-section" id="ingredients">
+  <div class="container">
+    <div class="ingredient-layout">
+      <div class="ingredient-visual reveal-up">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.heading | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'Untitled_design_1.png' | asset_url }}"
+            alt="{{ section.settings.heading | escape }}"
+            width="800"
+            height="800"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+      <div class="ingredient-info reveal-up">
+        {%- if section.settings.tag != blank -%}
+          <div class="section-tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="dosage-list">
+            {%- for block in section.blocks -%}
+              <div class="dosage-item" {{ block.shopify_attributes }}>
+                <span class="dosage-pill">{{ block.settings.amount }}</span>
+                <div class="dosage-text">
+                  <h4>{{ block.settings.name }}</h4>
+                  <span>{{ block.settings.benefit }}</span>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredient Transparency",
+  "class": "ingredient-wrapper",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "Ingredient Transparency" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every dose, on the label." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "No under-dosed fillers. No hidden blends. Every ingredient, every milligram right there on the tub." },
+    { "type": "image_picker", "id": "image", "label": "Showcase Image" }
+  ],
+  "blocks": [
+    {
+      "type": "dosage",
+      "name": "Dosage Item",
+      "settings": [
+        { "type": "text", "id": "amount", "label": "Dosage Amount", "default": "5g" },
+        { "type": "text", "id": "name", "label": "Ingredient Name", "default": "Beta-Alanine" },
+        { "type": "text", "id": "benefit", "label": "Benefit", "default": "clinically proven endurance dose" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient Transparency",
+      "blocks": [
+        { "type": "dosage", "settings": { "amount": "5g", "name": "Beta-Alanine", "benefit": "clinically proven endurance dose" } },
+        { "type": "dosage", "settings": { "amount": "2.5g", "name": "L-Citrulline DL-Malate", "benefit": "for pump and blood flow" } },
+        { "type": "dosage", "settings": { "amount": "200mg", "name": "Caffeine Anhydrous", "benefit": "clean energy without the crash" } },
+        { "type": "dosage", "settings": { "amount": "180mg", "name": "Choline Bitartrate", "benefit": "focus and mind-muscle connection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

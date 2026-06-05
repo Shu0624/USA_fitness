@@ -1,0 +1,62 @@
+{%- comment -%}
+  Customer Login Page
+{%- endcomment -%}
+
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card reveal-up">
+      <h1>Login</h1>
+      <p class="auth-sub">Welcome back to United Science Alliance</p>
+
+      {%- form 'customer_login' -%}
+        {{ form.errors | default_errors }}
+        <div class="auth-field">
+          <label for="customer-email">Email</label>
+          <input type="email" name="customer[email]" id="customer-email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="customer-password">Password</label>
+          <input type="password" name="customer[password]" id="customer-password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary auth-btn">Sign In</button>
+        <div class="auth-links">
+          <a href="#recover">Forgot password?</a>
+          <a href="{{ routes.account_register_url }}">Create account</a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .auth-section { padding: 140px 0 120px; background: var(--usa-bg-cream); }
+  .auth-card {
+    max-width: 440px; margin: 0 auto; background: #fff; padding: 48px 40px;
+    border-radius: 16px; border: 1px solid var(--usa-border-dark);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  }
+  .auth-card h1 { font-family: var(--usa-font-display); font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  .auth-sub { color: var(--usa-text-muted-dark); margin-bottom: 32px; }
+  .auth-field { margin-bottom: 20px; }
+  .auth-field label {
+    display: block; font-family: var(--usa-font-display); font-size: 0.8rem;
+    font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--usa-text-dark);
+  }
+  .auth-field input {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--usa-border-dark);
+    border-radius: 8px; font-size: 0.95rem; font-family: var(--usa-font-body);
+    transition: border-color 0.3s;
+  }
+  .auth-field input:focus { outline: none; border-color: var(--usa-accent); }
+  .auth-btn { width: 100%; margin-top: 8px; }
+  .auth-links { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.85rem; }
+  .auth-links a { color: var(--usa-accent); text-decoration: none; }
+  .auth-links a:hover { text-decoration: underline; }
+</style>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "settings": []
+}
+{% endschema %}

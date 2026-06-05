@@ -1,0 +1,131 @@
+{%- comment -%}
+  Cart Page Section — Shopify native cart with AJAX update
+{%- endcomment -%}
+
+<section class="cart-section">
+  <div class="container">
+    <div class="cart-header reveal-up">
+      <h1>Your Cart</h1>
+      <span class="cart-item-count">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="/cart" method="post" id="cart-form">
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="cart-item reveal-up">
+              <div class="cart-item-img">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" loading="lazy">
+                {%- endif -%}
+              </div>
+              <div class="cart-item-info">
+                <h3><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+                {%- if item.variant.title != 'Default Title' -%}
+                  <span class="cart-item-variant">{{ item.variant.title }}</span>
+                {%- endif -%}
+                <span class="cart-item-price">{{ item.original_line_price | money }}</span>
+              </div>
+              <div class="cart-item-qty">
+                <div class="pd-qty">
+                  <button type="button" class="pd-qty-btn" data-action="decrease"
+                    onclick="updateCartQty('{{ item.key }}', {{ item.quantity | minus: 1 }})">-</button>
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="pd-qty-input" readonly>
+                  <button type="button" class="pd-qty-btn" data-action="increase"
+                    onclick="updateCartQty('{{ item.key }}', {{ item.quantity | plus: 1 }})">+</button>
+                </div>
+              </div>
+              <div class="cart-item-total">
+                <span>{{ item.final_line_price | money }}</span>
+              </div>
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove" aria-label="Remove">
+                <i class="fa-solid fa-xmark"></i>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-footer reveal-up">
+          <div class="cart-totals">
+            <div class="cart-subtotal-row">
+              <span>Subtotal</span>
+              <span class="cart-subtotal">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-note">Shipping & taxes calculated at checkout</p>
+          </div>
+          <div class="cart-actions">
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-outline-light" style="color:var(--usa-text-dark);border-color:var(--usa-border-dark);">Continue Shopping</a>
+            <button type="submit" name="checkout" class="btn btn-primary">Checkout — {{ cart.total_price | money }}</button>
+          </div>
+        </div>
+      </form>
+
+    {%- else -%}
+      <div class="cart-empty reveal-up">
+        <i class="fa-solid fa-bag-shopping" style="font-size:3rem; color:var(--usa-text-muted-dark); margin-bottom:24px;"></i>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added any products yet.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .cart-section { padding: 120px 0; background: var(--usa-bg-cream); }
+  .cart-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 48px; }
+  .cart-header h1 { font-family: var(--usa-font-display); font-size: 2.2rem; font-weight: 800; }
+  .cart-item-count { color: var(--usa-text-muted-dark); font-size: 0.95rem; }
+  .cart-items { display: flex; flex-direction: column; gap: 16px; }
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto auto;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--usa-border-dark);
+  }
+  .cart-item-img img { width: 80px; height: 80px; object-fit: contain; border-radius: 8px; }
+  .cart-item-info h3 { font-family: var(--usa-font-display); font-size: 1rem; font-weight: 700; }
+  .cart-item-info h3 a { text-decoration: none; color: var(--usa-text-dark); }
+  .cart-item-variant { font-size: 0.8rem; color: var(--usa-text-muted-dark); }
+  .cart-item-price { font-size: 0.85rem; color: var(--usa-text-muted-dark); text-decoration: line-through; }
+  .cart-item-total span { font-family: var(--usa-font-display); font-weight: 700; font-size: 1rem; }
+  .cart-item-remove { color: var(--usa-text-muted-dark); font-size: 1rem; padding: 8px; transition: color 0.3s; }
+  .cart-item-remove:hover { color: var(--usa-red); }
+  .cart-footer { margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .cart-subtotal-row { display: flex; justify-content: space-between; gap: 40px; margin-bottom: 8px; }
+  .cart-subtotal { font-family: var(--usa-font-display); font-size: 1.5rem; font-weight: 800; }
+  .cart-note { color: var(--usa-text-muted-dark); font-size: 0.85rem; }
+  .cart-actions { display: flex; gap: 12px; }
+  .cart-empty { text-align: center; padding: 80px 0; }
+  .cart-empty h2 { font-family: var(--usa-font-display); font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+  .cart-empty p { color: var(--usa-text-muted-dark); margin-bottom: 24px; }
+  @media (max-width: 768px) {
+    .cart-item { grid-template-columns: 60px 1fr; gap: 12px; }
+    .cart-item-qty, .cart-item-total { grid-column: 2; }
+    .cart-item-remove { position: absolute; top: 12px; right: 12px; }
+    .cart-item { position: relative; }
+    .cart-footer { flex-direction: column; align-items: stretch; }
+    .cart-actions { flex-direction: column; }
+  }
+</style>
+
+<script>
+  function updateCartQty(key, qty) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: Math.max(0, qty) })
+    }).then(() => location.reload());
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}

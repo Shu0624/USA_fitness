@@ -1,0 +1,126 @@
+<!-- sections/footer.liquid -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <h3>{{ section.settings.brand_title | default: 'USA SUPPLEMENT' }}</h3>
+        <span class="footer-accent">{{ section.settings.brand_sub | default: 'UNITED SCIENCE ALLIANCE' }}</span>
+        <p>{{ section.settings.brand_desc | default: 'To build the world\'s most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health.' }}</p>
+        
+        <div class="social-row">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          {%- endif -%}
+          {%- if settings.social_twitter != blank -%}
+            <a href="{{ settings.social_twitter }}" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Custom Link Columns -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' -%}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.title }}</h4>
+            {%- assign footer_menu = linklists[block.settings.menu] -%}
+            {%- if footer_menu != blank -%}
+              <ul>
+                {%- for link in footer_menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Compliance Badges -->
+    <div class="footer-compliance">
+      {%- if settings.fssai_lic != blank -%}
+        <span>FSSAI Lic: {{ settings.fssai_lic }}</span>
+      {%- endif -%}
+      {%- if settings.fda_reg != blank -%}
+        <span>{{ settings.fda_reg }}</span>
+      {%- endif -%}
+      {%- if settings.iso_cert != blank -%}
+        <span>{{ settings.iso_cert }}</span>
+      {%- endif -%}
+      {%- if settings.gmp_comp != blank -%}
+        <span>{{ settings.gmp_comp }}</span>
+      {%- endif -%}
+      {%- if settings.haccp_cert != blank -%}
+        <span>{{ settings.haccp_cert }}</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bar">
+      <p>{{ section.settings.copyright | default: '© 2026 United Science Alliance · Telangana, India · All Rights Reserved' }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Site Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand Title",
+      "default": "USA SUPPLEMENT"
+    },
+    {
+      "type": "text",
+      "id": "brand_sub",
+      "label": "Brand Subtitle",
+      "default": "UNITED SCIENCE ALLIANCE"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health."
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright Text",
+      "default": "© 2026 United Science Alliance · Telangana, India · All Rights Reserved"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Link Column",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Products"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Site Footer"
+    }
+  ]
+}
+{% endschema %}

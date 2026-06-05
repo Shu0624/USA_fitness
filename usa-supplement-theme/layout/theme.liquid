@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_bg_dark }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Dynamic Theme settings custom properties -->
+  <style>
+    :root {
+      --usa-bg-dark: {{ settings.color_bg_dark | default: '#141414' }};
+      --usa-bg-cream: {{ settings.color_bg_cream | default: '#FBF8F1' }};
+      --usa-bg-cream-alt: {{ settings.color_bg_cream_alt | default: '#F3EFE6' }};
+      --usa-accent: {{ settings.color_accent | default: '#F09E43' }};
+      --usa-accent-hover: {{ settings.color_accent_hover | default: '#E08C32' }};
+      --usa-accent-glow: {{ settings.color_accent | default: '#F09E43' | color_modify: 'alpha', 0.3 }};
+      --usa-accent-soft: {{ settings.color_accent | default: '#F09E43' | color_modify: 'alpha', 0.1 }};
+      --usa-text-dark: {{ settings.color_text_dark | default: '#111111' }};
+      --usa-text-light: {{ settings.color_text_light | default: '#ffffff' }};
+      --usa-text-muted-dark: {{ settings.color_text_muted_dark | default: '#555555' }};
+      --usa-text-muted-light: {{ settings.color_text_muted_light | default: '#aaaaaa' }};
+      --usa-border-dark: rgba(0, 0, 0, 0.08);
+      --usa-border-light: rgba(255, 255, 255, 0.1);
+      --usa-card-white: {{ settings.color_card_white | default: '#ffffff' }};
+      --usa-card-dark: {{ settings.color_card_dark | default: '#222222' }};
+      --usa-green: #52c41a;
+      --usa-red: #f5222d;
+      --usa-font-display: 'Outfit', sans-serif;
+      --usa-font-body: 'Inter', sans-serif;
+      --usa-shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+      --usa-shadow-hover: 0 15px 50px rgba(255, 60, 0, 0.15);
+    }
+  </style>
+
+  <!-- Stylesheet -->
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+
+  <!-- Shopify dynamic header hook -->
+  {{ content_for_header }}
+</head>
+<body>
+
+  <!-- Global Marquee Notification -->
+  {% section 'marquee' %}
+
+  <!-- Global Navigation Header -->
+  {% section 'header' %}
+
+  <!-- Main Content Layout -->
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Global Footer -->
+  {% section 'footer' %}
+
+  <!-- JS Dependencies: GSAP, ScrollTrigger, Lenis Smooth Scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
+
+  <!-- Core Theme Script -->
+  <script src="{{ 'app.js' | asset_url }}" defer></script>
+
+</body>
+</html>

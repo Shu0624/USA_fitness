@@ -1,0 +1,138 @@
+{%- comment -%}
+  Vision & Mission + Ecosystem Pillars Section
+  Two cards (Vision/Mission) with stats + 6 pillar tiles, all as blocks
+{%- endcomment -%}
+
+<section class="vision-section" id="vision">
+  <div class="container">
+    {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+
+    <div class="vm-grid">
+      <!-- Vision Card -->
+      <div class="vm-card">
+        <div class="vm-card-glow"></div>
+        <div class="vm-icon"><i class="fa-solid {{ section.settings.vision_icon | default: 'fa-eye' }}"></i></div>
+        <h3>{{ section.settings.vision_title | default: 'Our Vision' }}</h3>
+        <p>{{ section.settings.vision_text }}</p>
+        {%- assign vision_stats = section.blocks | where: "type", "vision_stat" -%}
+        {%- if vision_stats.size > 0 -%}
+          <div class="vm-stats-row">
+            {%- for block in vision_stats -%}
+              <div class="vm-stat" {{ block.shopify_attributes }}>
+                <span class="vm-stat-number"
+                  {%- if block.settings.target_number != blank %} data-target="{{ block.settings.target_number }}"{% endif -%}
+                  {%- if block.settings.suffix != blank %} data-suffix="{{ block.settings.suffix }}"{% endif -%}
+                >{{ block.settings.display_value | default: '0' }}</span>
+                <span class="vm-stat-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Mission Card -->
+      <div class="vm-card">
+        <div class="vm-card-glow"></div>
+        <div class="vm-icon"><i class="fa-solid {{ section.settings.mission_icon | default: 'fa-bullseye' }}"></i></div>
+        <h3>{{ section.settings.mission_title | default: 'Our Mission' }}</h3>
+        <p>{{ section.settings.mission_text }}</p>
+        {%- assign pillar_chips = section.blocks | where: "type", "pillar_chip" -%}
+        {%- if pillar_chips.size > 0 -%}
+          <div class="vm-pillars-row">
+            {%- for block in pillar_chips -%}
+              <div class="vm-pillar-chip" {{ block.shopify_attributes }}>
+                <i class="fa-solid {{ block.settings.icon }}"></i> {{ block.settings.label }}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Ecosystem Pillar Tiles -->
+    {%- assign pillar_tiles = section.blocks | where: "type", "pillar_tile" -%}
+    {%- if pillar_tiles.size > 0 -%}
+      <div class="pillars-grid">
+        {%- for block in pillar_tiles -%}
+          <div class="pillar-tile" {{ block.shopify_attributes }}>
+            <div class="pillar-icon"><i class="fa-solid {{ block.settings.icon }}"></i></div>
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vision & Mission",
+  "class": "vision-wrapper",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "Our Purpose" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Driven by Science. Built for Everyone." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Two pillars that guide everything we build, create, and deliver." },
+    { "type": "header", "content": "Vision Card" },
+    { "type": "text", "id": "vision_icon", "label": "Vision Icon", "default": "fa-eye" },
+    { "type": "text", "id": "vision_title", "label": "Vision Title", "default": "Our Vision" },
+    { "type": "textarea", "id": "vision_text", "label": "Vision Description", "default": "To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health." },
+    { "type": "header", "content": "Mission Card" },
+    { "type": "text", "id": "mission_icon", "label": "Mission Icon", "default": "fa-bullseye" },
+    { "type": "text", "id": "mission_title", "label": "Mission Title", "default": "Our Mission" },
+    { "type": "textarea", "id": "mission_text", "label": "Mission Description", "default": "Make science-backed health solutions accessible to every individual through products, education, technology and community." }
+  ],
+  "blocks": [
+    {
+      "type": "vision_stat",
+      "name": "Vision Stat",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "target_number", "label": "Counter Target (number)", "default": "1" },
+        { "type": "text", "id": "suffix", "label": "Suffix", "default": "B+" },
+        { "type": "text", "id": "display_value", "label": "Initial Display", "default": "0" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Lives Impacted" }
+      ]
+    },
+    {
+      "type": "pillar_chip",
+      "name": "Mission Pillar",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon Class", "default": "fa-flask" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Nutrition" }
+      ]
+    },
+    {
+      "type": "pillar_tile",
+      "name": "Ecosystem Pillar Tile",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon Class", "default": "fa-apple-whole" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Nutrition" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Science-backed supplements for peak performance." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vision & Mission",
+      "blocks": [
+        { "type": "vision_stat", "settings": { "target_number": "1", "suffix": "B+", "label": "Lives Impacted" } },
+        { "type": "vision_stat", "settings": { "target_number": "100", "suffix": "+", "label": "Countries" } },
+        { "type": "vision_stat", "settings": { "display_value": "24/7", "label": "Science Driven" } },
+        { "type": "pillar_chip", "settings": { "icon": "fa-flask", "label": "Nutrition" } },
+        { "type": "pillar_chip", "settings": { "icon": "fa-graduation-cap", "label": "Education" } },
+        { "type": "pillar_chip", "settings": { "icon": "fa-microchip", "label": "Technology" } },
+        { "type": "pillar_chip", "settings": { "icon": "fa-people-group", "label": "Community" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-apple-whole", "title": "Nutrition" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-spa", "title": "Wellness" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-book-open", "title": "Education" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-people-group", "title": "Community" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-microchip", "title": "Technology" } },
+        { "type": "pillar_tile", "settings": { "icon": "fa-heart-pulse", "title": "Preventive Health" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

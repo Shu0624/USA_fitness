@@ -1,0 +1,67 @@
+<!-- sections/newsletter.liquid -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner reveal-up">
+      <div class="newsletter-text">
+        {%- if section.settings.tag != blank -%}
+          <div class="section-tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+      
+      {%- form 'customer', class: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="input-group">
+          <input type="email" name="contact[email]" value="{{ form.email }}" placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}" required style="color: var(--usa-text-light);">
+          <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p style="color: var(--usa-green); margin-top: 10px;">✓ Subscribed! Welcome to the community.</p>
+        {%- endif -%}
+        <p class="form-note"><i class="fa-solid fa-lock"></i> No spam. Unsubscribe anytime. We respect your privacy.</p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Subscribe",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Section Tag",
+      "default": "Join The Community"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Be Part of the <em>Health Revolution</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Get exclusive early access to new launches, athlete tips, and members-only discounts. Join 5,000+ athletes in the USA community."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Input Placeholder",
+      "default": "Enter your email address"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Subscribe"
+    }
+  ]
+}
+{% endschema %}

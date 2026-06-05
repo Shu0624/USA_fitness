@@ -1,0 +1,55 @@
+{%- comment -%}
+  Why Choose Us — Feature cards as blocks
+{%- endcomment -%}
+
+<section class="why-section" id="why-usa">
+  <div class="container">
+    {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="why-grid reveal-up">
+        {%- for block in section.blocks -%}
+          <div class="why-card" {{ block.shopify_attributes }}>
+            <div class="why-card-icon"><i class="fa-solid {{ block.settings.icon }}"></i></div>
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "class": "why-wrapper",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "Why Choose Us" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why USA Supplement" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "India's most certified pre-workout. Every claim backed by third-party testing." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon Class", "default": "fa-check" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Banned-Substance Free" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Informed Choice certified" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "fa-check", "title": "Banned-Substance Free", "description": "Informed Choice certified" } },
+        { "type": "feature", "settings": { "icon": "fa-flask-vial", "title": "Clinically Dosed", "description": "5g Beta-Alanine · 2.5g Citrulline" } },
+        { "type": "feature", "settings": { "icon": "fa-building-columns", "title": "FDA-Registered Facility", "description": "Reg. No. 16133920022" } },
+        { "type": "feature", "settings": { "icon": "fa-list-check", "title": "No Proprietary Blends", "description": "Every mg disclosed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

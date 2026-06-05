@@ -1,0 +1,159 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "United Science Alliance",
+    "theme_version": "1.0.0",
+    "theme_author": "USA Supplement Dev Team",
+    "theme_documentation_url": "https://g41a5h-9a.myshopify.com",
+    "theme_support_url": "https://g41a5h-9a.myshopify.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg_cream",
+        "label": "Cream Background",
+        "default": "#FBF8F1"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_cream_alt",
+        "label": "Cream Background Alt",
+        "default": "#F3EFE6"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Dark Background",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (Gold)",
+        "default": "#F09E43"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Accent Hover",
+        "default": "#E08C32"
+      },
+      {
+        "type": "color",
+        "id": "color_text_dark",
+        "label": "Text Dark",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Text Light",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Text Muted",
+        "default": "#555555"
+      },
+      {
+        "type": "color",
+        "id": "color_card_dark",
+        "label": "Card Dark Background",
+        "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "color_green",
+        "label": "Success / Verified Color",
+        "default": "#52c41a"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "outfit_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Layout & Spacing",
+    "settings": [
+      {
+        "type": "range",
+        "id": "border_radius",
+        "label": "Border Radius",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Section Vertical Spacing",
+        "min": 40,
+        "max": 200,
+        "step": 10,
+        "default": 80,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable scroll animations (GSAP)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_smooth_scroll",
+        "label": "Enable smooth scrolling (Lenis)",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      }
+    ]
+  }
+]

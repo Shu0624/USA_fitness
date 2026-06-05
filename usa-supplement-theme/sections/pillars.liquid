@@ -1,0 +1,60 @@
+<!-- sections/pillars.liquid -->
+<div class="container" style="margin-top: -40px; margin-bottom: 80px;">
+  {%- if section.blocks.size > 0 -%}
+    <div class="pillars-grid">
+      {%- for block in section.blocks -%}
+        <div class="pillar-tile" {{ block.shopify_attributes }}>
+          <div class="pillar-icon"><i class="fa-solid {{ block.settings.icon_class | default: 'fa-apple-whole' }}"></i></div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Ecosystem Pillars",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "pillar_tile",
+      "name": "Pillar Tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "FontAwesome Icon Class",
+          "default": "fa-apple-whole"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Title",
+          "default": "Nutrition"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Pillar Description",
+          "default": "Science-backed supplements for peak performance."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ecosystem Pillars",
+      "blocks": [
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-apple-whole", "title": "Nutrition", "description": "Science-backed supplements for peak performance." } },
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-spa", "title": "Wellness", "description": "Holistic health solutions for body & mind." } },
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-book-open", "title": "Education", "description": "Empowering through verified health knowledge." } },
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-people-group", "title": "Community", "description": "Connecting athletes and health enthusiasts." } },
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-microchip", "title": "Technology", "description": "AI-driven health tracking and optimization." } },
+        { "type": "pillar_tile", "settings": { "icon_class": "fa-heart-pulse", "title": "Preventive Health", "description": "Proactive care before problems arise." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

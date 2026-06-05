@@ -1,0 +1,16 @@
+{%- comment -%}
+  Reusable Section Header — used in 10+ sections
+  Usage: {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+{%- endcomment -%}
+
+<div class="section-head reveal-up">
+  {%- if tag != blank -%}
+    <div class="section-tag">{{ tag }}</div>
+  {%- endif -%}
+  {%- if heading != blank -%}
+    <h2>{{ heading }}</h2>
+  {%- endif -%}
+  {%- if subheading != blank -%}
+    <p>{{ subheading }}</p>
+  {%- endif -%}
+</div>

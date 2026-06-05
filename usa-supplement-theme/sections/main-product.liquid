@@ -1,0 +1,337 @@
+<!-- sections/main-product.liquid -->
+<section class="product-detail-section">
+  <div class="container">
+    <div class="pd-grid">
+      
+      <!-- Left: Image Gallery -->
+      <div class="pd-gallery-col reveal-up">
+        {%- if product.featured_media -%}
+          <div class="pd-main-image-container" style="position: relative;">
+            {%- if product.tags contains 'Bestseller' or product.tags contains 'bestseller' -%}
+              <span class="pd-badge" style="position: absolute; top: 16px; left: 16px; background: #e04a19; color: #fff; font-family: var(--usa-font-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; padding: 5px 12px; border-radius: 6px; z-index: 2;">BESTSELLER</span>
+            {%- endif -%}
+            <img src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="pd-main-image" id="pd-main-img">
+          </div>
+          
+          {%- if product.media.size > 1 -%}
+            <div class="pd-thumbnails">
+              {%- for media in product.media -%}
+                <div class="pd-thumb {% if forloop.first %}active{% endif %}" data-media-id="{{ media.id }}" onclick="changeMainImage('{{ media | image_url: width: 1000 }}', this)">
+                  <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | escape }}">
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+
+        <script>
+          function changeMainImage(src, thumbElement) {
+            const mainImg = document.getElementById('pd-main-img');
+            if(!mainImg) return;
+            
+            // Update thumbnails active state
+            document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+            if(thumbElement) thumbElement.classList.add('active');
+            
+            // Slide and fade out animation
+            mainImg.style.opacity = '0';
+            mainImg.style.transform = 'translateX(-10px)';
+            
+            setTimeout(() => {
+              mainImg.src = src;
+              mainImg.style.transform = 'translateX(10px)';
+              
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  mainImg.style.opacity = '1';
+                  mainImg.style.transform = 'translateX(0)';
+                });
+              });
+            }, 300);
+          }
+        </script>
+      </div>
+
+      <!-- Right: Info & Purchase Form -->
+      <div class="pd-info reveal-up">
+        <div class="pd-breadcrumbs" style="font-size: 0.85rem; color: var(--usa-text-muted-dark); margin-bottom: 16px;">
+          <a href="{{ routes.root_url }}">Home</a> / <a href="/collections/all">Products</a> / {{ product.title }}
+        </div>
+        
+        <h1 class="pd-title" style="font-family: var(--usa-font-display); font-size: 2.8rem; font-weight: 800; color: var(--usa-text-dark); margin-bottom: 8px; line-height: 1.1;">{{ product.title }}</h1>
+        
+        {%- if product.metafields.custom.tagline -%}
+          <p class="pd-tagline" style="color: var(--usa-text-muted-dark); font-size: 1.05rem; font-style: italic; margin-bottom: 16px;">{{ product.metafields.custom.tagline }}</p>
+        {%- endif -%}
+
+        <!-- Star Reviews Hook (Mock/App integrated) -->
+        <div class="pd-rating-stars" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #f5a623; margin-top: 12px; margin-bottom: 24px;">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          <span class="pd-rating-text" style="color: var(--usa-text-muted-dark); font-size: 0.9rem;">5 (847) · 1,200+ athletes trust this</span>
+        </div>
+
+        <p class="pd-description" style="color: var(--usa-text-muted-dark); font-size: 1rem; line-height: 1.7; margin-bottom: 24px;">
+          {{ product.description }}
+        </p>
+
+        <!-- Dynamic Shopify Add-To-Cart Form -->
+        {%- form 'product', product, id: 'product-form-main', class: 'form' -%}
+          <!-- Hidden Input for active variant ID -->
+          <input type="hidden" name="id" id="ActiveVariantId" value="{{ product.selected_or_first_available_variant.id }}">
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="pd-options" style="margin-bottom: 24px;">
+              {%- for option in product.options_with_values -%}
+                <div class="pd-option-group" style="margin-bottom: 16px;">
+                  <span class="pd-option-label" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--usa-text-muted-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Select {{ option.name }}</span>
+                  <div class="pd-flavor-grid" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    {%- for value in option.values -%}
+                      <button type="button" class="pd-flavor-btn {% if option.selected_value == value %}active{% endif %}" data-option-index="{{ option.position | minus: 1 }}" data-value="{{ value | escape }}" style="padding: 10px 16px; border: 1px solid var(--usa-border-dark); border-radius: 8px; background: transparent; color: var(--usa-text-dark); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        {{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <!-- Purchase Card Options (One-time vs Subscribe Mock) -->
+          <div class="pd-purchase-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+            <div class="pd-card-opt active" data-purchase-type="onetime" style="border: 1px solid var(--usa-border-dark); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s;">
+              <h4>One-Time Purchase</h4>
+              <p class="pd-price-card-label">{{ product.selected_or_first_available_variant.price | money }}</p>
+            </div>
+            <div class="pd-card-opt" data-purchase-type="subscribe" style="border: 1px solid var(--usa-border-dark); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s;">
+              <h4>Subscribe & Save 15%</h4>
+              <p class="pd-price-card-label">{{ product.selected_or_first_available_variant.price | times: 0.85 | money }}</p>
+              <span class="pd-save-badge" style="background: rgba(82, 196, 26, 0.15); color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-top: 4px;">BEST VALUE</span>
+            </div>
+          </div>
+
+          <!-- Price Display -->
+          <div class="pd-price-display" style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
+            <span class="pd-price-main" id="VariantPriceDisplay" style="font-family: var(--usa-font-display); font-size: 2.8rem; font-weight: 800; color: var(--usa-text-dark);">
+              {{ product.selected_or_first_available_variant.price | money }}
+            </span>
+            {%- if product.metafields.custom.servings_info -%}
+              <span class="pd-price-sub" style="color: var(--usa-text-muted-dark); font-size: 0.9rem; font-weight: 500;">/ {{ product.metafields.custom.servings_info }}</span>
+            {%- endif -%}
+          </div>
+
+          <!-- Actions Row: Qty + Add to Cart -->
+          <div class="pd-action-row" style="display: flex; gap: 12px; margin-bottom: 24px;">
+            <div class="pd-qty-box" style="display: flex; align-items: center; border: 1px solid var(--usa-border-dark); border-radius: 8px; padding: 4px 8px; background: transparent;">
+              <button type="button" class="qty-minus" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; width: 32px; height: 32px; color: var(--usa-text-dark);">-</button>
+              <input type="text" name="quantity" id="ProductQuantity" value="1" style="width: 32px; text-align: center; border: none; font-weight: 700; background: transparent; color: var(--usa-text-dark);" readonly>
+              <button type="button" class="qty-plus" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; width: 32px; height: 32px; color: var(--usa-text-dark);">+</button>
+            </div>
+            
+            <button type="submit" name="add" class="pd-btn-black" style="flex: 1; background: #111; color: #fff; border: none; border-radius: 8px; font-family: var(--usa-font-display); font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; padding: 16px;">
+              ADD TO CART
+            </button>
+          </div>
+        {%- endform -%}
+
+        <!-- Dynamic features checklist -->
+        {%- assign features = section.blocks | where: "type", "feature" -%}
+        {%- if features.size > 0 -%}
+          <div class="pd-trust-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem; color: var(--usa-text-muted-dark); border-top: 1px solid var(--usa-border-dark); padding-top: 24px;">
+            {%- for block in features -%}
+              <div class="pd-trust-item" {{ block.shopify_attributes }}>
+                <i class="fa-solid {{ block.settings.icon | default: 'fa-circle-check' }}" style="color: var(--usa-accent); margin-right: 8px;"></i>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ingredient Science Details Section -->
+{%- assign ingredients = section.blocks | where: "type", "ingredient" -%}
+{%- if ingredients.size > 0 -%}
+  <section class="pd-details-section" style="background: var(--usa-bg-cream-alt); padding: 80px 0; margin-top: 80px;">
+    <div class="container">
+      <div class="pd-details-grid reveal-up">
+        <div class="pd-detail-card" style="background: var(--usa-card-white); border-radius: 16px; padding: 48px; box-shadow: var(--usa-shadow-soft); border: 1px solid rgba(0,0,0,0.03);">
+          <h3 style="font-family: var(--usa-font-display); font-size: 1.8rem; font-weight: 700; color: var(--usa-text-dark); margin-bottom: 32px; border-bottom: 2px solid var(--usa-accent); padding-bottom: 12px; display: inline-block;">{{ section.settings.science_title | default: 'The Science Behind The Formula' }}</h3>
+          
+          <div class="pd-ingredient-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            {%- for block in ingredients -%}
+              <div class="pd-ingredient" {{ block.shopify_attributes }} style="border-bottom: 1px solid var(--usa-border-dark); padding-bottom: 20px;">
+                <h4 style="font-family: var(--usa-font-display); font-size: 1.2rem; font-weight: 700; color: var(--usa-text-dark); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+                  {{ block.settings.title }}
+                  <span style="color: var(--usa-accent); font-weight: 800; font-size: 1rem;">{{ block.settings.dosage }}</span>
+                </h4>
+                <p style="color: var(--usa-text-muted-dark); font-size: 0.95rem; line-height: 1.6;">{{ block.settings.description }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<!-- Output Variant Map JSON to handle dynamic variant selection -->
+<script id="ProductVariantsJson-{{ section.id }}" type="application/json">
+  [
+    {%- for variant in product.variants -%}
+      {
+        "id": {{ variant.id }},
+        "title": "{{ variant.title | escape }}",
+        "price": "{{ variant.price | money }}",
+        "price_cents": {{ variant.price }},
+        "options": {{ variant.options | json }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sectionContainer = document.querySelector('.product-detail-section');
+    if (!sectionContainer) return;
+
+    // Parse Variants JSON
+    const variantsJson = JSON.parse(document.getElementById('ProductVariantsJson-{{ section.id }}').textContent);
+    
+    // Track selected option values
+    let selectedOptions = [];
+    document.querySelectorAll('.pd-option-group').forEach((group) => {
+      const activeBtn = group.querySelector('.pd-flavor-btn.active');
+      if (activeBtn) {
+        const index = parseInt(activeBtn.dataset.optionIndex);
+        selectedOptions[index] = activeBtn.dataset.value;
+      }
+    });
+
+    // Option Buttons Click handler
+    document.querySelectorAll('.pd-flavor-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const optionIndex = parseInt(btn.dataset.optionIndex);
+        const value = btn.dataset.value;
+        
+        // Toggle Active Classes
+        const group = btn.closest('.pd-flavor-grid');
+        group.querySelectorAll('.pd-flavor-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update selected options
+        selectedOptions[optionIndex] = value;
+
+        // Find matching variant
+        const matchingVariant = variantsJson.find((variant) => {
+          return variant.options.every((val, idx) => selectedOptions[idx] === val);
+        });
+
+        if (matchingVariant) {
+          // Update Hidden variant ID input
+          document.getElementById('ActiveVariantId').value = matchingVariant.id;
+          
+          // Update Price Displays
+          const formattedPrice = matchingVariant.price;
+          document.getElementById('VariantPriceDisplay').textContent = formattedPrice;
+          
+          // Update One-time vs Subscribe Mock values
+          const onetimePrice = document.querySelector('[data-purchase-type="onetime"] .pd-price-card-label');
+          const subscribePrice = document.querySelector('[data-purchase-type="subscribe"] .pd-price-card-label');
+          if (onetimePrice) onetimePrice.textContent = formattedPrice;
+          if (subscribePrice) {
+            const discountedPriceCents = matchingVariant.price_cents * 0.85;
+            // Simple formatter mock
+            subscribePrice.textContent = Shopify.formatMoney ? Shopify.formatMoney(discountedPriceCents) : matchingVariant.price;
+          }
+        }
+      });
+    });
+
+    // Quantity selectors
+    const qtyInput = document.getElementById('ProductQuantity');
+    const plusBtn = document.querySelector('.qty-plus');
+    const minusBtn = document.querySelector('.qty-minus');
+    if (qtyInput && plusBtn && minusBtn) {
+      plusBtn.addEventListener('click', () => {
+        let val = parseInt(qtyInput.value) || 1;
+        if (val < 99) qtyInput.value = val + 1;
+      });
+      minusBtn.addEventListener('click', () => {
+        let val = parseInt(qtyInput.value) || 1;
+        if (val > 1) qtyInput.value = val - 1;
+      });
+    }
+
+    // Purchase mock toggles
+    const purchaseOpts = document.querySelectorAll('.pd-card-opt');
+    purchaseOpts.forEach((opt) => {
+      opt.addEventListener('click', () => {
+        purchaseOpts.forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Details",
+  "settings": [
+    {
+      "type": "text",
+      "id": "science_title",
+      "label": "Science Section Title",
+      "default": "The Science Behind The Formula"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Key Product Feature",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "FontAwesome Icon Class",
+          "default": "fa-circle-check"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Explosive Energy"
+        }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Active Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Ingredient Name",
+          "default": "L-Citrulline Malate"
+        },
+        {
+          "type": "text",
+          "id": "dosage",
+          "label": "Dosage (e.g. 8000mg)",
+          "default": "8000mg"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Explanation Description",
+          "default": "Enhances nitric oxide production for massive blood flow, improved nutrient delivery, and prolonged endurance."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

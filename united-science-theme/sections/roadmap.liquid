@@ -1,0 +1,109 @@
+{%- comment -%}
+  Ecosystem Roadmap — 12 phases as blocks, year filter via JS
+{%- endcomment -%}
+
+<section class="roadmap-section" id="roadmap">
+  <div class="container">
+    {% render 'section-header', tag: section.settings.tag, heading: section.settings.heading, subheading: section.settings.subheading %}
+
+    <!-- Year Filter Buttons — Auto-generated from block years -->
+    <div class="roadmap-nav reveal-up">
+      <button class="roadmap-nav-btn active" data-year="all">Show All</button>
+      {%- assign years_seen = '' -%}
+      {%- for block in section.blocks -%}
+        {%- unless years_seen contains block.settings.year -%}
+          <button class="roadmap-nav-btn" data-year="{{ block.settings.year }}">{{ block.settings.year }}: {{ block.settings.year_label }}</button>
+          {%- if years_seen != '' -%}{%- assign years_seen = years_seen | append: ',' -%}{%- endif -%}
+          {%- assign years_seen = years_seen | append: block.settings.year -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Roadmap Timeline -->
+    <div class="roadmap-container reveal-up">
+      <div class="roadmap-scroll-wrapper">
+        <div class="roadmap-track">
+          {%- for block in section.blocks -%}
+            <div class="roadmap-card" data-year="{{ block.settings.year }}" {{ block.shopify_attributes }}>
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">{{ block.settings.phase_num }}</div>
+              <div class="roadmap-date">{{ block.settings.date_range }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              <p class="roadmap-objective">{{ block.settings.objective }}</p>
+
+              {%- if block.settings.products != blank -%}
+                <div class="roadmap-products">
+                  {%- assign product_list = block.settings.products | split: ',' -%}
+                  {%- for item in product_list -%}
+                    <span>{{ item | strip }}</span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.metrics != blank -%}
+                <div class="roadmap-metrics">
+                  <h5>Success Metrics</h5>
+                  <ul>
+                    {%- assign metric_list = block.settings.metrics | split: ',' -%}
+                    {%- for metric in metric_list -%}
+                      <li><i class="fa-solid fa-circle-check"></i> {{ metric | strip }}</li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="roadmap-controls">
+        <button class="roadmap-control-btn btn-prev" aria-label="Previous card"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="roadmap-control-btn btn-next" aria-label="Next card"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ecosystem Roadmap",
+  "class": "roadmap-wrapper",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Section Tag", "default": "USA Ecosystem Roadmap" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "12 Phases. 5 Years. 1 Vision." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Explore our strategic expansion timeline as we transition from a premium sports nutrition brand into a complete, data-driven global health ecosystem." }
+  ],
+  "blocks": [
+    {
+      "type": "phase",
+      "name": "Roadmap Phase",
+      "settings": [
+        { "type": "text", "id": "phase_num", "label": "Phase Number", "default": "PHASE 01" },
+        { "type": "text", "id": "date_range", "label": "Date Range", "default": "Jul – Sep 2026" },
+        { "type": "select", "id": "year", "label": "Year", "options": [
+          { "value": "2026", "label": "2026" },
+          { "value": "2027", "label": "2027" },
+          { "value": "2028", "label": "2028" },
+          { "value": "2029", "label": "2029" },
+          { "value": "2030", "label": "2030" }
+        ], "default": "2026" },
+        { "type": "text", "id": "year_label", "label": "Year Tab Label", "default": "Foundation", "info": "Appears on the filter button" },
+        { "type": "text", "id": "title", "label": "Phase Title", "default": "Foundation" },
+        { "type": "textarea", "id": "objective", "label": "Objective", "default": "Validate product-market fit with core performance formulations." },
+        { "type": "text", "id": "products", "label": "Products (comma separated)", "default": "Wildfire Pre-Workout, USA Plant Protein, Yeast Protein" },
+        { "type": "text", "id": "metrics", "label": "Success Metrics (comma separated)", "default": "1,000 first customers, 500+ verified reviews, 30% repeat purchase rate" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ecosystem Roadmap",
+      "blocks": [
+        { "type": "phase", "settings": { "phase_num": "PHASE 01", "date_range": "Jul – Sep 2026", "year": "2026", "year_label": "Foundation", "title": "Foundation", "products": "Wildfire Pre-Workout, USA Plant Protein, Yeast Protein", "metrics": "1,000 first customers, 500+ verified reviews, 30% repeat purchase rate" } },
+        { "type": "phase", "settings": { "phase_num": "PHASE 02", "date_range": "Oct – Dec 2026", "year": "2026", "year_label": "Foundation", "title": "Protein Domination", "products": "Whey Concentrate, Whey Isolate, Mass Gainer, Creatine Monohydrate", "metrics": "5,000 active customers, 100 gym partnerships, 10 distributors" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

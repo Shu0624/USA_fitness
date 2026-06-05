@@ -1,0 +1,189 @@
+{%- comment -%}
+  Header Section — Navbar with logo, navigation menu, icons
+  Everything editable via Customize
+{%- endcomment -%}
+
+<nav class="site-nav{% if section.settings.transparent_mode %} transparent{% endif %}" id="site-nav">
+  <div class="nav-inner">
+    <a href="{{ routes.root_url }}" class="nav-logo">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 200 }}"
+          alt="{{ shop.name | escape }}"
+          width="{{ section.settings.logo_width | default: 40 }}"
+          height="auto"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="nav-logo-icon">U</span>
+        <div class="nav-logo-text">
+          {%- assign logo_parts = section.settings.logo_text | default: 'UNITED SCIENCE ALLIANCE' | split: ' ' -%}
+          {%- for part in logo_parts -%}
+            <span>{{ part }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.menu != blank -%}
+      <ul class="nav-links">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li>
+            <a href="{{ link.url }}" {% if link.current %}class="active"{% endif %}>
+              {{ link.title | upcase }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <div class="nav-icons">
+      {%- if section.settings.enable_search -%}
+        <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      {%- endif -%}
+      <a href="{{ routes.account_url }}" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart" class="cart-icon-link">
+        <i class="fa-solid fa-bag-shopping"></i>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <span class="nav-logo-icon">U</span>
+    <button class="mobile-drawer-close" aria-label="Close" onclick="document.querySelector('.mobile-drawer').classList.remove('open')">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  {%- if section.settings.menu != blank -%}
+    <ul class="mobile-nav-links">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <li><a href="{{ link.url }}" onclick="document.querySelector('.mobile-drawer').classList.remove('open')">{{ link.title | upcase }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+  <div class="mobile-drawer-actions">
+    <a href="{{ routes.account_url }}" class="btn btn-outline-light" style="color:var(--usa-text-dark);border-color:var(--usa-border-dark);width:100%;">My Account</a>
+    <a href="{{ routes.cart_url }}" class="btn btn-primary" style="width:100%;">Cart ({{ cart.item_count }})</a>
+  </div>
+</div>
+<div class="mobile-drawer-overlay" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"></div>
+
+<style>
+  .mobile-menu-toggle { display: none; }
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--usa-text-dark);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 8px;
+    }
+  }
+  .mobile-drawer {
+    position: fixed;
+    top: 0; right: -320px;
+    width: 300px; height: 100vh;
+    background: var(--usa-bg-cream);
+    z-index: 2000;
+    transition: right 0.35s cubic-bezier(0.16,1,0.3,1);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+  }
+  .mobile-drawer.open { right: 0; }
+  .mobile-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .mobile-drawer-close {
+    background: none; border: none; font-size: 1.3rem;
+    color: var(--usa-text-dark); cursor: pointer; padding: 8px;
+  }
+  .mobile-nav-links {
+    list-style: none; display: flex; flex-direction: column; gap: 0;
+    flex: 1;
+  }
+  .mobile-nav-links li a {
+    display: block; padding: 14px 0;
+    font-family: var(--usa-font-display);
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;
+    color: var(--usa-text-dark); text-decoration: none;
+    border-bottom: 1px solid var(--usa-border-dark);
+    transition: color 0.3s;
+  }
+  .mobile-nav-links li a:hover { color: var(--usa-accent); }
+  .mobile-drawer-actions {
+    display: flex; flex-direction: column; gap: 10px; margin-top: 24px;
+  }
+  .mobile-drawer-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1999;
+  }
+  .mobile-drawer.open ~ .mobile-drawer-overlay { display: block; }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text (fallback if no image)",
+      "default": "UNITED SCIENCE ALLIANCE"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_mode",
+      "label": "Transparent header on homepage",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

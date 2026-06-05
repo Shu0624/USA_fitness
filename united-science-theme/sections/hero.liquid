@@ -1,0 +1,219 @@
+{%- comment -%}
+  Hero Banner Section — Full-featured hero with image/video, CTAs, trust badges, partner logos
+  Every element is editable via Customize
+{%- endcomment -%}
+
+<section class="hero-section" id="hero">
+  <div class="hero-grid-pattern"></div>
+
+  {%- if section.settings.bg_image != blank -%}
+    <div class="hero-bg" style="background-image: url('{{ section.settings.bg_image | image_url: width: 1920 }}');"></div>
+  {%- else -%}
+    <div class="hero-bg" style="background-image: url('{{ 'hero_athlete_v2.jpg' | asset_url }}');"></div>
+  {%- endif -%}
+
+  <div class="hero-overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="hero-content">
+    {%- if section.settings.badge != blank -%}
+      <div class="hero-badge">{{ section.settings.badge }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1>{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="hero-sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <!-- Trust Badges -->
+    {%- assign trust_badges = section.blocks | where: "type", "trust_badge" -%}
+    {%- if trust_badges.size > 0 -%}
+      <div class="hero-trust-row">
+        {%- for block in trust_badges -%}
+          <div class="hero-trust-item" {{ block.shopify_attributes }}>
+            <div class="hero-trust-icon"><i class="fa-solid {{ block.settings.icon_class }}"></i></div>
+            <div class="hero-trust-text">{{ block.settings.label }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- CTA Buttons -->
+    <div class="hero-actions">
+      {%- if section.settings.cta_1_text != blank -%}
+        <a href="{{ section.settings.cta_1_url | default: '#products' }}" class="btn btn-primary">
+          {{ section.settings.cta_1_text }} <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_2_text != blank -%}
+        <a href="{{ section.settings.cta_2_url | default: '#vision' }}" class="btn btn-outline-light">
+          {{ section.settings.cta_2_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Partner Logos -->
+    {%- assign partner_logos = section.blocks | where: "type", "partner_logo" -%}
+    {%- if partner_logos.size > 0 -%}
+      <div class="hero-partners">
+        <span class="hero-partners-label">{{ section.settings.partners_label | default: 'TRUSTED BY WORLD-CLASS ATHLETES & TEAMS' }}</span>
+        <div class="hero-partners-logos">
+          {%- for block in partner_logos -%}
+            {%- if block.settings.logo_img != blank -%}
+              <img src="{{ block.settings.logo_img | image_url: width: 80 }}" alt="{{ block.settings.logo_text }}" loading="lazy" {{ block.shopify_attributes }}>
+            {%- else -%}
+              <span class="partner-logo-text" {{ block.shopify_attributes }}>{{ block.settings.logo_text }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom Right Tagline -->
+  {%- if section.settings.tagline != blank -%}
+    <div class="hero-tagline-br">
+      {{ section.settings.tagline }}
+    </div>
+  {%- endif -%}
+
+  <div class="scroll-hint">
+    <div class="scroll-pill"><div class="scroll-dot-anim"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "class": "hero-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Hero Badge Text",
+      "default": "ELITE. SCIENCE. RESULTS."
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Hero Heading",
+      "default": "<p>BUILT<br>ON SCIENCE.<br><em>PROVEN<br>BY ELITE.</em></p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "World-Class Nutrition. Peak Performance. Real Results."
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "Primary Button Text",
+      "default": "EXPLORE PRODUCTS"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_url",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "Secondary Button Text",
+      "default": "OUR VISION"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_url",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "partners_label",
+      "label": "Partners Row Label",
+      "default": "TRUSTED BY WORLD-CLASS ATHLETES & TEAMS"
+    },
+    {
+      "type": "richtext",
+      "id": "tagline",
+      "label": "Bottom-Right Tagline",
+      "default": "<p>IT'S NOT LUCK.<br><em>IT'S SCIENCE.</em></p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "FontAwesome Icon Class",
+          "default": "fa-flask-vial",
+          "info": "e.g. fa-flask-vial, fa-trophy, fa-bolt, fa-shield-halved"
+        },
+        {
+          "type": "textarea",
+          "id": "label",
+          "label": "Badge Label",
+          "default": "SCIENCE-BACKED\nFORMULAS"
+        }
+      ]
+    },
+    {
+      "type": "partner_logo",
+      "name": "Partner Logo",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "logo_text",
+          "label": "Logo Text",
+          "default": "FSSAI"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "Logo Image (overrides text)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon_class": "fa-flask-vial", "label": "SCIENCE-BACKED\nFORMULAS" } },
+        { "type": "trust_badge", "settings": { "icon_class": "fa-trophy", "label": "TRUSTED BY\nELITE ATHLETES" } },
+        { "type": "trust_badge", "settings": { "icon_class": "fa-bolt", "label": "PERFORMANCE\nYOU CAN FEEL" } },
+        { "type": "trust_badge", "settings": { "icon_class": "fa-shield-halved", "label": "QUALITY YOU\nCAN TRUST" } },
+        { "type": "partner_logo", "settings": { "logo_text": "FSSAI" } },
+        { "type": "partner_logo", "settings": { "logo_text": "FDA" } },
+        { "type": "partner_logo", "settings": { "logo_text": "GMP" } },
+        { "type": "partner_logo", "settings": { "logo_text": "HACCP" } },
+        { "type": "partner_logo", "settings": { "logo_text": "ISO" } },
+        { "type": "partner_logo", "settings": { "logo_text": "IC" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

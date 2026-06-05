@@ -1,0 +1,129 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "badge": "ELITE. SCIENCE. RESULTS.",
+        "heading": "<p>BUILT<br>ON SCIENCE.<br><em>PROVEN<br>BY ELITE.</em></p>",
+        "subheading": "World-Class Nutrition. Peak Performance. Real Results.",
+        "cta_1_text": "EXPLORE PRODUCTS",
+        "cta_2_text": "OUR VISION",
+        "tagline": "IT'S NOT LUCK.<br><em>IT'S SCIENCE.</em>"
+      }
+    },
+    "pillars": {
+      "type": "pillars",
+      "settings": {}
+    },
+    "vision_mission": {
+      "type": "vision-mission",
+      "settings": {
+        "tag": "Our Purpose",
+        "heading": "Driven by Science. Built for Everyone.",
+        "subheading": "Two pillars that guide everything we build, create, and deliver.",
+        "vision_icon": "fa-eye",
+        "vision_title": "Our Vision",
+        "vision_text": "To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health.",
+        "mission_icon": "fa-bullseye",
+        "mission_title": "Our Mission",
+        "mission_text": "Make science-backed health solutions accessible to every individual through products, education, technology and community."
+      }
+    },
+    "products_grid": {
+      "type": "product-grid",
+      "settings": {
+        "tag": "Our Products",
+        "heading": "Science-Backed Nutrition",
+        "subheading": "Premium supplements formulated for real results. No shortcuts, no compromises.",
+        "limit": 3
+      }
+    },
+    "certifications": {
+      "type": "certifications",
+      "settings": {
+        "headline": "The only Indian pre-workout certified to global athlete safety standards.",
+        "verified_text": "ALL 8 CERTIFICATIONS INDEPENDENTLY VERIFIED"
+      }
+    },
+    "why_us": {
+      "type": "why-us",
+      "settings": {
+        "tag": "Why Choose Us",
+        "heading": "Why USA Supplement",
+        "subheading": "India's most certified pre-workout. Every claim backed by third-party testing."
+      }
+    },
+    "ingredients": {
+      "type": "ingredient-transparency",
+      "settings": {
+        "tag": "Ingredient Transparency",
+        "heading": "Every dose, on the label.",
+        "subheading": "No under-dosed fillers. No hidden blends. Every ingredient, every milligram right there on the tub."
+      }
+    },
+    "flavors": {
+      "type": "flavors",
+      "settings": {
+        "tag": "6 Flavors",
+        "heading": "Find your flavor.",
+        "subheading": "Same clinical formula. Six ways to crave it.",
+        "cta_text": "Shop All Flavors →"
+      }
+    },
+    "community": {
+      "type": "community",
+      "settings": {
+        "tag": "Our Story",
+        "heading": "<p>Building The World's Most Trusted <em>Health Ecosystem</em></p>",
+        "quote": "The first victory is not raising investment. The first victory is creating customers who buy again without being asked.",
+        "cite": "— Founding Principle, USA Supplement"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "tag": "Trusted by Athletes",
+        "heading": "What Our Community Says",
+        "subheading": "Real reviews from real athletes who chose science over shortcuts."
+      }
+    },
+    "roadmap": {
+      "type": "roadmap",
+      "settings": {
+        "tag": "Ecosystem Roadmap",
+        "heading": "USA Health Ecosystem Roadmap",
+        "subheading": "A 12-phase roadmap integrating nutrition, wellness, tech, and longevity science."
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "tag": "Support",
+        "heading": "Frequently Asked Questions"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "tag": "Join The Community",
+        "heading": "Be Part of the <em>Health Revolution</em>",
+        "description": "Get exclusive early access to new launches, athlete tips, and members-only discounts. Join 5,000+ athletes in the USA community."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "pillars",
+    "vision_mission",
+    "products_grid",
+    "certifications",
+    "why_us",
+    "ingredients",
+    "flavors",
+    "community",
+    "reviews",
+    "roadmap",
+    "faq",
+    "newsletter"
+  ]
+}

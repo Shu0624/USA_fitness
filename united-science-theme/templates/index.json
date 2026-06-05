@@ -1,0 +1,133 @@
+{
+  "sections": {
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "n1": { "type": "notice", "settings": { "text": "FREE SHIPPING ABOVE ₹999" } },
+        "n2": { "type": "notice", "settings": { "text": "INFORMED CHOICE CERTIFIED" } },
+        "n3": { "type": "notice", "settings": { "text": "BANNED-SUBSTANCE FREE" } },
+        "n4": { "type": "notice", "settings": { "text": "LAB-TESTED & VERIFIED" } },
+        "n5": { "type": "notice", "settings": { "text": "SCIENCE-BACKED SOLUTIONS" } }
+      },
+      "block_order": ["n1", "n2", "n3", "n4", "n5"]
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "badge": "ELITE. SCIENCE. RESULTS.",
+        "subheading": "World-Class Nutrition. Peak Performance. Real Results."
+      }
+    },
+    "vision-mission": {
+      "type": "vision-mission",
+      "settings": {}
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "tag": "Our Products",
+        "heading": "Science-Backed Nutrition",
+        "subheading": "Premium supplements formulated for real results. No shortcuts, no compromises."
+      }
+    },
+    "certifications": {
+      "type": "certifications",
+      "blocks": {
+        "c1": { "type": "cert", "settings": { "icon_class": "fa-shield-halved", "title": "FSSAI" } },
+        "c2": { "type": "cert", "settings": { "icon_class": "fa-building-columns", "title": "FDA" } },
+        "c3": { "type": "cert", "settings": { "icon_class": "fa-circle-check", "title": "Informed Choice" } },
+        "c4": { "type": "cert", "settings": { "icon_class": "fa-flask-vial", "title": "Labdoor" } },
+        "c5": { "type": "cert", "settings": { "icon_class": "fa-certificate", "title": "GMP" } },
+        "c6": { "type": "cert", "settings": { "icon_class": "fa-clipboard-check", "title": "HACCP" } },
+        "c7": { "type": "cert", "settings": { "icon_class": "fa-award", "title": "ISO" } },
+        "c8": { "type": "cert", "settings": { "icon_class": "fa-vials", "title": "Tested" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+      "settings": {}
+    },
+    "why-us": {
+      "type": "why-us",
+      "blocks": {
+        "w1": { "type": "feature", "settings": { "icon": "fa-shield-halved", "title": "Banned-Substance Free", "description": "Informed Choice certified" } },
+        "w2": { "type": "feature", "settings": { "icon": "fa-flask-vial", "title": "Clinically Dosed", "description": "5g Beta-Alanine · 2.5g Citrulline" } },
+        "w3": { "type": "feature", "settings": { "icon": "fa-building-columns", "title": "FDA-Registered Facility", "description": "Reg. No. 16133920022" } },
+        "w4": { "type": "feature", "settings": { "icon": "fa-list-check", "title": "No Proprietary Blends", "description": "Every mg disclosed" } }
+      },
+      "block_order": ["w1", "w2", "w3", "w4"],
+      "settings": {}
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "blocks": {
+        "d1": { "type": "dosage", "settings": { "amount": "5g", "name": "Beta-Alanine", "benefit": "clinically proven endurance dose" } },
+        "d2": { "type": "dosage", "settings": { "amount": "2.5g", "name": "L-Citrulline DL-Malate", "benefit": "for pump and blood flow" } },
+        "d3": { "type": "dosage", "settings": { "amount": "200mg", "name": "Caffeine Anhydrous", "benefit": "clean energy without the crash" } },
+        "d4": { "type": "dosage", "settings": { "amount": "180mg", "name": "Choline Bitartrate", "benefit": "focus and mind-muscle connection" } }
+      },
+      "block_order": ["d1", "d2", "d3", "d4"],
+      "settings": {}
+    },
+    "flavors": {
+      "type": "flavors",
+      "blocks": {
+        "f1": { "type": "flavor", "settings": { "name": "Kiwi Krazze", "description": "Tropical & tart", "bg_color": "#5ba829" } },
+        "f2": { "type": "flavor", "settings": { "name": "Punch Rush", "description": "Fruit punch blast", "bg_color": "#c44040", "badge": "POPULAR" } },
+        "f3": { "type": "flavor", "settings": { "name": "Citrus Storm", "description": "Sweet orange", "bg_color": "#d48a1a" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {}
+    },
+    "community": {
+      "type": "community",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "target": "12", "label": "Phases", "sublabel": "5-Year Roadmap" } },
+        "s2": { "type": "stat", "settings": { "target": "50", "suffix": "+", "label": "Products", "sublabel": "Across Categories" } },
+        "s3": { "type": "stat", "settings": { "target": "100", "suffix": "%", "label": "Transparent", "sublabel": "No Hidden Formulas" } },
+        "s4": { "type": "stat", "settings": { "display": "∞", "label": "Commitment", "sublabel": "To Your Health" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "rating": 5, "review_text": "Wildfire is the cleanest pre-workout I've ever used. No jitters, no crash — just pure, sustained energy through my entire 90-minute session.", "reviewer_name": "Rahul Sharma", "reviewer_role": "Competitive Powerlifter · Hyderabad", "avatar_color_1": "#c8860a", "avatar_color_2": "#e0a832" } },
+        "r2": { "type": "review", "settings": { "rating": 5, "review_text": "As a drug-tested athlete, I can't risk contamination. USA Supplement's Informed Choice certification gives me 100% confidence. The focus is unreal.", "reviewer_name": "Priya Nair", "reviewer_role": "National Level Swimmer · Chennai", "is_featured": true, "avatar_color_1": "#6366f1", "avatar_color_2": "#8b5cf6" } },
+        "r3": { "type": "review", "settings": { "rating": 5, "review_text": "I've tried every brand on the market. Nothing comes close to the pump and endurance I get from Wildfire. My clients are now hooked too.", "reviewer_name": "Vikram Patel", "reviewer_role": "Certified Personal Trainer · Mumbai", "avatar_color_1": "#22c55e", "avatar_color_2": "#16a34a" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "faq_item", "settings": { "question": "What is USA Supplement's vision?", "answer": "<p>USA Supplement is building the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health.</p>" } },
+        "q2": { "type": "faq_item", "settings": { "question": "What causes the tingling sensation after taking Wildfire?", "answer": "<p>The tingling sensation is caused by Beta-Alanine, a clinically studied amino acid that helps buffer lactic acid in muscles. It is completely harmless and temporary.</p>" } },
+        "q3": { "type": "faq_item", "settings": { "question": "Is Wildfire safe for drug-tested competitive athletes?", "answer": "<p>Yes, Wildfire is 100% banned-substance free and certified by Informed Choice. Every batch undergoes rigorous testing to ensure zero contamination.</p>" } },
+        "q4": { "type": "faq_item", "settings": { "question": "How should I consume Wildfire Pre-Workout?", "answer": "<p>Mix 1 scoop with 250-300ml of cold water and consume 15-30 minutes before your workout. If you are sensitive to caffeine, start with a half scoop to assess tolerance.</p>" } },
+        "q5": { "type": "faq_item", "settings": { "question": "What other products does USA Supplement offer?", "answer": "<p>Currently we offer Wildfire Pre-Workout, USA Plant Protein, and USA Fermented Yeast Protein. We are expanding our line with more science-backed formulas soon.</p>" } },
+        "q6": { "type": "faq_item", "settings": { "question": "Can I stack Wildfire with other supplements?", "answer": "<p>Yes, you can stack it with non-stimulant supplements like Creatine or L-Glutamine. Avoid stacking it with other high-stimulant products.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "marquee",
+    "hero",
+    "vision-mission",
+    "featured-products",
+    "certifications",
+    "why-us",
+    "ingredients",
+    "flavors",
+    "community",
+    "reviews",
+    "faq",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,65 @@
+{%- comment -%}
+  Marquee Announcement Bar — Scrolling text notices
+  Each notice is a block, fully editable and reorderable
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+<div class="marquee-bar" style="background: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="marquee-track">
+    {%- comment -%} Render notices twice for seamless infinite scroll animation {%- endcomment -%}
+    {%- for pass in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        <span class="marquee-dot"></span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marquee Announcement",
+  "class": "marquee-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "notice",
+      "name": "Notice",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Notice Text",
+          "default": "FREE SHIPPING ABOVE ₹999"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Announcement",
+      "blocks": [
+        { "type": "notice", "settings": { "text": "FREE SHIPPING ABOVE ₹999" } },
+        { "type": "notice", "settings": { "text": "INFORMED CHOICE CERTIFIED" } },
+        { "type": "notice", "settings": { "text": "BANNED-SUBSTANCE FREE" } },
+        { "type": "notice", "settings": { "text": "LAB-TESTED & VERIFIED" } },
+        { "type": "notice", "settings": { "text": "SCIENCE-BACKED SOLUTIONS" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

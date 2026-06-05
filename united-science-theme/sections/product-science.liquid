@@ -1,0 +1,242 @@
+{%- comment -%}
+  Product Science & Ingredients Section
+  Renders below the main product section.
+  
+  DATA SOURCES (priority order):
+  1. Product metafields (product.metafields.science.*)
+  2. Fallback: Section block settings (for customizer editing)
+  
+  METAFIELD NAMESPACE: "science"
+  Keys: ingredients_title, ingredient_1_name, ingredient_1_dose, ingredient_1_desc, etc.
+  
+  For scalability, use a JSON metafield for the full ingredient list:
+  product.metafields.science.ingredients_json (type: json)
+{%- endcomment -%}
+
+<section class="pd-details-section" id="product-science">
+  <div class="container">
+    <div class="pd-details-grid reveal-up">
+
+      <!-- Ingredients Card -->
+      <div class="pd-detail-card">
+        <h3>{{ section.settings.card_title | default: 'The Science Behind This Product' }}</h3>
+
+        {%- if product.metafields.science.ingredients_json != blank -%}
+          {%- assign ingredients = product.metafields.science.ingredients_json.value -%}
+          <div class="pd-ingredient-list">
+            {%- for item in ingredients -%}
+              <div class="pd-ingredient">
+                <h4>{{ item.name }} <span>{{ item.dose }}</span></h4>
+                <p>{{ item.description }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          {%- assign ingredient_blocks = section.blocks | where: "type", "ingredient" -%}
+          <div class="pd-ingredient-list">
+            {%- if ingredient_blocks.size > 0 -%}
+              {%- for block in ingredient_blocks -%}
+                <div class="pd-ingredient" {{ block.shopify_attributes }}>
+                  <h4>{{ block.settings.name }} <span>{{ block.settings.dose }}</span></h4>
+                  <p>{{ block.settings.description }}</p>
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              {%- if product.handle contains 'wildfire' -%}
+                <div class="pd-ingredient">
+                  <h4>Citrulline Malate 2:1 <span>6,000 mg</span></h4>
+                  <p>Clinically dosed to maximize nitric oxide production, delivering massive muscle pumps and optimizing nutrient delivery during intense training.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Beta-Alanine <span>3,200 mg</span></h4>
+                  <p>Buffers lactic acid accumulation in the muscles, delaying fatigue and allowing you to push past your previous limits.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Caffeine Anhydrous <span>300 mg</span></h4>
+                  <p>Provides a clean, rapid surge of energy and mental focus without the crash, keeping you driven through your longest workouts.</p>
+                </div>
+              {%- elsif product.handle contains 'plant' -%}
+                <div class="pd-ingredient">
+                  <h4>Organic Pea Protein <span>20 g</span></h4>
+                  <p>Rich in BCAAs, highly digestible source of premium plant protein to support clean muscle building and recovery.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Organic Brown Rice Protein <span>4 g</span></h4>
+                  <p>Complementary protein source completing the amino acid profile for maximum bio-availability.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Digestive Enzyme Blend <span>100 mg</span></h4>
+                  <p>Enhances absorption and ensures zero bloating, making it extremely gentle on the stomach.</p>
+                </div>
+              {%- elsif product.handle contains 'fermented' -%}
+                <div class="pd-ingredient">
+                  <h4>Fermented Yeast Protein <span>24 g</span></h4>
+                  <p>Next-generation bio-available protein source produced via eco-friendly fermentation. Incredibly clean and rapid absorption.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Essential Amino Acids <span>11.5 g</span></h4>
+                  <p>Full spectrum EAAs to kickstart muscle protein synthesis and optimize recovery times.</p>
+                </div>
+                <div class="pd-ingredient">
+                  <h4>Micronutrient Blend <span>100% RDA</span></h4>
+                  <p>Essential vitamins and minerals to support general athletic health and energy metabolism.</p>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Benefits Card (if enabled) -->
+      {%- if section.settings.show_benefits -%}
+        <div class="pd-detail-card">
+          <h3>{{ section.settings.benefits_title | default: 'Key Benefits' }}</h3>
+          <div class="pd-benefits-grid">
+            {%- assign benefit_blocks = section.blocks | where: "type", "benefit" -%}
+            {%- if benefit_blocks.size > 0 -%}
+              {%- for block in benefit_blocks -%}
+                <div class="pd-benefit-item" {{ block.shopify_attributes }}>
+                  <i class="fa-solid {{ block.settings.icon | default: 'fa-check-circle' }}"></i>
+                  <div>
+                    <h4>{{ block.settings.title }}</h4>
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              {%- if product.handle contains 'wildfire' -%}
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-bolt"></i>
+                  <div>
+                    <h4>Explosive Energy</h4>
+                    <p>Clean energy without jitters or crash.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-brain"></i>
+                  <div>
+                    <h4>Laser Sharp Focus</h4>
+                    <p>High cognitive performance during sets.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-dumbbell"></i>
+                  <div>
+                    <h4>Massive Muscle Pump</h4>
+                    <p>Increased blood flow and vascularity.</p>
+                  </div>
+                </div>
+              {%- elsif product.handle contains 'plant' -%}
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-leaf"></i>
+                  <div>
+                    <h4>100% Plant-Based</h4>
+                    <p>Clean, vegan-friendly ingredients.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-shield-heart"></i>
+                  <div>
+                    <h4>Easy on Stomach</h4>
+                    <p>Enzymes ensure easy digestion.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-rotate"></i>
+                  <div>
+                    <h4>Accelerated Recovery</h4>
+                    <p>Complete amino profile heals muscles fast.</p>
+                  </div>
+                </div>
+              {%- elsif product.handle contains 'fermented' -%}
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-flask"></i>
+                  <div>
+                    <h4>Next-Gen Science</h4>
+                    <p>Fermentation yields bio-available nutrients.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-dna"></i>
+                  <div>
+                    <h4>Allergen Free</h4>
+                    <p>Free of soy, gluten, dairy, and nuts.</p>
+                  </div>
+                </div>
+                <div class="pd-benefit-item">
+                  <i class="fa-solid fa-chart-line"></i>
+                  <div>
+                    <h4>Elite Performance</h4>
+                    <p>Fuels extreme training demands.</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Warnings / Dosage Card -->
+      {%- if section.settings.show_warnings -%}
+        <div class="pd-detail-card pd-warning-card">
+          <h3><i class="fa-solid fa-triangle-exclamation"></i> {{ section.settings.warnings_title | default: 'Usage & Warnings' }}</h3>
+          <div class="pd-warning-content">
+            {{ section.settings.warnings_text }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Science",
+  "class": "product-science-wrapper",
+  "settings": [
+    { "type": "text", "id": "card_title", "label": "Ingredients Card Title", "default": "The Science Behind This Product" },
+    { "type": "header", "content": "Benefits Section" },
+    { "type": "checkbox", "id": "show_benefits", "label": "Show Benefits Card", "default": true },
+    { "type": "text", "id": "benefits_title", "label": "Benefits Card Title", "default": "Key Benefits" },
+    { "type": "header", "content": "Warnings Section" },
+    { "type": "checkbox", "id": "show_warnings", "label": "Show Warnings Card", "default": false },
+    { "type": "text", "id": "warnings_title", "label": "Warnings Title", "default": "Usage & Warnings" },
+    { "type": "richtext", "id": "warnings_text", "label": "Warnings Content", "default": "<p>Consult a physician before use if you have any medical conditions. Not intended for persons under 18.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ingredient Name", "default": "L-Citrulline Malate" },
+        { "type": "text", "id": "dose", "label": "Dosage", "default": "8000mg" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Enhances nitric oxide production for massive blood flow, improved nutrient delivery, and prolonged endurance." }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon Class", "default": "fa-bolt" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Explosive Energy" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Clean, sustained energy from clinical-dose caffeine." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Science",
+      "blocks": [
+        { "type": "ingredient", "settings": { "name": "L-Citrulline Malate", "dose": "8000mg", "description": "Enhances nitric oxide production for massive blood flow, improved nutrient delivery, and prolonged endurance." } },
+        { "type": "ingredient", "settings": { "name": "Beta-Alanine", "dose": "3200mg", "description": "Buffers lactic acid buildup in muscles, delaying fatigue and allowing you to push past your normal limits." } },
+        { "type": "ingredient", "settings": { "name": "Caffeine Anhydrous", "dose": "250mg", "description": "The perfect clinical dose for immediate, clean energy and heightened alertness without the excessive jitters." } },
+        { "type": "ingredient", "settings": { "name": "L-Tyrosine", "dose": "1000mg", "description": "Supports cognitive function during high-stress activities, enhancing your mind-muscle connection." } },
+        { "type": "benefit", "settings": { "icon": "fa-bolt", "title": "Explosive Energy" } },
+        { "type": "benefit", "settings": { "icon": "fa-brain", "title": "Laser Focus" } },
+        { "type": "benefit", "settings": { "icon": "fa-droplet", "title": "Maximal Pumps" } },
+        { "type": "benefit", "settings": { "icon": "fa-shield-halved", "title": "Informed Choice Certified" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

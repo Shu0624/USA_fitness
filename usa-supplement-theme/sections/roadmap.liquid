@@ -1,0 +1,201 @@
+<!-- sections/roadmap.liquid -->
+<section class="roadmap-section" id="roadmap">
+  <div class="container">
+    <div class="section-head reveal-up">
+      {%- if section.settings.tag != blank -%}
+        <div class="section-tag">{{ section.settings.tag }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="roadmap-container reveal-up">
+      <!-- Roadmap Navigation Timeline -->
+      <div class="roadmap-timeline">
+        <div class="roadmap-progress-bar"><div class="roadmap-progress"></div></div>
+        <div class="roadmap-timeline-nav">
+          <button class="roadmap-nav-btn active" data-year="all">All</button>
+          <button class="roadmap-nav-btn" data-year="2026">2026</button>
+          <button class="roadmap-nav-btn" data-year="2027">2027</button>
+          <button class="roadmap-nav-btn" data-year="2028">2028</button>
+          <button class="roadmap-nav-btn" data-year="2029">2029</button>
+          <button class="roadmap-nav-btn" data-year="2030">2030</button>
+        </div>
+      </div>
+
+      <!-- Roadmap Scroll Wrapper -->
+      <div class="roadmap-scroll-outer">
+        <div class="roadmap-scroll-wrapper">
+          <div class="roadmap-track">
+            {%- for block in section.blocks -%}
+              <div class="roadmap-card" data-year="{{ block.settings.year }}" {{ block.shopify_attributes }}>
+                <div class="roadmap-card-glow"></div>
+                <div class="roadmap-phase-num">{{ block.settings.phase_num | upcase }}</div>
+                <div class="roadmap-date">{{ block.settings.date_range }}</div>
+                <h3>{{ block.settings.title }}</h3>
+                <p class="roadmap-objective">{{ block.settings.objective }}</p>
+                
+                {%- if block.settings.products != blank -%}
+                  <div class="roadmap-products">
+                    {%- assign products = block.settings.products | split: ',' -%}
+                    {%- for product in products -%}
+                      <span>{{ product | strip }}</span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                
+                {%- if block.settings.metrics != blank -%}
+                  <div class="roadmap-metrics">
+                    <h5>Success Metrics</h5>
+                    <ul>
+                      {%- assign metrics = block.settings.metrics | split: ',' -%}
+                      {%- for metric in metrics -%}
+                        <li><i class="fa-solid fa-circle-check"></i> {{ metric | strip }}</li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <!-- Scroll navigation controls -->
+        <div class="roadmap-controls">
+          <button class="roadmap-control-btn btn-prev" aria-label="Previous card"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="roadmap-control-btn btn-next" aria-label="Next card"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ecosystem Roadmap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Section Tag",
+      "default": "Ecosystem Roadmap"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "USA Health Ecosystem Roadmap"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Section Subtitle",
+      "default": "A 12-phase roadmap integrating nutrition, wellness, tech, and longevity science."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "roadmap_phase",
+      "name": "Roadmap Phase Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "phase_num",
+          "label": "Phase Number",
+          "default": "PHASE 01"
+        },
+        {
+          "type": "text",
+          "id": "date_range",
+          "label": "Date Range",
+          "default": "Jan – Mar 2026"
+        },
+        {
+          "type": "select",
+          "id": "year",
+          "label": "Filter Year Tag",
+          "options": [
+            { "value": "2026", "label": "2026" },
+            { "value": "2027", "label": "2027" },
+            { "value": "2028", "label": "2028" },
+            { "value": "2029", "label": "2029" },
+            { "value": "2030", "label": "2030" }
+          ],
+          "default": "2026"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Phase Title",
+          "default": "Pre-Workout Division"
+        },
+        {
+          "type": "textarea",
+          "id": "objective",
+          "label": "Phase Objective",
+          "default": "Establish USA market entry with our flagship clinically dosed formulation."
+        },
+        {
+          "type": "text",
+          "id": "products",
+          "label": "Products (comma-separated)",
+          "default": "Wildfire Pre-Workout"
+        },
+        {
+          "type": "text",
+          "id": "metrics",
+          "label": "Success Metrics (comma-separated)",
+          "default": "Informed Choice certified, 10K active customers, National distribution"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ecosystem Roadmap",
+      "blocks": [
+        {
+          "type": "roadmap_phase",
+          "settings": {
+            "phase_num": "PHASE 01",
+            "date_range": "Jan – Mar 2026",
+            "year": "2026",
+            "title": "Pre-Workout Division",
+            "objective": "Establish USA market entry with our flagship clinically dosed formulation.",
+            "products": "Wildfire Pre-Workout",
+            "metrics": "Informed Choice certified, 10K active customers, National distribution"
+          }
+        },
+        {
+          "type": "roadmap_phase",
+          "settings": {
+            "phase_num": "PHASE 02",
+            "date_range": "Apr – Jun 2026",
+            "year": "2026",
+            "title": "Proteins Division",
+            "objective": "Launch clean vegan and bio-engineered protein powders.",
+            "products": "USA Plant Protein, USA Fermented Yeast Protein",
+            "metrics": "Labdoor verified, 3 flavor variants, Q-Commerce launch"
+          }
+        },
+        {
+          "type": "roadmap_phase",
+          "settings": {
+            "phase_num": "PHASE 03",
+            "date_range": "Jul – Sep 2026",
+            "year": "2026",
+            "title": "Wellness Division",
+            "objective": "Address daily micronutrient needs with science-backed formulas.",
+            "products": "Daily Multi-Vitamins, Fish Oil, Joint Support",
+            "metrics": "Clean Label Project certified, 20K active subscribers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

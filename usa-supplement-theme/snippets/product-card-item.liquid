@@ -1,0 +1,47 @@
+{%- comment -%}
+  Renders a product card item.
+  Accepts:
+  - product: {Object} Product object (required)
+  - class: {String} Extra classes (optional)
+
+  Usage:
+  {% render 'product-card-item', product: product %}
+{%- endcomment -%}
+
+<div class="product-card reveal-up {{ class }}">
+  <div class="product-card-img">
+    {%- if product.tags contains 'Bestseller' or product.tags contains 'bestseller' -%}
+      <span class="product-card-badge badge-bestseller">BESTSELLER</span>
+    {%- elsif product.tags contains 'New' or product.tags contains 'new' -%}
+      <span class="product-card-badge badge-new">NEW</span>
+    {%- elsif product.tags contains 'Popular' or product.tags contains 'popular' -%}
+      <span class="product-card-badge badge-popular">POPULAR</span>
+    {%- endif -%}
+    
+    {%- if product.featured_media -%}
+      <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.featured_media.alt | escape }}" loading="lazy">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="product-card-body">
+    <h3>{{ product.title }}</h3>
+    {%- if product.metafields.custom.tagline -%}
+      <p class="product-tagline">{{ product.metafields.custom.tagline }}</p>
+    {%- else -%}
+      <p class="product-tagline">{{ product.description | strip_html | truncatewords: 8 }}</p>
+    {%- endif -%}
+    
+    <div class="product-card-price">
+      {% render 'price', product: product %}
+    </div>
+    
+    {%- if product.metafields.custom.servings_info -%}
+      <p class="product-card-meta">{{ product.metafields.custom.servings_info }}</p>
+    {%- else -%}
+      <p class="product-card-meta">Premium Quality Supplement</p>
+    {%- endif -%}
+    
+    <a href="{{ product.url }}" class="btn btn-primary" style="display:inline-block; text-decoration:none; margin-top: 12px; width: 100%; text-align: center;">View Product →</a>
+  </div>
+</div>

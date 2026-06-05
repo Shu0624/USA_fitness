@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "variant_picker": { "type": "variant_picker" },
+        "buy_buttons": { "type": "buy_buttons" },
+        "description": { "type": "description" },
+        "trust_badges": { "type": "trust_badges" }
+      },
+      "block_order": ["title", "price", "variant_picker", "buy_buttons", "description", "trust_badges"]
+    },
+    "product-science": {
+      "type": "product-science",
+      "settings": {
+        "show_benefits": true,
+        "show_warnings": false
+      }
+    },
+    "product-faq": {
+      "type": "product-faq",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "tag": "What Athletes Say",
+        "heading": "Reviews"
+      }
+    }
+  },
+  "order": ["main-product", "product-science", "product-faq", "reviews"]
+}

@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "science_title": "The Science Behind The Formula"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "tag": "Trusted by Athletes",
+        "heading": "Verified Athlete Feedback",
+        "subheading": "See what athletes say after training with our formulas."
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "tag": "Product Support",
+        "heading": "Frequently Asked Questions"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "tag": "Join The Community",
+        "heading": "Be Part of the <em>Health Revolution</em>",
+        "description": "Get exclusive early access to new launches, athlete tips, and members-only discounts."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "reviews",
+    "faq",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,254 @@
+{%- comment -%}
+  Main Product Section — Dynamic product page
+  Replaces product-wildfire.html, product-plant-protein.html, product-fermented-protein.html
+  Supports @app blocks for Reviews, Subscriptions, Upsells
+{%- endcomment -%}
+
+<section class="product-detail-section">
+  <div class="container">
+    <div class="pd-grid">
+
+      <!-- Left: Image Gallery -->
+      <div class="pd-gallery-col reveal-up">
+        <div class="pd-gallery">
+          {%- if product.available == false -%}
+            <span class="pd-badge" style="background: var(--usa-red);">SOLD OUT</span>
+          {%- elsif product.metafields.custom.badge != blank -%}
+            <span class="pd-badge">{{ product.metafields.custom.badge }}</span>
+          {%- endif -%}
+          {%- assign featured_image_src = product.featured_image -%}
+          {%- if featured_image_src == blank -%}
+            {%- if product.handle contains 'wildfire' -%}
+              {%- assign featured_image_src = 'wildfire-preworkout.png' | asset_url -%}
+            {%- elsif product.handle contains 'plant' -%}
+              {%- assign featured_image_src = 'Plant protien (4).jpeg' | asset_url -%}
+            {%- elsif product.handle contains 'fermented' -%}
+              {%- assign featured_image_src = 'fermented yeast protien.jpeg' | asset_url -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- assign featured_image_src = product.featured_image | image_url: width: 800 -%}
+          {%- endif -%}
+          {%- if featured_image_src != blank -%}
+            <img
+              id="pdMainImage"
+              src="{{ featured_image_src }}"
+              alt="{{ product.title | escape }}"
+              width="{{ product.featured_image.width | default: 800 }}"
+              height="{{ product.featured_image.height | default: 800 }}"
+              loading="eager"
+            >
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="pd-thumbnails">
+            {%- for image in product.images -%}
+              <img
+                class="pd-thumb{% if forloop.first %} active{% endif %}"
+                src="{{ image | image_url: width: 120 }}"
+                alt="{{ image.alt | default: product.title | escape }}"
+                width="{{ image.width | default: 120 }}"
+                height="{{ image.height | default: 120 }}"
+                data-full="{{ image | image_url: width: 800 }}"
+                onclick="changeMainImage(this, '{{ image | image_url: width: 800 }}')"
+                loading="lazy"
+              >
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right: Product Info -->
+      <div class="pd-info reveal-up">
+        <div class="pd-breadcrumbs">
+          <a href="{{ routes.root_url }}">Home</a> /
+          <a href="{{ routes.collections_url }}/all">Products</a> /
+          {{ product.title }}
+        </div>
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'title' -%}
+              <h1 class="pd-title" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+              {%- assign tagline_text = product.metafields.custom.tagline -%}
+              {%- if tagline_text == blank -%}
+                {%- if product.handle contains 'wildfire' -%}
+                  {%- assign tagline_text = "Clinically dosed. Banned-substance free." -%}
+                {%- elsif product.handle contains 'plant' -%}
+                  {%- assign tagline_text = "Pure plant-powered performance." -%}
+                {%- elsif product.handle contains 'fermented' -%}
+                  {%- assign tagline_text = "Next-gen fermented protein." -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if tagline_text != blank -%}
+                <p class="pd-tagline">{{ tagline_text }}</p>
+              {%- endif -%}
+
+            {%- when 'price' -%}
+              <div class="pd-price-row" {{ block.shopify_attributes }}>
+                {%- assign product_price = product.selected_or_first_available_variant.price -%}
+                {%- if product_price == 0 or product_price == blank -%}
+                  {%- if product.handle contains 'wildfire' -%}
+                    <span class="pd-price">Rs. 2,499</span>
+                  {%- elsif product.handle contains 'plant' -%}
+                    <span class="pd-price">Rs. 1,999</span>
+                  {%- elsif product.handle contains 'fermented' -%}
+                    <span class="pd-price">Rs. 2,299</span>
+                  {%- else -%}
+                    <span class="pd-price">{{ 0 | money }}</span>
+                  {%- endif -%}
+                {%- else -%}
+                  <span class="pd-price">{{ product_price | money }}</span>
+                {%- endif -%}
+                {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+                  <span class="pd-compare-price"><s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s></span>
+                {%- endif -%}
+                {%- assign servings_text = product.metafields.custom.servings -%}
+                {%- if servings_text == blank -%}
+                  {%- if product.handle contains 'wildfire' -%}
+                    {%- assign servings_text = "30 servings per tub" -%}
+                  {%- elsif product.handle contains 'plant' -%}
+                    {%- assign servings_text = "25 servings per tub" -%}
+                  {%- elsif product.handle contains 'fermented' -%}
+                    {%- assign servings_text = "30 servings per tub" -%}
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if servings_text != blank -%}
+                  <span class="pd-meta">{{ servings_text }}</span>
+                {%- endif -%}
+              </div>
+
+            {%- when 'description' -%}
+              <div class="pd-description" {{ block.shopify_attributes }}>
+                {%- if product.description != blank -%}
+                  {{ product.description }}
+                {%- else -%}
+                  {%- if product.handle contains 'wildfire' -%}
+                    <p>Designed for high-intensity athletes. Wildfire features 6g Citrulline Malate, 3.2g Beta-Alanine, and 300mg Caffeine for unmatched energy, pump, and laser focus.</p>
+                  {%- elsif product.handle contains 'plant' -%}
+                    <p>Formulated with clean organic pea and brown rice proteins. Contains 24g protein per serving, zero soy, and complete BCAAs for muscle recovery.</p>
+                  {%- elsif product.handle contains 'fermented' -%}
+                    <p>Made from fermented bio-available yeast protein. Highly digestible, allergen-free, and delivers 24g protein with essential amino acids.</p>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+
+            {%- when 'variant_picker' -%}
+              {%- if product.has_only_default_variant == false -%}
+                <div class="pd-options" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    <div class="pd-option-group">
+                      <span class="pd-option-label">Select {{ option.name }}</span>
+                      <div class="pd-flavor-grid">
+                        {%- for value in option.values -%}
+                          <button
+                            class="pd-flavor-btn{% if option.selected_value == value %} active{% endif %}"
+                            data-option-name="{{ option.name }}"
+                            data-option-value="{{ value }}"
+                          >{{ value }}</button>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+            {%- when 'buy_buttons' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- form 'product', product, id: 'product-form', class: 'pd-form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <div class="pd-actions">
+                    <div class="pd-qty">
+                      <button type="button" class="pd-qty-btn" data-action="decrease">-</button>
+                      <input type="number" name="quantity" value="1" min="1" max="99" class="pd-qty-input" readonly>
+                      <button type="button" class="pd-qty-btn" data-action="increase">+</button>
+                    </div>
+                    <button type="submit" class="pd-add-btn"{% unless product.available %} disabled{% endunless %}>
+                      {%- if product.available -%}
+                        Add to Cart — {{ product.selected_or_first_available_variant.price | money }}
+                      {%- else -%}
+                        Sold Out
+                      {%- endif -%}
+                    </button>
+                  </div>
+                {%- endform -%}
+              </div>
+
+            {%- when 'trust_badges' -%}
+              <div class="pd-features" {{ block.shopify_attributes }}>
+                {%- assign badges = block.settings.badges | split: '|' -%}
+                {%- assign icons = block.settings.icons | split: '|' -%}
+                {%- for badge in badges -%}
+                  <div class="pd-feature">
+                    <i class="fa-solid {{ icons[forloop.index0] | default: 'fa-check' }}"></i>
+                    <span>{{ badge | strip }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+
+            {%- when '@app' -%}
+              <div {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Product JSON for variant picker JS -->
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "class": "main-product-wrapper",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_auto_slide",
+      "label": "Enable auto-sliding gallery",
+      "default": true
+    }
+  ],
+  "blocks": [
+    { "type": "title", "name": "Product Title", "limit": 1 },
+    { "type": "price", "name": "Price", "limit": 1 },
+    { "type": "description", "name": "Description", "limit": 1 },
+    { "type": "variant_picker", "name": "Variant Picker", "limit": 1 },
+    {
+      "type": "buy_buttons",
+      "name": "Buy Buttons",
+      "limit": 1
+    },
+    {
+      "type": "trust_badges",
+      "name": "Trust Badges",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "badges", "label": "Badges (pipe separated)", "default": "Free Shipping|COD Available|Informed Choice Certified|30-Day Returns" },
+        { "type": "text", "id": "icons", "label": "Icons (pipe separated)", "default": "fa-truck-fast|fa-money-bill-wave|fa-shield-halved|fa-rotate-left" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Product Page",
+      "blocks": [
+        { "type": "title" },
+        { "type": "price" },
+        { "type": "variant_picker" },
+        { "type": "buy_buttons" },
+        { "type": "description" },
+        { "type": "trust_badges" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,153 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "USA Supplement OS 2.0 Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity",
+    "theme_documentation_url": "https://example.com",
+    "theme_support_url": "https://example.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "🎨 Brand Palettes"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_cream",
+        "label": "Light/Cream Background",
+        "default": "#FBF8F1"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_cream_alt",
+        "label": "Cream Alternate Background",
+        "default": "#F3EFE6"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Dark Background",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent / Gold Color",
+        "default": "#F09E43"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Accent Hover Color",
+        "default": "#E08C32"
+      },
+      {
+        "type": "color",
+        "id": "color_text_dark",
+        "label": "Text Dark",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Text Light",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted_dark",
+        "label": "Text Muted Dark",
+        "default": "#555555"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted_light",
+        "label": "Text Muted Light",
+        "default": "#AAAAAA"
+      },
+      {
+        "type": "color",
+        "id": "color_card_white",
+        "label": "Card White Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_card_dark",
+        "label": "Card Dark Background",
+        "default": "#222222"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "🔗 Social Link Handles"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter/X URL"
+      }
+    ]
+  },
+  {
+    "name": "Brand Compliance",
+    "settings": [
+      {
+        "type": "header",
+        "content": "🛡️ Compliance Badges & License Numbers"
+      },
+      {
+        "type": "text",
+        "id": "fssai_lic",
+        "label": "FSSAI License Number",
+        "default": "12345678901234"
+      },
+      {
+        "type": "text",
+        "id": "fda_reg",
+        "label": "FDA Registration Label",
+        "default": "FDA Facility Registered"
+      },
+      {
+        "type": "text",
+        "id": "iso_cert",
+        "label": "ISO Certification Label",
+        "default": "ISO 22000 Certified"
+      },
+      {
+        "type": "text",
+        "id": "gmp_comp",
+        "label": "GMP Label",
+        "default": "GMP Compliant"
+      },
+      {
+        "type": "text",
+        "id": "haccp_cert",
+        "label": "HACCP Label",
+        "default": "HACCP Certified"
+      }
+    ]
+  }
+]

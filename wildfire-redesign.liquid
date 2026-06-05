@@ -1,0 +1,3020 @@
+<!--
+  Shopify Section: USA Supplement — Complete Redesign
+  Agency: GrowWithUs
+  File: sections/wildfire-redesign.liquid
+  Version: 2.0
+  Deploy: Shopify OS 2.0 Theme → Sections → Add New Section → Paste
+-->
+
+{%- style -%}
+  /* ════════════════════════════════════════════════════════════════
+     USA SUPPLEMENT — PREMIUM DESIGN SYSTEM
+     Warm Brown / Cream / Gold Palette
+     ════════════════════════════════════════════════════════════════ */
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+  :root {
+    --usa-bg-dark: {{ section.settings.bg_dark | default: '#1a1108' }};
+    --usa-bg-cream: {{ section.settings.bg_cream | default: '#f7f2ea' }};
+    --usa-bg-cream-alt: {{ section.settings.bg_cream_alt | default: '#efe8db' }};
+    --usa-accent: {{ section.settings.accent_color | default: '#c8860a' }};
+    --usa-accent-hover: {{ section.settings.accent_color | default: '#c8860a' | color_lighten: 8 }};
+    --usa-accent-glow: {{ section.settings.accent_color | default: '#c8860a' | color_modify: 'alpha', 0.2 }};
+    --usa-accent-soft: {{ section.settings.accent_color | default: '#c8860a' | color_modify: 'alpha', 0.08 }};
+    --usa-text-dark: #2c1810;
+    --usa-text-light: #f7f2ea;
+    --usa-text-muted-dark: #8a7560;
+    --usa-text-muted-light: #a09080;
+    --usa-border-dark: rgba(255,255,255,0.08);
+    --usa-border-light: rgba(44,24,16,0.1);
+    --usa-card-dark: rgba(255,255,255,0.04);
+    --usa-card-light: rgba(255,255,255,0.7);
+    --usa-green: #52c41a;
+    --usa-red: #f5222d;
+    --usa-font-display: 'Inter', sans-serif;
+    --usa-font-body: 'Inter', sans-serif;
+    --usa-shadow-soft: 0 10px 40px rgba(0,0,0,0.03);
+    --usa-shadow-hover: 0 15px 50px rgba(0,0,0,0.06);
+  }
+
+  /* ── RESET & BASE ── */
+  .usa-wrapper {
+    font-family: var(--usa-font-body);
+    line-height: 1.65;
+    overflow-x: hidden;
+    color: var(--usa-text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+  .usa-wrapper *, .usa-wrapper *::before, .usa-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .usa-wrapper img { max-width: 100%; display: block; }
+  .usa-wrapper a { color: inherit; text-decoration: none; }
+  .usa-wrapper ul { list-style: none; }
+
+  .usa-wrapper .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── SHARED COMPONENTS ── */
+  .usa-wrapper .section-tag {
+    display: inline-block;
+    font-family: var(--usa-font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--usa-accent);
+    margin-bottom: 16px;
+  }
+
+  .usa-wrapper .section-head {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .usa-wrapper .section-head h2 {
+    font-family: var(--usa-font-display);
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .section-head p {
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .usa-wrapper .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--usa-font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s var(--usa-ease);
+    text-decoration: none;
+  }
+  .usa-wrapper .btn-primary {
+    background: var(--usa-accent);
+    color: #fff;
+  }
+  .usa-wrapper .btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--usa-accent-hover);
+    box-shadow: var(--usa-shadow-soft);
+  }
+  .usa-wrapper .btn-outline-dark {
+    background: transparent;
+    color: var(--usa-text-dark);
+    border: 1.5px solid var(--usa-border-light);
+  }
+  .usa-wrapper .btn-outline-dark:hover {
+    border-color: var(--usa-accent);
+    color: var(--usa-accent);
+    transform: translateY(-3px);
+  }
+  .usa-wrapper .btn-outline-light {
+    background: transparent;
+    color: var(--usa-text-light);
+    border: 1px solid var(--usa-border-dark);
+  }
+  .usa-wrapper .btn-outline-light:hover {
+    border-color: #fff;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .usa-wrapper .btn-dark {
+    background: var(--usa-bg-dark);
+    color: var(--usa-text-light);
+  }
+  .usa-wrapper .btn-dark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .usa-wrapper .btn-wide { width: 100%; }
+
+  /* GSAP Handles scroll reveal animations. No CSS required here to prevent conflicts. */
+
+  /* ════════════════════════════════════════════════
+     SECTION STYLES
+     ════════════════════════════════════════════════ */
+
+  /* ── MARQUEE ── */
+  .usa-wrapper .marquee-bar {
+    background: var(--usa-bg-dark);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: var(--usa-font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--usa-text-muted-light);
+    text-transform: uppercase;
+  }
+  .usa-wrapper .marquee-track {
+    display: inline-block;
+    animation: usaMarquee 40s linear infinite;
+  }
+  .usa-wrapper .marquee-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: var(--usa-accent);
+    border-radius: 50%;
+    margin: 0 28px;
+    vertical-align: middle;
+  }
+  @keyframes usaMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── HERO ── */
+  .usa-wrapper .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--usa-bg-dark);
+  }
+  .usa-wrapper .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+  }
+  .usa-wrapper .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(26,17,8,0.85) 0%, rgba(26,17,8,0.5) 50%, rgba(26,17,8,0.9) 100%);
+  }
+  .usa-wrapper .hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 700px;
+    padding: 0 40px;
+    margin-left: max(40px, calc((100% - 1200px)/2 + 24px));
+  }
+  .usa-wrapper .hero-badge {
+    display: inline-block;
+    font-family: var(--usa-font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--usa-accent);
+    background: var(--usa-accent-soft);
+    border: 1px solid rgba(200,134,10,0.2);
+    padding: 8px 18px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .usa-wrapper .hero-section h1 {
+    font-family: var(--usa-font-display);
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    color: var(--usa-text-light);
+    margin-bottom: 24px;
+  }
+  .usa-wrapper .hero-section h1 em {
+    color: var(--usa-accent);
+    font-style: italic;
+  }
+  .usa-wrapper .hero-sub {
+    color: var(--usa-text-muted-light);
+    font-size: 1.15rem;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    max-width: 540px;
+  }
+  .usa-wrapper .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .usa-wrapper .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--usa-text-muted-light);
+    font-family: var(--usa-font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .usa-wrapper .scroll-pill {
+    width: 20px; height: 32px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    position: relative;
+  }
+  .usa-wrapper .scroll-dot-anim {
+    width: 3px; height: 6px;
+    background: var(--usa-accent);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: usaBobble 1.6s ease-in-out infinite;
+  }
+  @keyframes usaBobble {
+    0%,100% { opacity: 0; top: 6px; }
+    40% { opacity: 1; }
+    80% { opacity: 0; top: 18px; }
+  }
+
+  /* ── VISION & MISSION ── */
+  .usa-wrapper .vision-section {
+    padding: 120px 0;
+    background: var(--usa-bg-cream);
+  }
+  .usa-wrapper .vision-section .section-head p {
+    color: var(--usa-text-muted-dark);
+  }
+  .usa-wrapper .vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 80px;
+  }
+  .usa-wrapper .vm-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    box-shadow: var(--usa-shadow-soft);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .usa-wrapper .vm-card:hover {
+    box-shadow: var(--usa-shadow-hover);
+  }
+  .usa-wrapper .vm-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--usa-accent), transparent);
+  }
+  .usa-wrapper .vm-icon {
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background: var(--usa-accent-soft);
+    border: 1px solid rgba(200,134,10,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--usa-accent);
+    margin-bottom: 28px;
+  }
+  .usa-wrapper .vm-card h3 {
+    font-family: var(--usa-font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--usa-text-dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .usa-wrapper .vm-card p {
+    color: var(--usa-text-muted-dark);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* Ecosystem Pillars */
+  .usa-wrapper .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+  .usa-wrapper .pillar-tile {
+    background: transparent;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+  }
+  .usa-wrapper .pillar-tile:hover {
+    background: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: var(--usa-shadow-soft);
+    border-color: transparent;
+  }
+  .usa-wrapper .pillar-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--usa-accent-soft);
+    border: 1.5px solid rgba(200,134,10,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--usa-accent);
+    margin: 0 auto 16px;
+    transition: all 0.3s;
+  }
+  .usa-wrapper .pillar-tile:hover .pillar-icon {
+    background: var(--usa-accent);
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .usa-wrapper .pillar-tile h4 {
+    font-family: var(--usa-font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--usa-text-dark);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── PRODUCTS ── */
+  .usa-wrapper .products-section {
+    padding: 120px 0;
+    background: var(--usa-bg-dark);
+    color: var(--usa-text-light);
+  }
+  .usa-wrapper .products-section .section-head h2,
+  .usa-wrapper .products-section .section-tag {
+    color: var(--usa-text-light);
+  }
+  .usa-wrapper .products-section .section-head p {
+    color: var(--usa-text-muted-light);
+  }
+  .usa-wrapper .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .usa-wrapper .product-card {
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--usa-border-dark);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .usa-wrapper .product-card:hover {
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-5px);
+  }
+  .usa-wrapper .product-card-img {
+    width: 100%; height: 320px;
+    background: var(--usa-bg-cream);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .usa-wrapper .product-card-img img {
+    width: 80%; height: auto;
+    object-fit: contain;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .usa-wrapper .product-card:hover .product-card-img img {
+    transform: scale(1.08);
+  }
+  .usa-wrapper .product-card-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    font-family: var(--usa-font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 6px;
+    z-index: 2;
+  }
+  .usa-wrapper .badge-bestseller { background: #e04a19; color: #fff; }
+  .usa-wrapper .badge-new { background: var(--usa-green); color: #fff; }
+  .usa-wrapper .badge-popular { background: var(--usa-accent); color: #fff; }
+  .usa-wrapper .product-card-body {
+    padding: 28px;
+  }
+  .usa-wrapper .product-card-body h3 {
+    font-family: var(--usa-font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--usa-text-light);
+    margin-bottom: 8px;
+  }
+  .usa-wrapper .product-card-body .product-tagline {
+    color: var(--usa-text-muted-light);
+    font-size: 0.88rem;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .product-card-price {
+    font-family: var(--usa-font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--usa-accent);
+    margin-bottom: 6px;
+  }
+  .usa-wrapper .product-card-meta {
+    color: var(--usa-text-muted-light);
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+  .usa-wrapper .product-card .btn-primary {
+    width: 100%;
+    font-size: 0.72rem;
+    padding: 14px 20px;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .usa-wrapper .cert-section {
+    padding: 80px 0;
+    background: var(--usa-bg-cream);
+    text-align: center;
+  }
+  .usa-wrapper .cert-headline {
+    font-family: var(--usa-font-body);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--usa-text-dark);
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+  .usa-wrapper .cert-logos-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .usa-wrapper .cert-logo-item {
+    flex: 1;
+    max-width: 180px;
+    text-align: center;
+    padding: 24px 20px;
+    border-right: 1px solid var(--usa-border-light);
+    transition: all 0.3s;
+  }
+  .usa-wrapper .cert-logo-item:last-child { border-right: none; }
+  .usa-wrapper .cert-logo-item:hover { transform: translateY(-3px); }
+  .usa-wrapper .cert-logo-icon {
+    font-size: 2rem;
+    color: var(--usa-text-dark);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .usa-wrapper .cert-logo-item span {
+    font-family: var(--usa-font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--usa-text-dark);
+    letter-spacing: 1px;
+  }
+  .usa-wrapper .cert-verified {
+    font-family: var(--usa-font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--usa-text-muted-dark);
+    position: relative;
+    display: inline-block;
+    padding: 0 24px;
+  }
+  .usa-wrapper .cert-verified::before,
+  .usa-wrapper .cert-verified::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--usa-border-light);
+  }
+  .usa-wrapper .cert-verified::before { right: 100%; }
+  .usa-wrapper .cert-verified::after { left: 100%; }
+
+  /* ── WHY USA SUPPLEMENT ── */
+  .usa-wrapper .why-section {
+    padding: 120px 0;
+    background: var(--usa-bg-dark);
+  }
+  .usa-wrapper .why-section .section-head h2 { color: var(--usa-text-light); }
+  .usa-wrapper .why-section .section-head p { color: var(--usa-text-muted-light); }
+  .usa-wrapper .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .usa-wrapper .why-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--usa-border-dark);
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .usa-wrapper .why-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200,134,10,0.25);
+    box-shadow: 0 16px 48px rgba(200,134,10,0.08);
+  }
+  .usa-wrapper .why-card-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 2px solid var(--usa-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 1.5rem;
+    color: var(--usa-accent);
+    transition: all 0.3s;
+  }
+  .usa-wrapper .why-card:hover .why-card-icon {
+    background: var(--usa-accent);
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .usa-wrapper .why-card h4 {
+    font-family: var(--usa-font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--usa-text-light);
+    margin-bottom: 10px;
+  }
+  .usa-wrapper .why-card p {
+    color: var(--usa-text-muted-light);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  /* ── INGREDIENT TRANSPARENCY ── */
+  .usa-wrapper .ingredient-section {
+    padding: 120px 0;
+    background: var(--usa-bg-cream);
+  }
+  .usa-wrapper .ingredient-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .usa-wrapper .ingredient-visual {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .usa-wrapper .ingredient-visual img {
+    width: 100%;
+    border-radius: 24px;
+  }
+  .usa-wrapper .ingredient-info .section-tag { margin-bottom: 12px; }
+  .usa-wrapper .ingredient-info h2 {
+    font-family: var(--usa-font-display);
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    color: var(--usa-text-dark);
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .ingredient-info > p {
+    color: var(--usa-text-muted-dark);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .usa-wrapper .dosage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .usa-wrapper .dosage-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--usa-card-light);
+    border: 1px solid var(--usa-border-light);
+    border-radius: 14px;
+    padding: 20px 24px;
+    transition: all 0.3s;
+  }
+  .usa-wrapper .dosage-item:hover {
+    border-color: rgba(200,134,10,0.25);
+    transform: translateX(4px);
+  }
+  .usa-wrapper .dosage-pill {
+    font-family: var(--usa-font-display);
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--usa-accent);
+    padding: 8px 18px;
+    border-radius: 8px;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+  }
+  .usa-wrapper .dosage-text h4 {
+    font-family: var(--usa-font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--usa-text-dark);
+    margin-bottom: 2px;
+  }
+  .usa-wrapper .dosage-text span {
+    color: var(--usa-text-muted-dark);
+    font-size: 0.85rem;
+  }
+
+  /* ── FLAVORS ── */
+  .usa-wrapper .flavors-section {
+    padding: 120px 0;
+    background: var(--usa-bg-cream-alt);
+  }
+  .usa-wrapper .flavors-section .section-head p { color: var(--usa-text-muted-dark); }
+  .usa-wrapper .flavor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .usa-wrapper .flavor-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+  .usa-wrapper .flavor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  }
+  .usa-wrapper .flavor-card-content {
+    position: relative;
+    z-index: 2;
+  }
+  .usa-wrapper .flavor-card-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    font-family: var(--usa-font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--usa-bg-dark);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    z-index: 3;
+  }
+  .usa-wrapper .flavor-tub-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    height: 55%;
+    object-fit: contain;
+    z-index: 1;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+    transition: transform 0.4s ease;
+  }
+  .usa-wrapper .flavor-card:hover .flavor-tub-img {
+    transform: translate(-50%, -58%) scale(1.05);
+  }
+  .usa-wrapper .flavor-card h3 {
+    font-family: var(--usa-font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .usa-wrapper .flavor-card .flavor-desc {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.88rem;
+  }
+  .usa-wrapper .flavor-card .flavor-arrow {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+  }
+  .usa-wrapper .flavor-card:hover .flavor-arrow {
+    background: #fff;
+    color: var(--usa-text-dark);
+  }
+  .usa-wrapper .flavors-cta {
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  /* ── COMMUNITY / BRAND STORY ── */
+  .usa-wrapper .community-section {
+    padding: 120px 0;
+    background: var(--usa-bg-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .usa-wrapper .community-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -15%;
+    width: 50%;
+    height: 160%;
+    background: radial-gradient(circle, var(--usa-accent-soft) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .usa-wrapper .community-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .usa-wrapper .community-text h2 {
+    font-family: var(--usa-font-display);
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--usa-text-light);
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .usa-wrapper .community-text h2 em {
+    color: var(--usa-accent);
+    font-style: italic;
+  }
+  .usa-wrapper .community-text > p {
+    color: var(--usa-text-muted-light);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .community-quote {
+    margin-top: 32px;
+    padding: 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--usa-border-dark);
+    border-left: 3px solid var(--usa-accent);
+    border-radius: 0 14px 14px 0;
+  }
+  .usa-wrapper .community-quote i {
+    color: var(--usa-accent);
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .usa-wrapper .community-quote blockquote {
+    font-family: var(--usa-font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--usa-text-light);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .usa-wrapper .community-quote cite {
+    color: var(--usa-text-muted-light);
+    font-size: 0.85rem;
+    font-style: normal;
+  }
+  .usa-wrapper .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .usa-wrapper .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--usa-border-dark);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .usa-wrapper .stat-card:hover {
+    border-color: rgba(200,134,10,0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(200,134,10,0.08);
+  }
+  .usa-wrapper .stat-number {
+    font-family: var(--usa-font-display);
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--usa-accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .usa-wrapper .stat-label {
+    font-family: var(--usa-font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--usa-text-light);
+    margin-bottom: 4px;
+  }
+  .usa-wrapper .stat-sub {
+    color: var(--usa-text-muted-light);
+    font-size: 0.8rem;
+  }
+
+  /* ── ELITE PREMIUM STYLES ── */
+  .usa-wrapper .text-gradient {
+    background: linear-gradient(135deg, #ffffff 40%, var(--usa-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .usa-wrapper .hero-grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .usa-wrapper .spotlight-card, 
+  .usa-wrapper .vm-card, 
+  .usa-wrapper .pillar-tile, 
+  .usa-wrapper .product-card, 
+  .usa-wrapper .why-card, 
+  .usa-wrapper .stat-card,
+  .usa-wrapper .roadmap-card {
+    position: relative;
+    overflow: hidden;
+    --mouse-x: 0px;
+    --mouse-y: 0px;
+  }
+  .usa-wrapper .spotlight-card::before, 
+  .usa-wrapper .vm-card::before, 
+  .usa-wrapper .pillar-tile::before, 
+  .usa-wrapper .product-card::before, 
+  .usa-wrapper .why-card::before, 
+  .usa-wrapper .stat-card::before,
+  .usa-wrapper .roadmap-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(350px circle at var(--mouse-x) var(--mouse-y), rgba(200, 134, 10, 0.06), transparent 80%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .usa-wrapper .spotlight-card:hover::before, 
+  .usa-wrapper .vm-card:hover::before, 
+  .usa-wrapper .pillar-tile:hover::before, 
+  .usa-wrapper .product-card:hover::before, 
+  .usa-wrapper .why-card:hover::before, 
+  .usa-wrapper .stat-card:hover::before,
+  .usa-wrapper .roadmap-card:hover::before {
+    opacity: 1;
+  }
+
+  /* ── ROADMAP SECTION ── */
+  .usa-wrapper .roadmap-section {
+    padding: 120px 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(200, 134, 10, 0.04) 0%, transparent 60%), #0d0803;
+    color: var(--usa-text-light);
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  .usa-wrapper .roadmap-section .section-head h2 { color: #fff; }
+  .usa-wrapper .roadmap-section .section-head p { color: var(--usa-text-muted-light); }
+  .usa-wrapper .roadmap-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .usa-wrapper .roadmap-nav-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--usa-text-muted-light);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: var(--usa-font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .usa-wrapper .roadmap-nav-btn:hover {
+    border-color: rgba(200, 134, 10, 0.4);
+    color: #fff;
+    background: rgba(200, 134, 10, 0.04);
+  }
+  .usa-wrapper .roadmap-nav-btn.active {
+    background: var(--usa-accent);
+    color: #fff;
+    border-color: var(--usa-accent);
+    box-shadow: 0 0 20px rgba(200, 134, 10, 0.25);
+  }
+  .usa-wrapper .roadmap-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 24px;
+  }
+  .usa-wrapper .roadmap-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    padding: 20px 4px 40px;
+  }
+  .usa-wrapper .roadmap-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .usa-wrapper .roadmap-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+  }
+  .usa-wrapper .roadmap-card {
+    width: 340px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .usa-wrapper .roadmap-card-glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(200, 134, 10, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+  .usa-wrapper .roadmap-card:hover .roadmap-card-glow {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(200, 134, 10, 0.15) 0%, transparent 70%);
+  }
+  .usa-wrapper .roadmap-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(200, 134, 10, 0.3);
+    box-shadow: 0 15px 40px rgba(200, 134, 10, 0.1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .usa-wrapper .roadmap-phase-num {
+    font-family: var(--usa-font-display);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--usa-accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .usa-wrapper .roadmap-date {
+    font-family: var(--usa-font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 30px;
+    width: fit-content;
+  }
+  .usa-wrapper .roadmap-card h3 {
+    font-family: var(--usa-font-display);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .usa-wrapper .roadmap-objective {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--usa-text-muted-light);
+    margin-bottom: 20px;
+    min-height: 48px;
+  }
+  .usa-wrapper .roadmap-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .usa-wrapper .roadmap-products span {
+    font-family: var(--usa-font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .usa-wrapper .roadmap-card:hover .roadmap-products span {
+    background: rgba(200, 134, 10, 0.05);
+    border-color: rgba(200, 134, 10, 0.15);
+    color: var(--usa-accent);
+  }
+  .usa-wrapper .roadmap-metrics h5 {
+    font-family: var(--usa-font-display);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+    opacity: 0.9;
+  }
+  .usa-wrapper .roadmap-metrics ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .usa-wrapper .roadmap-metrics li {
+    font-size: 0.78rem;
+    color: var(--usa-text-muted-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .usa-wrapper .roadmap-metrics li i {
+    color: var(--usa-accent);
+    font-size: 0.75rem;
+  }
+  .usa-wrapper .roadmap-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .usa-wrapper .roadmap-control-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .usa-wrapper .roadmap-control-btn:hover {
+    border-color: var(--usa-accent);
+    background: rgba(200, 134, 10, 0.05);
+    color: var(--usa-accent);
+    transform: scale(1.05);
+  }
+
+  /* ── REVIEWS ── */
+  .usa-wrapper .reviews-section {
+    padding: 120px 0;
+    background: var(--usa-bg-cream);
+  }
+  .usa-wrapper .reviews-section .section-head p { color: var(--usa-text-muted-dark); }
+  .usa-wrapper .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .usa-wrapper .review-card {
+    background: var(--usa-card-light);
+    border: 1px solid var(--usa-border-light);
+    border-radius: 20px;
+    padding: 36px 28px;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .usa-wrapper .review-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200,134,10,0.2);
+    box-shadow: 0 16px 48px rgba(200,134,10,0.06);
+  }
+  .usa-wrapper .review-card.featured {
+    border-color: rgba(200,134,10,0.2);
+    background: linear-gradient(135deg, rgba(200,134,10,0.04), rgba(255,255,255,0.7));
+  }
+  .usa-wrapper .review-stars {
+    color: #f59e0b;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .review-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--usa-text-dark);
+    margin-bottom: 24px;
+    min-height: 80px;
+    opacity: 0.85;
+  }
+  .usa-wrapper .review-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .review-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--usa-font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .usa-wrapper .review-author h4 {
+    font-family: var(--usa-font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--usa-text-dark);
+    margin-bottom: 2px;
+  }
+  .usa-wrapper .review-author span {
+    color: var(--usa-text-muted-dark);
+    font-size: 0.78rem;
+  }
+  .usa-wrapper .review-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--usa-green);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FAQ ── */
+  .usa-wrapper .faq-section {
+    padding: 120px 0;
+    background: var(--usa-bg-cream-alt);
+  }
+  .usa-wrapper .faq-section .section-head p { color: var(--usa-text-muted-dark); }
+  .usa-wrapper .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .usa-wrapper .faq-item {
+    background: var(--usa-card-light);
+    border: 1px solid var(--usa-border-light);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .usa-wrapper .faq-q {
+    width: 100%;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--usa-text-dark);
+    font-family: var(--usa-font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+  }
+  .usa-wrapper .faq-q i {
+    color: var(--usa-accent);
+    font-size: 0.85rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+  .usa-wrapper .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0,1,0,1);
+    padding: 0 28px;
+  }
+  .usa-wrapper .faq-a p {
+    padding-bottom: 24px;
+    color: var(--usa-text-muted-dark);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .usa-wrapper .faq-item.open {
+    border-color: rgba(200,134,10,0.25);
+  }
+  .usa-wrapper .faq-item.open .faq-q i {
+    transform: rotate(45deg);
+  }
+  .usa-wrapper .faq-item.open .faq-a {
+    max-height: 300px;
+    transition: max-height 0.4s cubic-bezier(1,0,1,0);
+  }
+
+  /* ── NEWSLETTER ── */
+  .usa-wrapper .newsletter-section {
+    padding: 100px 0;
+    background: var(--usa-bg-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .usa-wrapper .newsletter-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, var(--usa-accent-soft) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .usa-wrapper .newsletter-inner {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(200,134,10,0.05), rgba(255,255,255,0.02));
+    border: 1px solid rgba(200,134,10,0.15);
+    border-radius: 28px;
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .usa-wrapper .newsletter-text h2 {
+    font-family: var(--usa-font-display);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--usa-text-light);
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .usa-wrapper .newsletter-text h2 em {
+    color: var(--usa-accent);
+    font-style: italic;
+  }
+  .usa-wrapper .newsletter-text p {
+    color: var(--usa-text-muted-light);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .usa-wrapper .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .usa-wrapper .input-group {
+    display: flex;
+    gap: 12px;
+  }
+  .usa-wrapper .input-group input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--usa-border-dark);
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: var(--usa-text-light);
+    font-family: var(--usa-font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .usa-wrapper .input-group input:focus {
+    border-color: var(--usa-accent);
+  }
+  .usa-wrapper .input-group input::placeholder {
+    color: var(--usa-text-muted-light);
+  }
+  .usa-wrapper .form-note {
+    color: var(--usa-text-muted-light);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── FOOTER ── */
+  .usa-wrapper .site-footer {
+    background: #0d0803;
+    border-top: 1px solid var(--usa-border-dark);
+    padding: 80px 0 32px;
+  }
+  .usa-wrapper .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .usa-wrapper .footer-brand h3 {
+    font-family: var(--usa-font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--usa-text-light);
+    margin-bottom: 4px;
+  }
+  .usa-wrapper .footer-brand .footer-accent {
+    color: var(--usa-accent);
+    font-size: 0.75rem;
+    font-family: var(--usa-font-display);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .usa-wrapper .footer-brand > p {
+    color: var(--usa-text-muted-light);
+    margin: 16px 0 24px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .usa-wrapper .social-row {
+    display: flex;
+    gap: 12px;
+  }
+  .usa-wrapper .social-row a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--usa-border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--usa-text-muted-light);
+    transition: all 0.3s;
+  }
+  .usa-wrapper .social-row a:hover {
+    background: var(--usa-accent);
+    color: #fff;
+    border-color: var(--usa-accent);
+    transform: translateY(-2px);
+  }
+  .usa-wrapper .footer-col h4 {
+    font-family: var(--usa-font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--usa-text-light);
+  }
+  .usa-wrapper .footer-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .usa-wrapper .footer-col a {
+    color: var(--usa-text-muted-light);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .usa-wrapper .footer-col a:hover { color: var(--usa-accent); }
+  .usa-wrapper .footer-compliance {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .usa-wrapper .footer-compliance span {
+    font-size: 0.72rem;
+    color: var(--usa-text-muted-light);
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--usa-border-dark);
+    border-radius: 6px;
+  }
+  .usa-wrapper .footer-bar {
+    text-align: center;
+    color: var(--usa-text-muted-light);
+    font-size: 0.82rem;
+  }
+
+  /* ════════════════════════════════════════════════
+     RESPONSIVE
+     ════════════════════════════════════════════════ */
+  @media (max-width: 992px) {
+    .usa-wrapper .vm-grid,
+    .usa-wrapper .ingredient-layout,
+    .usa-wrapper .community-grid,
+    .usa-wrapper .newsletter-inner { grid-template-columns: 1fr; gap: 40px; }
+    .usa-wrapper .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+    .usa-wrapper .products-grid,
+    .usa-wrapper .flavor-grid,
+    .usa-wrapper .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
+    .usa-wrapper .why-grid { grid-template-columns: 1fr 1fr; }
+    .usa-wrapper .cert-logos-row { gap: 16px; }
+    .usa-wrapper .cert-logo-item { border-right: none; }
+    .usa-wrapper .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .usa-wrapper .hero-content { margin-left: 0; }
+    .usa-wrapper .newsletter-inner { padding: 40px 28px; }
+  }
+  @media (max-width: 600px) {
+    .usa-wrapper .hero-section h1 { font-size: 2.4rem; letter-spacing: -1px; }
+    .usa-wrapper .hero-content { padding: 0 20px; }
+    .usa-wrapper .section-head h2 { font-size: 2rem; }
+    .usa-wrapper .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .usa-wrapper .why-grid { grid-template-columns: 1fr; }
+    .usa-wrapper .input-group { flex-direction: column; }
+    .usa-wrapper .footer-grid { grid-template-columns: 1fr; }
+    .usa-wrapper .stats-grid { grid-template-columns: 1fr; }
+    .usa-wrapper .community-text h2 { font-size: 2rem; }
+    .usa-wrapper .ingredient-info h2 { font-size: 2rem; }
+    .usa-wrapper .vm-card { padding: 32px 24px; }
+    .usa-wrapper .flavor-card { min-height: 360px; }
+  }
+
+{%- endstyle -%}
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SECTION MARKUP
+     ════════════════════════════════════════════════════════════════ -->
+<div class="usa-wrapper" id="usa-section-{{ section.id }}">
+
+  <!-- ═══ MARQUEE BAR ═══ -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>FREE SHIPPING ABOVE ₹999</span><span class="marquee-dot"></span>
+      <span>INFORMED CHOICE CERTIFIED</span><span class="marquee-dot"></span>
+      <span>BANNED-SUBSTANCE FREE</span><span class="marquee-dot"></span>
+      <span>LAB-TESTED &amp; VERIFIED</span><span class="marquee-dot"></span>
+      <span>SCIENCE-BACKED SOLUTIONS</span><span class="marquee-dot"></span>
+      <span>FREE SHIPPING ABOVE ₹999</span><span class="marquee-dot"></span>
+      <span>INFORMED CHOICE CERTIFIED</span><span class="marquee-dot"></span>
+      <span>BANNED-SUBSTANCE FREE</span><span class="marquee-dot"></span>
+      <span>LAB-TESTED &amp; VERIFIED</span><span class="marquee-dot"></span>
+      <span>SCIENCE-BACKED SOLUTIONS</span><span class="marquee-dot"></span>
+    </div>
+  </div>
+
+  <!-- ═══ HERO SECTION ═══ -->
+  <section class="hero-section" id="hero">
+    <div class="hero-grid-pattern"></div>
+    {% if section.settings.hero_bg %}
+      <div class="hero-bg" style="background-image: url('{{ section.settings.hero_bg | image_url: width: 2000 }}');"></div>
+    {% endif %}
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">{{ section.settings.hero_badge | default: 'United Science Alliance' }}</div>
+      <h1>{{ section.settings.hero_title | default: 'Building The World's Most Trusted <em>Health Ecosystem.</em>' }}</h1>
+      <p class="hero-sub">{{ section.settings.hero_subtitle | default: 'Make science-backed health solutions accessible to every individual through products, education, technology and community.' }}</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary">{{ section.settings.hero_cta_1 | default: 'Explore Products' }}</a>
+        <a href="#vision" class="btn btn-outline-light">{{ section.settings.hero_cta_2 | default: 'Our Vision' }}</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-pill"><div class="scroll-dot-anim"></div></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ VISION & MISSION ═══ -->
+  <section class="vision-section" id="vision">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">Our Purpose</div>
+        <h2>{{ section.settings.vm_heading | default: 'Driven by Science. Built for Everyone.' }}</h2>
+        <p>{{ section.settings.vm_subheading | default: 'Two pillars that guide everything we build, create, and deliver.' }}</p>
+      </div>
+
+      <div class="vm-grid reveal-up">
+        <!-- Vision Card -->
+        <div class="vm-card">
+          <div class="vm-icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>{{ section.settings.vision_text | default: 'To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health.' }}</p>
+        </div>
+        <!-- Mission Card -->
+        <div class="vm-card">
+          <div class="vm-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>{{ section.settings.mission_text | default: 'Make science-backed health solutions accessible to every individual through products, education, technology and community.' }}</p>
+        </div>
+      </div>
+
+      <!-- Ecosystem Pillars -->
+      <div class="pillars-grid reveal-up">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'pillar' -%}
+            <div class="pillar-tile" {{ block.shopify_attributes }}>
+              <div class="pillar-icon">
+                {%- if block.settings.icon == 'nutrition' -%}<i class="fa-solid fa-apple-whole"></i>
+                {%- elsif block.settings.icon == 'wellness' -%}<i class="fa-solid fa-spa"></i>
+                {%- elsif block.settings.icon == 'education' -%}<i class="fa-solid fa-book-open"></i>
+                {%- elsif block.settings.icon == 'community' -%}<i class="fa-solid fa-people-group"></i>
+                {%- elsif block.settings.icon == 'technology' -%}<i class="fa-solid fa-microchip"></i>
+                {%- elsif block.settings.icon == 'preventive' -%}<i class="fa-solid fa-heart-pulse"></i>
+                {%- else -%}<i class="fa-solid fa-star"></i>
+                {%- endif -%}
+              </div>
+              <h4>{{ block.settings.title }}</h4>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS ═══ -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">{{ section.settings.products_tag | default: 'Our Products' }}</div>
+        <h2>{{ section.settings.products_heading | default: 'Science-Backed Nutrition' }}</h2>
+        <p>{{ section.settings.products_sub | default: 'Premium supplements formulated for real results. No shortcuts, no compromises.' }}</p>
+      </div>
+
+      <div class="products-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'product_card' -%}
+            <div class="product-card reveal-up" {{ block.shopify_attributes }}>
+              <div class="product-card-img">
+                {% if block.settings.badge != blank %}
+                  <span class="product-card-badge badge-{{ block.settings.badge_style | default: 'bestseller' }}">{{ block.settings.badge }}</span>
+                {% endif %}
+                {% if block.settings.image %}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title }}">
+                {% else %}
+                  <i class="fa-solid fa-box" style="font-size:4rem;color:var(--usa-text-muted-light);"></i>
+                {% endif %}
+              </div>
+              <div class="product-card-body">
+                <h3>{{ block.settings.title | default: 'Product Name' }}</h3>
+                <p class="product-tagline">{{ block.settings.tagline | default: 'Science-backed formula' }}</p>
+                <div class="product-card-price">{{ block.settings.price | default: 'Rs. 2,499' }}</div>
+                <p class="product-card-meta">{{ block.settings.meta | default: '30 servings per tub' }}</p>
+                {% if block.settings.product_url != blank %}
+                  <a href="{{ block.settings.product_url }}" class="btn btn-primary">View Product →</a>
+                {% else %}
+                  <button class="btn btn-primary" onclick="window.location.href='/collections/all'">View Product →</button>
+                {% endif %}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATIONS ═══ -->
+  <section class="cert-section" id="certifications">
+    <div class="container">
+      <p class="cert-headline reveal-up">{{ section.settings.cert_headline | default: 'The only Indian pre-workout certified to global athlete safety standards.' }}</p>
+      <div class="cert-logos-row reveal-up">
+        <div class="cert-logo-item">
+          <span class="cert-logo-icon"><i>fssai</i></span>
+          <span>FSSAI</span>
+        </div>
+        <div class="cert-logo-item">
+          <span class="cert-logo-icon"><i class="fa-solid fa-file-shield"></i></span>
+          <span>FDA</span>
+        </div>
+        <div class="cert-logo-item">
+          <span class="cert-logo-icon"><i class="fa-solid fa-certificate"></i></span>
+          <span>GMP</span>
+        </div>
+        <div class="cert-logo-item">
+          <span class="cert-logo-icon"><i class="fa-solid fa-clipboard-check"></i></span>
+          <span>HACCP</span>
+        </div>
+        <div class="cert-logo-item">
+          <span class="cert-logo-icon"><i class="fa-solid fa-award"></i></span>
+          <span>ISO</span>
+        </div>
+      </div>
+      <div class="cert-verified reveal-up">ALL 8 CERTIFICATIONS INDEPENDENTLY VERIFIED</div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY USA SUPPLEMENT ═══ -->
+  <section class="why-section" id="why-usa">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">Why Choose Us</div>
+        <h2>{{ section.settings.why_heading | default: 'Why USA Supplement' }}</h2>
+        <p>{{ section.settings.why_sub | default: "India's most certified pre-workout. Every claim backed by third-party testing." }}</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal-up">
+          <div class="why-card-icon"><i class="fa-solid fa-check"></i></div>
+          <h4>Banned-Substance Free</h4>
+          <p>Informed Choice certified</p>
+        </div>
+        <div class="why-card reveal-up">
+          <div class="why-card-icon"><i class="fa-solid fa-flask-vial"></i></div>
+          <h4>Clinically Dosed</h4>
+          <p>5g Beta-Alanine · 2.5g Citrulline</p>
+        </div>
+        <div class="why-card reveal-up">
+          <div class="why-card-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <h4>FDA-Registered Facility</h4>
+          <p>Reg. No. 16133920022</p>
+        </div>
+        <div class="why-card reveal-up">
+          <div class="why-card-icon"><i class="fa-solid fa-list-check"></i></div>
+          <h4>No Proprietary Blends</h4>
+          <p>Every mg disclosed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INGREDIENT TRANSPARENCY ═══ -->
+  <section class="ingredient-section" id="ingredients">
+    <div class="container">
+      <div class="ingredient-layout">
+        <div class="ingredient-visual reveal-up">
+          {% if section.settings.ingredient_image %}
+            <img src="{{ section.settings.ingredient_image | image_url: width: 800 }}" alt="Enhanced Focus & Mental Alertness">
+          {% endif %}
+        </div>
+        <div class="ingredient-info reveal-up">
+          <div class="section-tag">Ingredient Transparency</div>
+          <h2>{{ section.settings.ingredient_heading | default: 'Every dose, on the label.' }}</h2>
+          <p>{{ section.settings.ingredient_sub | default: 'No under-dosed fillers. No hidden blends. Every ingredient, every milligram right there on the tub.' }}</p>
+          <div class="dosage-list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'ingredient' -%}
+                <div class="dosage-item" {{ block.shopify_attributes }}>
+                  <span class="dosage-pill">{{ block.settings.dosage | default: '5g' }}</span>
+                  <div class="dosage-text">
+                    <h4>{{ block.settings.title | default: 'Beta-Alanine' }}</h4>
+                    <span>{{ block.settings.brief | default: 'clinically proven endurance dose' }}</span>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FLAVORS ═══ -->
+  <section class="flavors-section" id="flavors">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">{{ section.settings.flavors_tag | default: '6 Flavors' }}</div>
+        <h2>{{ section.settings.flavors_heading | default: 'Find your flavor.' }}</h2>
+        <p>{{ section.settings.flavors_sub | default: 'Same clinical formula. Six ways to crave it.' }}</p>
+      </div>
+
+      <div class="flavor-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'flavor' -%}
+            <div class="flavor-card" style="background: linear-gradient(180deg, {{ block.settings.flavor_color | default: '#73d13d' }}cc 0%, {{ block.settings.flavor_color | default: '#73d13d' }} 100%);" {{ block.shopify_attributes }}>
+              {% if block.settings.badge != blank %}
+                <span class="flavor-card-badge">{{ block.settings.badge }}</span>
+              {% endif %}
+              {% if block.settings.tub_image %}
+                <img src="{{ block.settings.tub_image | image_url: width: 400 }}" alt="{{ block.settings.title }}" class="flavor-tub-img">
+              {% endif %}
+              <div class="flavor-card-content">
+                <h3>{{ block.settings.title | default: 'Flavor Name' }}</h3>
+                <span class="flavor-desc">{{ block.settings.description | default: 'Tropical & tart' }}</span>
+              </div>
+              <div class="flavor-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="flavors-cta reveal-up">
+        <a href="{{ section.settings.flavors_cta_url | default: '/collections/all' }}" class="btn btn-primary">Shop All Flavors →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMMUNITY & BRAND STORY ═══ -->
+  <section class="community-section" id="community">
+    <div class="container">
+      <div class="community-grid">
+        <div class="community-text reveal-up">
+          <div class="section-tag">Our Story</div>
+          <h2>{{ section.settings.community_heading | default: 'Building The World\'s Most Trusted <em>Health Ecosystem</em>' }}</h2>
+          <p>{{ section.settings.community_text_1 | default: 'We believe every individual deserves access to science-backed health solutions. USA Supplement isn't just a brand — it's a 12-phase roadmap to transform how the world approaches nutrition, wellness, and preventive health.' }}</p>
+          <p>{{ section.settings.community_text_2 | default: 'From our flagship Wildfire Pre-Workout to a complete ecosystem spanning smart tech, education, and longevity science — we're building something that lasts.' }}</p>
+          <div class="community-quote">
+            <i class="fa-solid fa-quote-left"></i>
+            <blockquote>{{ section.settings.community_quote | default: '"The first victory is not raising investment. The first victory is creating customers who buy again without being asked."' }}</blockquote>
+            <cite>{{ section.settings.community_cite | default: '— Founding Principle, USA Supplement' }}</cite>
+          </div>
+        </div>
+        <div class="stats-grid reveal-up">
+          <div class="stat-card">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Phases</div>
+            <div class="stat-sub">5-Year Roadmap</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="50" data-suffix="+">0</div>
+            <div class="stat-label">Products</div>
+            <div class="stat-sub">Across Categories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="100" data-suffix="%">0</div>
+            <div class="stat-label">Transparent</div>
+            <div class="stat-sub">No Hidden Formulas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Commitment</div>
+            <div class="stat-sub">To Your Health</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INTERACTIVE ROADMAP ═══ -->
+  <section class="roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">USA Ecosystem Roadmap</div>
+        <h2>12 Phases. 5 Years. 1 Vision.</h2>
+        <p>Explore our strategic expansion timeline as we transition from a premium sports nutrition brand into a complete, data-driven global health ecosystem.</p>
+      </div>
+
+      <!-- Roadmap Navigation Timeline (Years) -->
+      <div class="roadmap-nav reveal-up">
+        <button class="roadmap-nav-btn active" data-year="all">Show All</button>
+        <button class="roadmap-nav-btn" data-year="2026">2026: Foundation</button>
+        <button class="roadmap-nav-btn" data-year="2027">2027: Expansion</button>
+        <button class="roadmap-nav-btn" data-year="2028">2028: Scale & Snacks</button>
+        <button class="roadmap-nav-btn" data-year="2029">2029: Smart Tech</button>
+        <button class="roadmap-nav-btn" data-year="2030">2030: Longevity Science</button>
+      </div>
+
+      <!-- Roadmap Timeline Scroll Container -->
+      <div class="roadmap-container reveal-up">
+        <div class="roadmap-scroll-wrapper">
+          <div class="roadmap-track">
+            
+            <!-- Phase 1 -->
+            <div class="roadmap-card" data-year="2026">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 01</div>
+              <div class="roadmap-date">Jul – Sep 2026</div>
+              <h3>Foundation</h3>
+              <p class="roadmap-objective">Validate product-market fit with core performance formulations.</p>
+              <div class="roadmap-products">
+                <span>Wildfire Pre-Workout</span>
+                <span>USA Plant Protein</span>
+                <span>Yeast Protein</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> 1,000 first customers</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 500+ verified reviews</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 30% repeat purchase rate</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="roadmap-card" data-year="2026">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 02</div>
+              <div class="roadmap-date">Oct – Dec 2026</div>
+              <h3>Protein Domination</h3>
+              <p class="roadmap-objective">Establish significant share in the mainstream fitness market.</p>
+              <div class="roadmap-products">
+                <span>Whey Concentrate</span>
+                <span>Whey Isolate</span>
+                <span>Mass Gainer</span>
+                <span>Creatine Monohydrate</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> 5,000 active customers</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 100 gym partnerships</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 10 distributors</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="roadmap-card" data-year="2027">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 03</div>
+              <div class="roadmap-date">Jan – Mar 2027</div>
+              <h3>Performance Ecosystem</h3>
+              <p class="roadmap-objective">Increase customer lifetime value through stacking integration.</p>
+              <div class="roadmap-products">
+                <span>EAA</span>
+                <span>BCAA</span>
+                <span>Glutamine</span>
+                <span>Electrolytes</span>
+                <span>L-Carnitine</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> 40% stack sales</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 35% repeat purchase rate</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Strong athlete network</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="roadmap-card" data-year="2027">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 04</div>
+              <div class="roadmap-date">Apr – Jun 2027</div>
+              <h3>Daily Health Division</h3>
+              <p class="roadmap-objective">Expand beyond the gym audience to families and corporate professionals.</p>
+              <div class="roadmap-products">
+                <span>Multivitamin</span>
+                <span>Fish Oil</span>
+                <span>Vitamin D3 K2</span>
+                <span>Magnesium Glycinate</span>
+                <span>Zinc</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> 25% non-gym customers</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Corporate health partnerships</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Wellness family segments</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 5 -->
+            <div class="roadmap-card" data-year="2027">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 05</div>
+              <div class="roadmap-date">Jul – Sep 2027</div>
+              <h3>Advanced Performance</h3>
+              <p class="roadmap-objective">Build a premium elite athlete category backed by clinical biology.</p>
+              <div class="roadmap-products">
+                <span>Testosterone Support</span>
+                <span>Beta Alanine</span>
+                <span>Citrulline Malate</span>
+                <span>L-Arginine</span>
+                <span>Creatine HCL</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Premium product adoption</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Sports team collaborations</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Performance bio-feedback</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 6 -->
+            <div class="roadmap-card" data-year="2027">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 06</div>
+              <div class="roadmap-date">Oct – Dec 2027</div>
+              <h3>USA Garden</h3>
+              <p class="roadmap-objective">Enter breakfast and clean family nutrition segment.</p>
+              <div class="roadmap-products">
+                <span>Protein Oats</span>
+                <span>Muesli</span>
+                <span>Granola</span>
+                <span>Peanut & Almond Butter</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Presence in homes</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Family consumption patterns</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Healthy pantry staples</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 7 -->
+            <div class="roadmap-card" data-year="2028">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 07</div>
+              <div class="roadmap-date">Jan – Mar 2028</div>
+              <h3>Healthy Snacks</h3>
+              <p class="roadmap-objective">Provide premium on-the-go nutrition for active travelers and offices.</p>
+              <div class="roadmap-products">
+                <span>Protein Bars / Wafers</span>
+                <span>Protein Snacks</span>
+                <span>Functional Snacks</span>
+                <span>Fruit & Vegetable Chips</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Airport & office presence</li>
+                  <li><i class="fa-solid fa-circle-check"></i> National retail expansion</li>
+                  <li><i class="fa-solid fa-circle-check"></i> High convenience adoption</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 8 -->
+            <div class="roadmap-card" data-year="2028">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 08</div>
+              <div class="roadmap-date">Apr – Jun 2028</div>
+              <h3>RTD Division</h3>
+              <p class="roadmap-objective">Introduce ready-to-drink convenience formats in retail.</p>
+              <div class="roadmap-products">
+                <span>Protein Water</span>
+                <span>Cold Coffee Protein</span>
+                <span>Energy Drinks</span>
+                <span>Green Tea / Caffeine Shots</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Modern trade presence</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Q-Commerce partnerships</li>
+                  <li><i class="fa-solid fa-circle-check"></i> High-volume retail velocity</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 9 -->
+            <div class="roadmap-card" data-year="2028">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 09</div>
+              <div class="roadmap-date">Jul – Sep 2028</div>
+              <h3>USA Originals</h3>
+              <p class="roadmap-objective">Build complete lifestyle brand identity and community apparel.</p>
+              <div class="roadmap-products">
+                <span>Premium Apparel</span>
+                <span>Training Shorts</span>
+                <span>Gym Bags / Shakers</span>
+                <span>Wrist Bands / Belts</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Community brand alignment</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 50K+ lifestyle gear units</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Global merchant footprint</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 10 -->
+            <div class="roadmap-card" data-year="2028">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 10</div>
+              <div class="roadmap-date">Oct – Dec 2028</div>
+              <h3>USA Fitness System</h3>
+              <p class="roadmap-objective">Create an educational platform and certified coach ecosystem moat.</p>
+              <div class="roadmap-products">
+                <span>USA Academy</span>
+                <span>Certification Programs</span>
+                <span>Coach Network</span>
+                <span>Gym Partnerships</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> 1,000+ certified coaches</li>
+                  <li><i class="fa-solid fa-circle-check"></i> 500+ partner gyms</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Education revenue stream</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 11 -->
+            <div class="roadmap-card" data-year="2029">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 11</div>
+              <div class="roadmap-date">2029 Expansion</div>
+              <h3>USA Smart Tech</h3>
+              <p class="roadmap-objective">Connect physical supplements with biometrics and intelligence wellness data.</p>
+              <div class="roadmap-products">
+                <span>Fitness Tracker</span>
+                <span>Smart Watch</span>
+                <span>Heart Rate / Oxygen Monitor</span>
+                <span>Body Composition Tech</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Connected user base</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Dynamic dosage recommendation</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Health dashboard launch</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 12 -->
+            <div class="roadmap-card" data-year="2030">
+              <div class="roadmap-card-glow"></div>
+              <div class="roadmap-phase-num">PHASE 12</div>
+              <div class="roadmap-date">2030 Vision</div>
+              <h3>USA Science</h3>
+              <p class="roadmap-objective">Transform USA from a nutrition brand into a complete longevity & preventive health ecosystem.</p>
+              <div class="roadmap-products">
+                <span>Longevity Programs</span>
+                <span>Recovery Programs</span>
+                <span>Preventive Consultations</span>
+                <span>Advanced Health Services</span>
+              </div>
+              <div class="roadmap-metrics">
+                <h5>Success Metrics</h5>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Longevity clinic pilots</li>
+                  <li><i class="fa-solid fa-circle-check"></i> Science advisory board expansion</li>
+                  <li><i class="fa-solid fa-circle-check"></i> True global ecosystem moat</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Scroll navigation controls -->
+        <div class="roadmap-controls">
+          <button class="roadmap-control-btn btn-prev" aria-label="Previous card"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="roadmap-control-btn btn-next" aria-label="Next card"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REVIEWS ═══ -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">Trusted by Athletes</div>
+        <h2>{{ section.settings.reviews_heading | default: 'What Our Community Says' }}</h2>
+        <p>{{ section.settings.reviews_sub | default: 'Real reviews from real athletes who chose science over shortcuts.' }}</p>
+      </div>
+      <div class="reviews-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div class="review-card {% if block.settings.featured %}featured{% endif %} reveal-up" {{ block.shopify_attributes }}>
+              <div class="review-stars">★★★★★</div>
+              <p class="review-text">"{{ block.settings.text }}"</p>
+              <div class="review-author">
+                <div class="review-avatar" style="background: {{ block.settings.avatar_gradient | default: 'linear-gradient(135deg, #c8860a, #e0a832)' }};">{{ block.settings.name | truncate: 1, '' | upcase }}</div>
+                <div>
+                  <h4>{{ block.settings.name | default: 'Athlete' }}</h4>
+                  <span>{{ block.settings.role | default: 'Verified Athlete' }}</span>
+                </div>
+              </div>
+              <span class="review-badge"><i class="fa-solid fa-circle-check"></i> Verified Purchase</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-head reveal-up">
+        <div class="section-tag">Support</div>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-q"><span>{{ block.settings.question }}</span><i class="fa-solid fa-plus"></i></button>
+              <div class="faq-a"><p>{{ block.settings.answer }}</p></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NEWSLETTER ═══ -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner reveal-up">
+        <div class="newsletter-text">
+          <div class="section-tag">Join The Community</div>
+          <h2>Be Part of the <em>Health Revolution</em></h2>
+          <p>Get exclusive early access to new launches, athlete tips, and members-only discounts. Join 5,000+ athletes in the USA community.</p>
+        </div>
+        <form class="newsletter-form" id="newsletter-form-{{ section.id }}">
+          <div class="input-group">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <p class="form-note"><i class="fa-solid fa-lock"></i> No spam. Unsubscribe anytime. We respect your privacy.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>USA SUPPLEMENT</h3>
+          <span class="footer-accent">UNITED SCIENCE ALLIANCE</span>
+          <p>{{ section.settings.vision_text | default: 'To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health.' }}</p>
+          <div class="social-row">
+            <a href="{{ section.settings.social_instagram | default: '#' }}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="{{ section.settings.social_facebook | default: '#' }}" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="{{ section.settings.social_youtube | default: '#' }}" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="{{ section.settings.social_twitter | default: '#' }}" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="/collections/all">All Products</a></li>
+            <li><a href="#products">Pre-Workout</a></li>
+            <li><a href="#products">Plant Protein</a></li>
+            <li><a href="#products">Yeast Protein</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#vision">Our Vision</a></li>
+            <li><a href="#community">Our Story</a></li>
+            <li><a href="#certifications">Lab Reports</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Quality Assurance</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-compliance">
+        <span>FSSAI Lic: 12345678901234</span>
+        <span>FDA Facility Registered</span>
+        <span>ISO 22000 Certified</span>
+        <span>GMP Compliant</span>
+        <span>HACCP Certified</span>
+      </div>
+      <div class="footer-bar">
+        <p>© 2026 United Science Alliance · Telangana, India · All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     JAVASCRIPT — GSAP + INTERACTIONS
+     ════════════════════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('#usa-section-{{ section.id }}');
+  if (!wrapper) return;
+
+  // GSAP handles scroll reveal animations to prevent CSS conflicts
+
+  // ═══ ANIMATED COUNTERS ═══
+  const counters = wrapper.querySelectorAll('.stat-number[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      if (target === 0 || isNaN(target)) { counterObserver.unobserve(el); return; }
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 60));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current + suffix;
+      }, 25);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // ═══ FAQ ACCORDION ═══
+  wrapper.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      wrapper.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ═══ NEWSLETTER FORM ═══
+  const form = wrapper.querySelector('[id^="newsletter-form"]');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input');
+      if (input) {
+        input.value = '';
+        input.placeholder = '✓ Subscribed! Welcome to the community.';
+        setTimeout(() => { input.placeholder = 'Enter your email address'; }, 3000);
+      }
+    });
+  }
+
+  // ═══ GSAP SCROLL ANIMATIONS ═══
+  function initGSAP() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      setTimeout(initGSAP, 150);
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Generic reveal-up elements (that aren't staggered specific elements)
+    gsap.utils.toArray(wrapper.querySelectorAll('.reveal-up:not(.vm-card, .pillar-tile, .product-card, .cert-logo-item, .why-card, .dosage-item, .flavor-card, .stat-card, .review-card, .faq-item)')).forEach(el => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 30, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+      );
+    });
+
+    // Hero entrance
+    const heroContent = wrapper.querySelector('.hero-content');
+    if (heroContent) {
+      gsap.fromTo(heroContent.children, 
+        { opacity: 0, y: 40, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.2, duration: 1.5, ease: 'expo.out', delay: 0.1 }
+      );
+      
+      // Hero Parallax
+      gsap.to(wrapper.querySelector('.hero-bg'), {
+        yPercent: 30,
+        ease: 'none',
+        scrollTrigger: { trigger: wrapper.querySelector('.hero-section'), start: 'top top', end: 'bottom top', scrub: true }
+      });
+    }
+
+    // Vision & Mission cards
+    if (wrapper.querySelectorAll('.vm-card').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.vm-card'), 
+        { opacity: 0, y: 40, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.2, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: wrapper.querySelector('.vision-section'), start: 'top 85%', once: true } }
+      );
+    }
+
+    // Pillar tiles
+    if (wrapper.querySelectorAll('.pillar-tile').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.pillar-tile'), 
+        { opacity: 0, scale: 0.9, filter: 'blur(5px)' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', stagger: 0.1, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: wrapper.querySelector('.pillars-grid'), start: 'top 85%', once: true } }
+      );
+    }
+
+    // Product cards
+    if (wrapper.querySelectorAll('.product-card').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.product-card'), 
+        { opacity: 0, y: 40, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.15, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: wrapper.querySelector('.products-section'), start: 'top 80%', once: true } }
+      );
+    }
+
+    // Cert logos
+    if (wrapper.querySelectorAll('.cert-logo-item').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.cert-logo-item'), 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, stagger: 0.1, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: wrapper.querySelector('.cert-section'), start: 'top 85%', once: true } }
+      );
+    }
+
+    // Why cards
+    if (wrapper.querySelectorAll('.why-card').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.why-card'), 
+        { opacity: 0, y: 30, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.15, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: wrapper.querySelector('.why-section'), start: 'top 85%', once: true } }
+      );
+    }
+
+    // Dosage items
+      { opacity: 1, x: 0, stagger: 0.12, duration: 0.6, scrollTrigger: { trigger: wrapper.querySelector('.ingredient-section'), start: 'top 75%', once: true } }
+    );
+
+    // Flavor cards
+    gsap.fromTo(wrapper.querySelectorAll('.flavor-card'), 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: wrapper.querySelector('.flavors-section'), start: 'top 85%', once: true } }
+    );
+
+    // Stats
+    gsap.fromTo(wrapper.querySelectorAll('.stat-card'), 
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, stagger: 0.1, duration: 0.7, ease: 'back.out(1.5)', scrollTrigger: { trigger: wrapper.querySelector('.stats-grid'), start: 'top 85%', once: true } }
+    );
+
+    // Review cards
+    gsap.fromTo(wrapper.querySelectorAll('.review-card'), 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: wrapper.querySelector('.reviews-section'), start: 'top 85%', once: true } }
+    );
+
+    // Roadmap cards staggered reveal
+    if (wrapper.querySelectorAll('.roadmap-card').length) {
+      gsap.fromTo(wrapper.querySelectorAll('.roadmap-card'), 
+        { opacity: 0, y: 30, filter: 'blur(5px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.08, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: wrapper.querySelector('.roadmap-section'), start: 'top 80%', once: true } }
+      );
+    }
+
+    // FAQ items
+    gsap.fromTo(wrapper.querySelectorAll('.faq-item'), 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, scrollTrigger: { trigger: wrapper.querySelector('.faq-section'), start: 'top 80%', once: true } }
+    );
+  }
+
+  setTimeout(initGSAP, 300);
+
+  // ═══ CURSOR SPOTLIGHT TRACKING ═══
+  const handleMouseMove = (e) => {
+    const selector = '.spotlight-card, .vm-card, .pillar-tile, .product-card, .why-card, .stat-card, .roadmap-card';
+    const cardsToGlow = wrapper.querySelectorAll(selector);
+    cardsToGlow.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  };
+  document.addEventListener('mousemove', handleMouseMove);
+
+  // ═══ INTERACTIVE ROADMAP CONTROLLER ═══
+  const roadmapWrapper = wrapper.querySelector('.roadmap-scroll-wrapper');
+  const roadmapPrevBtn = wrapper.querySelector('.roadmap-section .btn-prev');
+  const roadmapNextBtn = wrapper.querySelector('.roadmap-section .btn-next');
+  const roadmapNavBtns = wrapper.querySelectorAll('.roadmap-nav-btn');
+  const roadmapCards = wrapper.querySelectorAll('.roadmap-card');
+
+  if (roadmapWrapper && roadmapPrevBtn && roadmapNextBtn) {
+    const scrollAmount = 364; // card width (340) + gap (24)
+    roadmapPrevBtn.addEventListener('click', () => {
+      roadmapWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    roadmapNextBtn.addEventListener('click', () => {
+      roadmapWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  if (roadmapNavBtns.length > 0 && roadmapCards.length > 0 && typeof gsap !== 'undefined') {
+    roadmapNavBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        roadmapNavBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedYear = btn.dataset.year;
+
+        roadmapCards.forEach(card => {
+          const cardYear = card.dataset.year;
+          if (selectedYear === 'all' || cardYear === selectedYear) {
+            gsap.to(card, { 
+              display: 'flex', 
+              opacity: 1, 
+              scale: 1, 
+              duration: 0.4, 
+              ease: 'power2.out',
+              clearProps: 'transform' // Avoid overriding hover styles
+            });
+          } else {
+            gsap.to(card, { 
+              display: 'none', 
+              opacity: 0, 
+              scale: 0.95, 
+              duration: 0.3, 
+              ease: 'power2.in' 
+            });
+          }
+        });
+      });
+    });
+  }
+
+});
+</script>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SHOPIFY SCHEMA
+     ════════════════════════════════════════════════════════════════ -->
+{% schema %}
+{
+  "name": "USA Supplement — Full Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎨 Color Palette"
+    },
+    {
+      "type": "color",
+      "id": "bg_dark",
+      "label": "Dark Background",
+      "default": "#1a1108"
+    },
+    {
+      "type": "color",
+      "id": "bg_cream",
+      "label": "Light/Cream Background",
+      "default": "#f7f2ea"
+    },
+    {
+      "type": "color",
+      "id": "bg_cream_alt",
+      "label": "Cream Alternate Background",
+      "default": "#efe8db"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Gold)",
+      "default": "#c8860a"
+    },
+
+    {
+      "type": "header",
+      "content": "🦸 Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_bg",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Hero Badge Text",
+      "default": "United Science Alliance"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_title",
+      "label": "Hero Heading (supports <em> for italic)",
+      "default": "Building The World's Most Trusted <em>Health Ecosystem.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Make science-backed health solutions accessible to every individual through products, education, technology and community."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_1",
+      "label": "Hero Primary CTA",
+      "default": "Explore Products"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_2",
+      "label": "Hero Secondary CTA",
+      "default": "Our Vision"
+    },
+
+    {
+      "type": "header",
+      "content": "🔭 Vision & Mission"
+    },
+    {
+      "type": "text",
+      "id": "vm_heading",
+      "label": "Section Heading",
+      "default": "Driven by Science. Built for Everyone."
+    },
+    {
+      "type": "text",
+      "id": "vm_subheading",
+      "label": "Section Subtitle",
+      "default": "Two pillars that guide everything we build, create, and deliver."
+    },
+    {
+      "type": "textarea",
+      "id": "vision_text",
+      "label": "Vision Statement",
+      "default": "To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health."
+    },
+    {
+      "type": "textarea",
+      "id": "mission_text",
+      "label": "Mission Statement",
+      "default": "Make science-backed health solutions accessible to every individual through products, education, technology and community."
+    },
+
+    {
+      "type": "header",
+      "content": "🛒 Products Section"
+    },
+    {
+      "type": "text",
+      "id": "products_tag",
+      "label": "Products Tag",
+      "default": "Our Products"
+    },
+    {
+      "type": "text",
+      "id": "products_heading",
+      "label": "Products Heading",
+      "default": "Science-Backed Nutrition"
+    },
+    {
+      "type": "text",
+      "id": "products_sub",
+      "label": "Products Subtitle",
+      "default": "Premium supplements formulated for real results. No shortcuts, no compromises."
+    },
+
+    {
+      "type": "header",
+      "content": "🏅 Certifications"
+    },
+    {
+      "type": "text",
+      "id": "cert_headline",
+      "label": "Certifications Headline",
+      "default": "The only Indian pre-workout certified to global athlete safety standards."
+    },
+
+    {
+      "type": "header",
+      "content": "💪 Why USA Supplement"
+    },
+    {
+      "type": "text",
+      "id": "why_heading",
+      "label": "Section Heading",
+      "default": "Why USA Supplement"
+    },
+    {
+      "type": "text",
+      "id": "why_sub",
+      "label": "Section Subtitle",
+      "default": "India's most certified pre-workout. Every claim backed by third-party testing."
+    },
+
+    {
+      "type": "header",
+      "content": "🔬 Ingredient Transparency"
+    },
+    {
+      "type": "image_picker",
+      "id": "ingredient_image",
+      "label": "Ingredient Section Image"
+    },
+    {
+      "type": "text",
+      "id": "ingredient_heading",
+      "label": "Heading",
+      "default": "Every dose, on the label."
+    },
+    {
+      "type": "text",
+      "id": "ingredient_sub",
+      "label": "Subtitle",
+      "default": "No under-dosed fillers. No hidden blends. Every ingredient, every milligram right there on the tub."
+    },
+
+    {
+      "type": "header",
+      "content": "🍊 Flavors Section"
+    },
+    {
+      "type": "text",
+      "id": "flavors_tag",
+      "label": "Flavors Tag",
+      "default": "6 Flavors"
+    },
+    {
+      "type": "text",
+      "id": "flavors_heading",
+      "label": "Flavors Heading",
+      "default": "Find your flavor."
+    },
+    {
+      "type": "text",
+      "id": "flavors_sub",
+      "label": "Flavors Subtitle",
+      "default": "Same clinical formula. Six ways to crave it."
+    },
+    {
+      "type": "url",
+      "id": "flavors_cta_url",
+      "label": "Shop All Flavors URL"
+    },
+
+    {
+      "type": "header",
+      "content": "🏠 Community & Brand Story"
+    },
+    {
+      "type": "textarea",
+      "id": "community_heading",
+      "label": "Heading (supports <em>)",
+      "default": "Building The World's Most Trusted <em>Health Ecosystem</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "community_text_1",
+      "label": "Paragraph 1",
+      "default": "We believe every individual deserves access to science-backed health solutions. USA Supplement isn't just a brand — it's a 12-phase roadmap to transform how the world approaches nutrition, wellness, and preventive health."
+    },
+    {
+      "type": "textarea",
+      "id": "community_text_2",
+      "label": "Paragraph 2",
+      "default": "From our flagship Wildfire Pre-Workout to a complete ecosystem spanning smart tech, education, and longevity science — we're building something that lasts."
+    },
+    {
+      "type": "text",
+      "id": "community_quote",
+      "label": "Founder Quote",
+      "default": "\"The first victory is not raising investment. The first victory is creating customers who buy again without being asked.\""
+    },
+    {
+      "type": "text",
+      "id": "community_cite",
+      "label": "Quote Attribution",
+      "default": "— Founding Principle, USA Supplement"
+    },
+
+    {
+      "type": "header",
+      "content": "⭐ Reviews Section"
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews Heading",
+      "default": "What Our Community Says"
+    },
+    {
+      "type": "text",
+      "id": "reviews_sub",
+      "label": "Reviews Subtitle",
+      "default": "Real reviews from real athletes who chose science over shortcuts."
+    },
+
+    {
+      "type": "header",
+      "content": "🔗 Social Media"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "social_twitter",
+      "label": "Twitter/X URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Ecosystem Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Title",
+          "default": "Nutrition"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "nutrition", "label": "🥗 Nutrition" },
+            { "value": "wellness", "label": "🧘 Wellness" },
+            { "value": "education", "label": "📚 Education" },
+            { "value": "community", "label": "👥 Community" },
+            { "value": "technology", "label": "💡 Technology" },
+            { "value": "preventive", "label": "🏥 Preventive Health" }
+          ],
+          "default": "nutrition"
+        }
+      ]
+    },
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Wildfire Pre-Workout"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "default": "Clinically dosed. Banned-substance free."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "Rs. 2,499"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta Info",
+          "default": "30 servings per tub"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text (leave blank for none)",
+          "default": "BESTSELLER"
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Badge Style",
+          "options": [
+            { "value": "bestseller", "label": "Bestseller (Red)" },
+            { "value": "new", "label": "New (Green)" },
+            { "value": "popular", "label": "Popular (Gold)" }
+          ],
+          "default": "bestseller"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product Page URL"
+        }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient Dosage",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Ingredient Name",
+          "default": "Beta-Alanine"
+        },
+        {
+          "type": "text",
+          "id": "dosage",
+          "label": "Dosage",
+          "default": "5g"
+        },
+        {
+          "type": "text",
+          "id": "brief",
+          "label": "Brief Description",
+          "default": "clinically proven endurance dose"
+        }
+      ]
+    },
+    {
+      "type": "flavor",
+      "name": "Flavor Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Flavor Name",
+          "default": "Kiwi Krazze"
+        },
+        {
+          "type": "color",
+          "id": "flavor_color",
+          "label": "Card Background Color",
+          "default": "#73d13d"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Tropical & tart"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (leave blank for none)"
+        },
+        {
+          "type": "image_picker",
+          "id": "tub_image",
+          "label": "Tub Image"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "Wildfire is the cleanest pre-workout I've ever used. No jitters, no crash — just pure, sustained energy."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Reviewer Name",
+          "default": "Rahul Sharma"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / Location",
+          "default": "Competitive Powerlifter · Hyderabad"
+        },
+        {
+          "type": "text",
+          "id": "avatar_gradient",
+          "label": "Avatar Gradient CSS",
+          "default": "linear-gradient(135deg, #c8860a, #e0a832)"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Review (highlight)",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What causes the tingling sensation after taking Wildfire?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "The tingling (paresthesia) is caused by the clinical dose of Beta-Alanine. It is completely harmless and indicates active binding to nerve receptors for carnosine loading."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "USA Supplement — Full Page",
+      "blocks": [
+        { "type": "pillar", "settings": { "title": "Nutrition", "icon": "nutrition" } },
+        { "type": "pillar", "settings": { "title": "Wellness", "icon": "wellness" } },
+        { "type": "pillar", "settings": { "title": "Education", "icon": "education" } },
+        { "type": "pillar", "settings": { "title": "Community", "icon": "community" } },
+        { "type": "pillar", "settings": { "title": "Technology", "icon": "technology" } },
+        { "type": "pillar", "settings": { "title": "Preventive Health", "icon": "preventive" } },
+        { "type": "product_card", "settings": { "title": "Wildfire Pre-Workout", "tagline": "Clinically dosed. Banned-substance free.", "price": "Rs. 2,499", "meta": "30 servings per tub", "badge": "BESTSELLER", "badge_style": "bestseller" } },
+        { "type": "product_card", "settings": { "title": "USA Plant Protein", "tagline": "Pure plant-powered performance.", "price": "Rs. 1,999", "meta": "25 servings per tub", "badge": "NEW", "badge_style": "new" } },
+        { "type": "product_card", "settings": { "title": "USA Fermented Yeast Protein", "tagline": "Next-gen fermented protein.", "price": "Rs. 2,299", "meta": "30 servings per tub", "badge": "POPULAR", "badge_style": "popular" } },
+        { "type": "ingredient", "settings": { "title": "Beta-Alanine", "dosage": "5g", "brief": "clinically proven endurance dose" } },
+        { "type": "ingredient", "settings": { "title": "L-Citrulline DL-Malate", "dosage": "2.5g", "brief": "for pump and blood flow" } },
+        { "type": "ingredient", "settings": { "title": "Caffeine Anhydrous", "dosage": "200mg", "brief": "clean energy without the crash" } },
+        { "type": "ingredient", "settings": { "title": "Choline Bitartrate", "dosage": "180mg", "brief": "focus and mind-muscle connection" } },
+        { "type": "flavor", "settings": { "title": "Kiwi Krazze", "flavor_color": "#5ba829", "description": "Tropical & tart" } },
+        { "type": "flavor", "settings": { "title": "Punch Rush", "flavor_color": "#c44040", "description": "Fruit punch blast", "badge": "POPULAR" } },
+        { "type": "flavor", "settings": { "title": "Citrus Storm", "flavor_color": "#d48a1a", "description": "Sweet orange" } },
+        { "type": "review", "settings": { "text": "Wildfire is the cleanest pre-workout I've ever used. No jitters, no crash — just pure, sustained energy through my entire 90-minute session.", "name": "Rahul Sharma", "role": "Competitive Powerlifter · Hyderabad", "avatar_gradient": "linear-gradient(135deg, #c8860a, #e0a832)" } },
+        { "type": "review", "settings": { "text": "As a drug-tested athlete, I can't risk contamination. USA Supplement's Informed Choice certification gives me 100% confidence. The focus is unreal.", "name": "Priya Nair", "role": "National Level Swimmer · Chennai", "avatar_gradient": "linear-gradient(135deg, #6366f1, #8b5cf6)", "featured": true } },
+        { "type": "review", "settings": { "text": "I've tried every brand on the market. Nothing comes close to the pump and endurance I get from Wildfire. My clients are now hooked too.", "name": "Vikram Patel", "role": "Certified Personal Trainer · Mumbai", "avatar_gradient": "linear-gradient(135deg, #22c55e, #16a34a)" } },
+        { "type": "faq", "settings": { "question": "What is USA Supplement's vision?", "answer": "USA Supplement is building the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health. Our mission is to make science-backed health solutions accessible to every individual." } },
+        { "type": "faq", "settings": { "question": "What causes the tingling sensation after taking Wildfire?", "answer": "The tingling (paresthesia) is caused by the clinical dose of Beta-Alanine (5g). It is completely harmless and indicates active binding to nerve receptors for carnosine loading." } },
+        { "type": "faq", "settings": { "question": "Is Wildfire safe for drug-tested competitive athletes?", "answer": "Yes. Wildfire is Informed Choice certified and Labdoor verified. Every batch is tested for 250+ WADA banned substances, ensuring complete safety for competition." } },
+        { "type": "faq", "settings": { "question": "How should I consume Wildfire Pre-Workout?", "answer": "Mix 1 scoop with 200–250 ml of cold water, 20–30 minutes before training. Start with half a scoop if you are caffeine-sensitive." } },
+        { "type": "faq", "settings": { "question": "What other products does USA Supplement offer?", "answer": "Beyond Wildfire Pre-Workout, we offer USA Plant Protein and USA Fermented Yeast Protein. We're building a 12-phase health ecosystem with 50+ products spanning proteins, daily vitamins, healthy snacks, fitness apparel, education platforms, and smart health tech — all launching between 2026 and 2030." } },
+        { "type": "faq", "settings": { "question": "Can I stack Wildfire with other supplements?", "answer": "Yes. Wildfire pairs well with creatine monohydrate and BCAAs. Avoid stacking with other high-caffeine products to prevent overstimulation." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

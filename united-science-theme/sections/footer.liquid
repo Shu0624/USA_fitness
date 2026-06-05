@@ -1,0 +1,126 @@
+{%- comment -%}
+  Footer Section — Brand info, menu columns, compliance badges, social links
+{%- endcomment -%}
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>{{ section.settings.brand_name | default: 'USA SUPPLEMENT' }}</h3>
+        <span class="footer-accent">{{ section.settings.brand_subtitle | default: 'UNITED SCIENCE ALLIANCE' }}</span>
+        <p>{{ section.settings.brand_description | default: "To build the world's most trusted health ecosystem." }}</p>
+        {% render 'social-icons' %}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu_column' -%}
+            <div class="footer-col" {{ block.shopify_attributes }}>
+              <h4>{{ block.settings.title }}</h4>
+              {%- if block.settings.menu != blank -%}
+                <ul>
+                  {%- for link in linklists[block.settings.menu].links -%}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- when 'compliance' -%}
+            {%- comment -%} Rendered below in compliance row {%- endcomment -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- assign compliance_blocks = section.blocks | where: "type", "compliance" -%}
+    {%- if compliance_blocks.size > 0 -%}
+      <div class="footer-compliance">
+        {%- for block in compliance_blocks -%}
+          <span {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="footer-bar">
+      <p>{{ section.settings.copyright | default: '© 2026 United Science Alliance · Telangana, India · All Rights Reserved' }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "USA SUPPLEMENT"
+    },
+    {
+      "type": "text",
+      "id": "brand_subtitle",
+      "label": "Brand Subtitle",
+      "default": "UNITED SCIENCE ALLIANCE"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Brand Description",
+      "default": "To build the world's most trusted health ecosystem integrating nutrition, wellness, education, community, technology and preventive health."
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright Text",
+      "default": "© 2026 United Science Alliance · Telangana, India · All Rights Reserved"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Products"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "compliance",
+      "name": "Compliance Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Badge Text",
+          "default": "FSSAI Lic: 12345678901234"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu_column", "settings": { "title": "Products" } },
+        { "type": "menu_column", "settings": { "title": "Company" } },
+        { "type": "menu_column", "settings": { "title": "Support" } },
+        { "type": "compliance", "settings": { "label": "FSSAI Lic: 12345678901234" } },
+        { "type": "compliance", "settings": { "label": "FDA Facility Registered" } },
+        { "type": "compliance", "settings": { "label": "ISO 22000 Certified" } },
+        { "type": "compliance", "settings": { "label": "GMP Compliant" } },
+        { "type": "compliance", "settings": { "label": "HACCP Certified" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
