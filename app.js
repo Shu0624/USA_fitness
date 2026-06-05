@@ -181,11 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.reviews-section', start: 'top 85%', once: true } }
     );
 
-    // Roadmap cards staggered reveal
-    gsap.fromTo('.roadmap-card', 
-      { opacity: 0, y: 30, filter: 'blur(5px)' },
-      { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.08, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.roadmap-section', start: 'top 80%', once: true } }
-    );
+
 
     // FAQ items
     gsap.fromTo('.faq-item', 
@@ -283,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ═══ CURSOR SPOTLIGHT TRACKING ═══
   const handleMouseMove = (e) => {
-    const selector = '.spotlight-card, .vm-card, .pillar-tile, .product-card, .why-card, .stat-card, .roadmap-card';
+    const selector = '.spotlight-card, .vm-card, .pillar-tile, .product-card, .why-card, .stat-card';
     const cardsToGlow = document.querySelectorAll(selector);
     cardsToGlow.forEach(card => {
       const rect = card.getBoundingClientRect();
@@ -295,55 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('mousemove', handleMouseMove);
 
-  // ═══ INTERACTIVE ROADMAP CONTROLLER ═══
-  const roadmapWrapper = document.querySelector('.roadmap-scroll-wrapper');
-  const roadmapPrevBtn = document.querySelector('.roadmap-section .btn-prev');
-  const roadmapNextBtn = document.querySelector('.roadmap-section .btn-next');
-  const roadmapNavBtns = document.querySelectorAll('.roadmap-nav-btn');
-  const roadmapCards = document.querySelectorAll('.roadmap-card');
 
-  if (roadmapWrapper && roadmapPrevBtn && roadmapNextBtn) {
-    const scrollAmount = 364; // card width (340) + gap (24)
-    roadmapPrevBtn.addEventListener('click', () => {
-      roadmapWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-    roadmapNextBtn.addEventListener('click', () => {
-      roadmapWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-  }
-
-  if (roadmapNavBtns.length > 0 && roadmapCards.length > 0 && typeof gsap !== 'undefined') {
-    roadmapNavBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        roadmapNavBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const selectedYear = btn.dataset.year;
-
-        roadmapCards.forEach(card => {
-          const cardYear = card.dataset.year;
-          if (selectedYear === 'all' || cardYear === selectedYear) {
-            gsap.to(card, { 
-              display: 'flex', 
-              opacity: 1, 
-              scale: 1, 
-              duration: 0.4, 
-              ease: 'power2.out',
-              clearProps: 'transform' // Avoid overriding hover styles
-            });
-          } else {
-            gsap.to(card, { 
-              display: 'none', 
-              opacity: 0, 
-              scale: 0.95, 
-              duration: 0.3, 
-              ease: 'power2.in' 
-            });
-          }
-        });
-      });
-    });
-  }
 
   // ═══ PRODUCT PAGE INTERACTIONS ═══
   // Flavor Chips
